@@ -1,0 +1,23 @@
+{
+  "name": "clipt",
+  "productName": "Clipt",
+  "version": "0.1.0",
+  "main": "app.js",
+  "author": {
+    "name": "Anthony Li",
+    "email": "me@anthli.com",
+    "url": "anthli.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/anthli/clipt"
+  },
+  "license": "MIT",
+  "scripts": {
+    "start": "electron ."
+  },
+  "dependencies": {
+    "lodash": "latest",
+    "nedb": "latest"
+  }
+}

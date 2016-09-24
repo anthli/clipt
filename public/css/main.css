@@ -1,0 +1,38 @@
+* {
+  font-family: -apple-system, BlinkMacSystemFont,
+    "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+    "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  font-weight: 300;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+#clip-list {
+  margin: 0;
+  padding: 0;
+}
+
+.clip-item {
+  align-items: center;
+  display: flex;
+  border-bottom: 1px solid #e6e6e6;
+  height: 100px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.clip {
+  overflow: hidden;
+  padding: 0 10px;
+  position: relative;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: inherit;
+}
