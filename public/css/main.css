@@ -1,9 +1,13 @@
 * {
+  cursor:default;
   font-family: -apple-system, BlinkMacSystemFont,
     "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
     "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   font-weight: 300;
+
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 html, body {
@@ -21,11 +25,24 @@ html, body {
 .clip-item {
   align-items: center;
   display: flex;
-  border-bottom: 1px solid #e6e6e6;
+  border-bottom: 1px solid #f2f2f2;
   height: 100px;
   list-style: none;
   margin: 0;
   padding: 0;
+
+  transition: all ease-out 300ms;
+}
+
+.clip-item:hover {
+  background-color: #e6e6e6;
+  border-color: #e6e6e6;
+
+  transition: all ease-out 300ms;
+}
+
+.clip-item:active {
+  background-color: #cccccc;
 }
 
 .clip {

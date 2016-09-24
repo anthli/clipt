@@ -1,6 +1,8 @@
 'use strict';
 
-const {app, BrowserWindow, globalShortcut} = require('electron');
+const app = require('electron').app;
+const BrowserWindow = require('electron').BrowserWindow;
+const globalShortcut = require('electron').globalShortcut;
 const clip = require('./lib/clip.js');
 const clipboardWatcher = require('./lib/clipboardWatcher.js');
 const db = require('./lib/db.js');
@@ -11,9 +13,7 @@ let win;
 const watcher = clipboardWatcher({
   onTextChange: (text) => {
     // New clip containing the type, timestamp, and text
-    let txtClip = clip('text', {
-      text: text
-    });
+    let txtClip = clip('text', {text: text});
 
     db.addClip(txtClip, (err, doc) => {
       if (err) {
@@ -24,21 +24,21 @@ const watcher = clipboardWatcher({
     });
   },
 
-  onImageChange: (text, image) => {
-    // New clip containing the type, timestamp, and image
-    let imgClip = clip('image', {
-      text: text,
-      image: image
-    });
-
-    db.addClip(imgClip, (err, doc) => {
-      if (err) {
-        console.error(err);
-
-        return;
-      }
-    });
-  }
+  // onImageChange: (text, image) => {
+  //   // New clip containing the type, timestamp, and image
+  //   let imgClip = clip('image', {
+  //     text: text,
+  //     image: image
+  //   });
+  //
+  //   db.addClip(imgClip, (err, doc) => {
+  //     if (err) {
+  //       console.error(err);
+  //
+  //       return;
+  //     }
+  //   });
+  // }
 });
 
 // Initialize the BrowserWindow
@@ -47,12 +47,14 @@ const createWindow = () => {
   let screenSize = screen.getPrimaryDisplay().workAreaSize;
   let cursorPos = screen.getCursorScreenPoint();
 
-  // The window will open at the current position of the cursor
+  // Configure the browser window and keep it closed until all required data has
+  // been sent to the renderer
   win = new BrowserWindow({
     width: screenSize.width / 2,
     height: (screenSize.height * 2) / 3,
     x: cursorPos.x,
-    y: cursorPos.y
+    y: cursorPos.y,
+    show: false
   });
 
   // Load index.html
@@ -66,8 +68,10 @@ const createWindow = () => {
       return;
     }
 
+    // Send the clips to the renderer and show the window
     win.webContents.on('did-finish-load', () => {
       win.webContents.send('clips', clips);
+      win.show();
     });
   });
 

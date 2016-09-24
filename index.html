@@ -9,6 +9,12 @@
     <link rel="stylesheet" href="public/css/main.css" media="screen">
     <!-- <link rel="stylesheet" href="public/css/main.min.css" media="screen"> -->
 
+    <script>
+      if (typeof module === 'object') {
+        window.module = module; module = undefined;
+      }
+    </script>
+
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/angular/angular.min.js"></script>
     <script src="bower_components/lodash/dist/lodash.min.js"></script>
@@ -17,11 +23,15 @@
     <script src="public/js/controllers.js"></script>
     <script src="public/js/services.js"></script>
     <!-- <script src="public/js/main.min.js"></script> -->
+
+    <script>
+      if (window.module) module = window.module;
+    </script>
   </head>
 
   <body ng-app="clipt" ng-controller="MainCtrl">
     <ul id="clip-list" ng-repeat="clip in clips">
-      <li class="clip-item">
+      <li class="clip-item" ng-click="getClip($index)">
         <div class="clip">
           {{clip.text}}
         </div>
