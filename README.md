@@ -11,17 +11,23 @@ important!
 - Displays clips in descending order (latest to earliest) so the most recent
   clips appear at the top, and the oldest ones at the bottom
 - Clips can be deleted on demand
-- Supports copying of: text, images
+- Currently, the supported data can be copied:
+  - text
+- To be added:
+  - images
+  - documents
 
 ## Development
 
 ### Requirements
 - [Node.js](https://goo.gl/QXkkAl)
+- [Bower](https://goo.gl/j0z3QO)
 - [Electron](https://goo.gl/3gzXUm)
 
 To start developing, clone the repo and run the following:
 
 ```bash
+$ bower install
 $ npm install
 $ npm start
 ```
