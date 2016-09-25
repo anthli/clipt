@@ -43,13 +43,44 @@ html, body {
 
 .clip-item:active {
   background-color: #cccccc;
+  border-color: #cccccc;
 }
 
 .clip {
+  font-size: 14px;
   overflow: hidden;
   padding: 0 10px;
   position: relative;
   text-overflow: ellipsis;
   white-space: nowrap;
   width: inherit;
+}
+
+#clip-search {
+  align-items: center;
+  background-color: #ffffff;
+  border: 1px solid #e6e6e6;
+  bottom: 0;
+  color: #cccccc;
+  display: flex;
+  left: -1px;
+  position: fixed;
+  width: inherit;
+}
+
+#clip-search i {
+  position: absolute;
+  left: 10px;
+}
+
+#clip-search input {
+  border: 0;
+  font-size: 14px;
+  height: 20px;
+  padding: 10px 10px 10px 32px;
+  width: inherit;
+}
+
+#clip-search input:focus {
+  outline: none;
 }

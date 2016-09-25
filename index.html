@@ -21,21 +21,27 @@
 
     <script src="public/js/app.js"></script>
     <script src="public/js/controllers.js"></script>
-    <script src="public/js/services.js"></script>
+    <script src="public/js/directives.js"></script>
     <!-- <script src="public/js/main.min.js"></script> -->
 
     <script>
-      if (window.module) module = window.module;
+      if (window.module) {
+        module = window.module;
+      }
     </script>
   </head>
 
   <body ng-app="clipt" ng-controller="MainCtrl">
-    <ul id="clip-list" ng-repeat="clip in clips">
+    <ul id="clip-list" ng-repeat="clip in clips | filter: search">
       <li class="clip-item" ng-click="getClip($index)">
         <div class="clip">
           {{clip.text}}
         </div>
       </li>
     </ul>
+
+    <div id="clip-search">
+      <i class="fa fa-search"></i><input type="text" placeholder="Search..." ng-model="search">
+    </div>
   </body>
 </html>
