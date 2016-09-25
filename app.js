@@ -1,8 +1,10 @@
 'use strict';
 
-const app = require('electron').app;
-const BrowserWindow = require('electron').BrowserWindow;
-const globalShortcut = require('electron').globalShortcut;
+const {
+  app,
+  BrowserWindow,
+  globalShortcut
+} = require('electron');
 const clip = require('./lib/clip.js');
 const clipboardWatcher = require('./lib/clipboardWatcher.js');
 const db = require('./lib/db.js');
@@ -54,7 +56,8 @@ const createWindow = () => {
     height: (screenSize.height * 2) / 3,
     x: cursorPos.x,
     y: cursorPos.y,
-    show: false
+    show: false,
+    title: 'Clipt'
   });
 
   // Load index.html

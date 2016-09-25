@@ -1,6 +1,6 @@
 'use strict';
 
-const ipcRenderer = require('electron').ipcRenderer;
+const {ipcRenderer} = require('electron');
 
 angular.module('clipt.controllers', [])
 
@@ -14,7 +14,7 @@ angular.module('clipt.controllers', [])
     $scope.clipIndex = index;
   };
 
-  // Set $scope.clips to the new list of clips received from the main process
+  // Render the clips that were received from the main process
   ipcRenderer.on('clips', (event, clips) => {
     $scope.$apply(() => {
       $scope.clips = clips;
@@ -22,7 +22,10 @@ angular.module('clipt.controllers', [])
   });
 
   // When a clip is clicked on, send it back to the main process
-  $(document).on('click', (event) => {
-    ipcRenderer.send('clip-copied', $scope.clips[$scope.clipIndex]);
+  $(document).dblclick((event) => {
+    // Ignore double-clicks that weren't inside the area of a clip
+    if ($scope.clipIndex !== undefined) {
+      ipcRenderer.send('clip-copied', $scope.clips[$scope.clipIndex]);
+    }
   });
 }]);
