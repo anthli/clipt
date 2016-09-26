@@ -56,6 +56,10 @@ html, body {
   width: inherit;
 }
 
+#clip-list-search-spacer {
+  height: 42px;
+}
+
 #clip-search {
   align-items: center;
   background-color: #ffffff;
