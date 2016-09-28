@@ -3,7 +3,8 @@
 const {
   app,
   BrowserWindow,
-  globalShortcut
+  globalShortcut,
+  ipcMain
 } = require('electron');
 const clip = require('./lib/clip.js');
 const clipboardWatcher = require('./lib/clipboardWatcher.js');
@@ -22,6 +23,21 @@ const watcher = clipboardWatcher({
         console.error(err);
 
         return;
+      }
+
+
+
+      // Only refresh the clips if the window is open
+      if (win) {
+        db.getClips((err, clips) => {
+          if (err) {
+            console.error(err);
+
+            return;
+          }
+
+          win.webContents.send('clips', clips);
+        });
       }
     });
   },
@@ -74,7 +90,13 @@ const createWindow = () => {
     // Send the clips to the renderer and show the window
     win.webContents.on('did-finish-load', () => {
       win.webContents.send('clips', clips);
-      win.show();
+
+      // Show the window once the clips are ready to be displayed
+      ipcMain.on('clips-ready', (event) => {
+        if (!win.isVisible()) {
+          win.show();
+        }
+      });
     });
   });
 
@@ -103,13 +125,6 @@ app.on('ready', () => {
     console.error('Failed to register CommandOrControl+`');
   }
 });
-
-// Close the window when it gets blurred
-// app.on('browser-window-blur', () => {
-//   if (win) {
-//     win.destroy();
-//   }
-// });
 
 app.on('activate', () => {
   // On macOS it is common to re-create a window in the app when the

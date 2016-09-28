@@ -18,6 +18,9 @@ angular.module('clipt.controllers', [])
   ipcRenderer.on('clips', (event, clips) => {
     $scope.$apply(() => {
       $scope.clips = clips;
+
+      // Notify the main process that the clips are ready to be displayed
+      ipcRenderer.send('clips-ready');
     });
   });
 

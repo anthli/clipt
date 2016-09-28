@@ -11,6 +11,7 @@ important!
 - Displays clips in descending order (latest to earliest) so the most recent
   clips appear at the top, and the oldest ones at the bottom
 - Clips can be deleted on demand
+- Searching for clips can be easily done through the search bar at the bottom
 - Currently, the supported data can be copied:
   - text
 - To be added:
