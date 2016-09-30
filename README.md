@@ -7,6 +7,8 @@ With Clipt, whatever you copy will be stored and can be used at a later
 time. Never again will you have to worry about copying over something
 important!
 
+![alt text](./public/imgs/search.png)
+
 ## Features
 - Displays clips in descending order (latest to earliest) so the most recent
   clips appear at the top, and the oldest ones at the bottom
@@ -31,4 +33,10 @@ To start developing, clone the repo and run the following:
 $ bower install
 $ npm install
 $ npm start
+```
+
+To build the installers, run the followingL
+
+```bash
+$ npm run build
 ```

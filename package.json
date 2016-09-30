@@ -1,7 +1,8 @@
 {
   "name": "clipt",
   "productName": "Clipt",
-  "version": "0.1.0",
+  "description": "A simple cross platform clipboard history manager.",
+  "version": "0.0.1",
   "main": "app.js",
   "author": {
     "name": "Anthony Li",
@@ -13,11 +14,18 @@
     "url": "https://github.com/anthli/clipt"
   },
   "license": "MIT",
-  "scripts": {
-    "start": "electron ."
-  },
   "dependencies": {
+    "electron": "latest",
     "lodash": "latest",
     "nedb": "latest"
+  },
+  "devDependencies": {
+    "electron-packager": "latest"
+  },
+  "scripts": {
+    "start": "electron .",
+    "build:win": "electron-packager . --platform=win32 --arch=ia32",
+    "build:darwin": "electron-packager . --platform=darwin --arch=x64",
+    "build:linux": "electron-packager . --platform=linux --arch=ia32"
   }
 }
