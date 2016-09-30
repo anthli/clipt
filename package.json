@@ -24,6 +24,7 @@
   },
   "scripts": {
     "start": "electron .",
+    "build": "electron-packager . --all",
     "build:win": "electron-packager . --platform=win32 --arch=ia32",
     "build:darwin": "electron-packager . --platform=darwin --arch=x64",
     "build:linux": "electron-packager . --platform=linux --arch=ia32"

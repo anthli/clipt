@@ -1,4 +1,4 @@
-# Clipt (WIP)
+# Clipt
 
 Working on a research paper where you copied some information to use, but
 accidentally copied over it with the URL of a funny post on Reddit?
@@ -35,8 +35,16 @@ $ npm install
 $ npm start
 ```
 
-To build the installers, run the followingL
+To build all installers, run the following:
 
 ```bash
 $ npm run build
+```
+
+For individual installers:
+
+```bash
+$ npm run build:win (Windows)
+$ npm run build:darwin (macOS)
+$ npm run build:linux (Linux)
 ```
