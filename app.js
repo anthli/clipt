@@ -6,8 +6,9 @@ const {
   globalShortcut,
   ipcMain
 } = require('electron');
-const clip = require('./lib/clip.js');
 const clipboardWatcher = require('./lib/clipboardWatcher.js');
+
+const clip = require('./lib/clip.js');
 const db = require('./lib/db.js');
 
 let win;
@@ -24,8 +25,6 @@ const watcher = clipboardWatcher({
 
         return;
       }
-
-
 
       // Only refresh the clips if the window is open
       if (win) {
@@ -87,11 +86,12 @@ const createWindow = () => {
       return;
     }
 
-    // Send the clips to the renderer and show the window
+    // Send the clips to the renderer
     win.webContents.on('did-finish-load', () => {
       win.webContents.send('clips', clips);
 
-      // Show the window once the clips are ready to be displayed
+      // Once the clips are ready to be displayed, show the window if it's not
+      // open already
       ipcMain.on('clips-ready', (event) => {
         if (!win.isVisible()) {
           win.show();
