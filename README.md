@@ -1,4 +1,4 @@
-# Clipt
+# Clipt (WIP)
 
 Working on a research paper where you copied some information to use, but
 accidentally copied over it with the URL of a funny post on Reddit?
