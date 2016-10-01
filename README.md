@@ -23,7 +23,6 @@ important!
 
 ### Requirements
 - [Node.js](https://goo.gl/QXkkAl)
-- [Electron](https://goo.gl/3gzXUm)
 
 To start developing, clone the repo and run the following:
 
