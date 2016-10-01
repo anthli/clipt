@@ -75,8 +75,8 @@ html, body {
   border-radius: 6px;
   display: none;
   height: 30px;
-  margin-top: -32px;
   margin-left: -40px;
+  margin-top: -32px;
   position: absolute;
   width: 80px;
 }

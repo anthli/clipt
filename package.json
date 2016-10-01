@@ -15,18 +15,24 @@
   },
   "license": "MIT",
   "dependencies": {
-    "electron": "latest",
-    "lodash": "latest",
+    "angular": "latest",
+    "jquery": "latest",
     "nedb": "latest"
   },
   "devDependencies": {
+    "electron": "latest",
+    "electron-builder": "latest",
     "electron-packager": "latest"
   },
   "scripts": {
     "start": "electron .",
-    "build": "electron-packager . --all",
-    "build:win": "electron-packager . --platform=win32 --arch=ia32",
-    "build:darwin": "electron-packager . --platform=darwin --arch=x64",
-    "build:linux": "electron-packager . --platform=linux --arch=ia32"
+    "pack": "build --dir",
+    "dist": "build"
+  },
+  "build": {
+    "appId": "com.anthli.clipt",
+    "mac": {
+      "category": "public.app-category.productivity"
+    }
   }
 }

@@ -12,9 +12,9 @@ angular.module('clipt.services', [])
       // Fade the popup message in at the cursor's position when copying a clip
       popupContainer.fadeIn(300);
       popupContainer.css({
-        "display": "flex",
-        "left": event.pageX,
-        "top": event.pageY
+        'display': 'flex',
+        'left': event.pageX,
+        'top': event.pageY
       });
 
       // Fade the popup message out after 750 ms
