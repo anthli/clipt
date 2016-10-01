@@ -6,9 +6,8 @@ const {
   globalShortcut,
   ipcMain
 } = require('electron');
-const clipboardWatcher = require('./lib/clipboardWatcher.js');
-
 const clip = require('./lib/clip.js');
+const clipboardWatcher = require('./lib/clipboardWatcher.js');
 const db = require('./lib/db.js');
 
 let win;
@@ -124,6 +123,30 @@ app.on('ready', () => {
   if (!openPressed) {
     console.error('Failed to register CommandOrControl+`');
   }
+
+  // Delete the clip selected in the window and send the remaining clips back
+  // to be displayed
+  ipcMain.on('delete-clip', (event, id) => {
+    db.deleteClip(id, (err, count) => {
+      if (err) {
+        console.error(err);
+
+        return;
+      }
+
+      // Retrieve all clips and send them to the renderer
+      db.getClips((err, clips) => {
+        if (err) {
+          console.error(err);
+
+          return;
+        }
+
+        // Send the remaining clips to the renderer
+        win.webContents.send('clips', clips);
+      });
+    });
+  });
 });
 
 app.on('activate', () => {

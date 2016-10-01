@@ -46,6 +46,20 @@ html, body {
   border-color: #cccccc;
 }
 
+.delete-clip {
+  color: #999999;
+  font-size: 24px;
+  margin-left: 10px;
+
+  transition: all ease-out 300ms;
+}
+
+.delete-clip:hover {
+  color: #000000;
+
+  transition: all ease-out 300ms;
+}
+
 .clip {
   font-size: 14px;
   overflow: hidden;
@@ -54,6 +68,23 @@ html, body {
   text-overflow: ellipsis;
   white-space: nowrap;
   width: inherit;
+}
+
+#copy-popup-container {
+  background-color: #999999;
+  border-radius: 6px;
+  display: none;
+  height: 30px;
+  margin-top: -32px;
+  margin-left: -40px;
+  position: absolute;
+  width: 80px;
+}
+
+#copy-popup-message {
+  color: #ffffff;
+  font-size: 12px;
+  margin: auto;
 }
 
 #clip-list-search-spacer {
