@@ -14,10 +14,11 @@ important!
   clips appear at the top, and the oldest ones at the bottom
 - Clips can be deleted on demand
 - Searching for clips can be easily done through the search bar at the bottom
-- Currently, the supported data can be copied:
-  - text
-- To be added:
-  - images
+- Supports copying of text
+
+## Features To Be Added
+- Copying of images
+- Tray icons
 
 ## Development
 
