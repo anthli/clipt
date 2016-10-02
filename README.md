@@ -15,10 +15,12 @@ important!
 - Clips can be deleted on demand
 - Searching for clips can be easily done through the search bar at the bottom
 - Supports copying of text
+- Application can be opened using `` Ctrl/Cmd + ` `` (for now)
 
 ## Features To Be Added
 - Copying of images
 - Tray icons
+- Configuring application shortcuts
 
 ## Development
 
