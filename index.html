@@ -31,7 +31,7 @@
 
   <body ng-app="clipt" ng-controller="MainCtrl">
     <ul id="clip-list">
-      <li class="clip-item" ng-repeat="clip in clips | filter: search" ng-dblclick="copyClip($index)">
+      <li class="clip-item" ng-repeat="clip in clips | filter: search" ng-dblclick="copyClip($event, $index)">
         <i class="delete-clip fa fa-trash-o" ng-click="deleteClip($index)"></i>
         <div class="clip">
           {{clip.text}}

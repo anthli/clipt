@@ -7,8 +7,11 @@ angular.module('clipt.controllers', [])
   $scope.search;
 
   // Copy the clip at the given index
-  $scope.copyClip = (index) => {
-    Clipt.copyClip($scope.clips, index);
+  $scope.copyClip = ($event, index) => {
+    // Prevent a double-click registering when rapidly deleting clips
+    if (!angular.element($event.target).hasClass('delete-clip')) {
+      Clipt.copyClip($scope.clips, index);
+    }
   };
 
   // Delete the clip at the given index
