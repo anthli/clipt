@@ -5,7 +5,8 @@ const {
   globalShortcut,
   ipcMain,
 } = require('electron');
-const configuredWindow = require('./lib/configureBrowser');
+
+const configuredBrowser = require('./lib/configureBrowser');
 const clip = require('./lib/clip');
 const clipboardWatcher = require('./lib/clipboardWatcher');
 const constants = require('./lib/constants');
@@ -59,7 +60,7 @@ const watcher = clipboardWatcher({
 
 // Initialize the browser window
 const createWindow = () => {
-  win = configuredWindow();
+  win = configuredBrowser();
 
   // Retrieve all clips and send them to the renderer
   db.getClips((err, clips) => {
@@ -83,6 +84,20 @@ const createWindow = () => {
 // Initialize the application tray
 const createTray = () => {
   tray = configuredTray();
+
+  // Set up the tray actions based on the system platform
+  switch (process.platform) {
+    case constants.platform.mac:
+      break;
+
+    case constants.platform.win:
+      // Open/close the window when the tray icon is double-clicked on
+      tray.on(constants.message.tray.doubleClick, () => {
+        win.isVisible() ? win.hide() : win.show();
+      });
+
+      break;
+  }
 }
 
 // Initialize the application shortcuts
