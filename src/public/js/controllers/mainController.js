@@ -2,7 +2,7 @@
 
 angular.module('clipt.controllers', [])
 
-.controller('MainCtrl', ['$scope', 'Clipt', ($scope, Clipt) => {
+.controller('MainCtrl', ['$scope', 'Main', ($scope, Main) => {
   $scope.clips;
   $scope.search;
 
@@ -10,13 +10,13 @@ angular.module('clipt.controllers', [])
   $scope.copyClip = ($event, index) => {
     // Prevent a double-click registering when rapidly deleting clips
     if (!angular.element($event.target).hasClass('delete-clip')) {
-      Clipt.copyClip($scope.clips, index);
+      Main.copyClip($scope.clips, index);
     }
   };
 
   // Delete the clip at the given index
   $scope.deleteClip = (index) => {
-    Clipt.deleteClip($scope.clips, index);
+    Main.deleteClip($scope.clips, index);
   };
 
   // Render the clips that were received from the main process

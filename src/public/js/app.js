@@ -3,4 +3,8 @@
 const {ipcRenderer} = require('electron');
 const $ = require('jquery');
 
-angular.module('clipt', ['clipt.controllers', 'clipt.services']);
+angular.module('clipt', [
+  'ngDialog',
+  'clipt.controllers',
+  'clipt.services'
+]);

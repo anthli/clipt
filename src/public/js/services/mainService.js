@@ -2,7 +2,7 @@
 
 angular.module('clipt.services', [])
 
-.factory('Clipt', () => {
+.factory('Main', () => {
   return {
     // When a clip is double-clicked on, send it back to the main process
     // for its data to be written to the clipboard

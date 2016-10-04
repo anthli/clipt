@@ -19,7 +19,6 @@ important!
 
 ## Features To Be Added
 - Copying of images
-- Tray icons
 - Configuring application shortcuts
 
 ## Development

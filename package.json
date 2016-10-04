@@ -3,7 +3,7 @@
   "productName": "Clipt",
   "description": "A simple cross platform clipboard history manager.",
   "version": "0.0.1",
-  "main": "app.js",
+  "main": "src/app.js",
   "author": {
     "name": "Anthony Li",
     "email": "me@anthli.com",
@@ -17,7 +17,8 @@
   "dependencies": {
     "angular": "latest",
     "jquery": "latest",
-    "nedb": "latest"
+    "nedb": "latest",
+    "ng-dialog": "latest"
   },
   "devDependencies": {
     "electron": "latest",
