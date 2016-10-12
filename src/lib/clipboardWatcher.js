@@ -8,6 +8,8 @@ const {
   ipcMain
 } = require('electron');
 
+const constants = require('./constants');
+
 // Directory where copied files are stored
 const fileDir = './.db/files/';
 
@@ -24,12 +26,13 @@ const imageHasDiff = (oldImg, newImg) => {
 };
 
 // Take the data from the clip and write it to the clipboard
-ipcMain.on('clip-copied', (event, clip) => {
+ipcMain.on(constants.message.clip.clipCopied, (event, clip) => {
   switch (clip.type) {
-    case 'text':
+    case constants.clipType.text:
       clipboard.writeText(clip.text);
       break
-    // case 'image':
+
+    // case constants.clipType.image:
     //   clipboard.writeImage(clip.image);
     //   break
   }

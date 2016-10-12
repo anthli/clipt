@@ -1,8 +1,6 @@
 'use strict';
 
-angular.module('clipt.services', [])
-
-.factory('Main', () => {
+app.factory('Main', function() {
   return {
     // When a clip is double-clicked on, send it back to the main process
     // for its data to be written to the clipboard
@@ -10,7 +8,7 @@ angular.module('clipt.services', [])
       let popupContainer = $('#copy-popup-container');
 
       // Fade the popup message in at the cursor's position when copying a clip
-      popupContainer.fadeIn(300);
+      popupContainer.fadeIn(150);
       popupContainer.css({
         'display': 'flex',
         'left': event.pageX,
@@ -19,8 +17,8 @@ angular.module('clipt.services', [])
 
       // Fade the popup message out after 750 ms
       setTimeout(() => {
-        popupContainer.fadeOut(300);
-      }, 750);
+        popupContainer.fadeOut(150);
+      }, 500);
 
       ipcRenderer.send('clip-copied', clips[index]);
     },

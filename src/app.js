@@ -6,19 +6,21 @@ const {
   ipcMain,
 } = require('electron');
 
-const configuredBrowser = require('./lib/configureBrowser');
 const clip = require('./lib/clip');
 const clipboardWatcher = require('./lib/clipboardWatcher');
 const constants = require('./lib/constants');
+const createWindow = require('./lib/configureWindow');
+const createShortcuts = require('./lib/configureShortcuts');
+const createTray = require('./lib/configureTray');
 const db = require('./lib/db');
-const configuredTray = require('./lib/configureTray');
+const windowManager = require('./lib/windowManager');;
 
 let win;
-let tray;
 
 // Start the clipboard watcher
 const watcher = clipboardWatcher({
   onTextChange: (text) => {
+    win = windowManager.getMainWindow();
     // New clip containing the type, timestamp, and text
     let txtClip = clip(constants.clipType.text, {text: text});
 
@@ -43,6 +45,7 @@ const watcher = clipboardWatcher({
   },
 
   // onImageChange: (text, image) => {
+  //   win = windowManager.getMainWindow();
   //   // New clip containing the type, timestamp, and image
   //   let imgClip = clip(constants.clipType.image, {
   //     text: text,
@@ -58,73 +61,15 @@ const watcher = clipboardWatcher({
   // }
 });
 
-// Initialize the browser window
-const createWindow = () => {
-  win = configuredBrowser();
-
-  // Retrieve all clips and send them to the renderer
-  db.getClips((err, clips) => {
-    if (err) {
-      console.error(err);
-      return;
-    }
-
-    // Send the clips to the renderer once it's finishsed loading
-    win.webContents.on(constants.message.app.didFinishLoad, () => {
-      win.webContents.send(constants.message.clip.clips, clips);
-    });
-  });
-
-  // Dereference the window when it closes
-  win.on(constants.message.app.closed, () => {
-    win = null;
-  });
-}
-
-// Initialize the application tray
-const createTray = () => {
-  tray = configuredTray();
-
-  // Set up the tray actions based on the system platform
-  switch (process.platform) {
-    case constants.platform.mac:
-      break;
-
-    case constants.platform.win:
-      // Open/close the window when the tray icon is double-clicked on
-      tray.on(constants.message.tray.doubleClick, () => {
-        win.isVisible() ? win.hide() : win.show();
-      });
-
-      break;
-  }
-}
-
-// Initialize the application shortcuts
-const createShortcuts = () => {
-  // Open a new window or close the existing one when CommandOrControl+`
-  // is pressed
-  const open = globalShortcut.register(constants.shortcut.open.key, () => {
-    // Toggles opening and closing the window
-    if (win) {
-      win.destroy();
-    }
-    else {
-      createWindow();
-    }
-  });
-
-  if (!open) {
-    console.error(constants.shortcut.open.error);
-  }
-}
-
 /* app configuration */
 
 app.on(constants.message.app.ready, () => {
+  // Initialize each component of the application
   createWindow();
-  createTray();
   createShortcuts();
+  createTray();
+
+  win = windowManager.getMainWindow();
 });
 
 // Quit when all windows are closed
@@ -141,6 +86,8 @@ app.on(constants.message.app.activate, () => {
   // dock icon is clicked and there are no other windows open
   if (!win) {
     createWindow();
+    createShortcuts();
+    createTray();
   }
 });
 
@@ -157,6 +104,8 @@ app.on(constants.message.app.willQuit, () => {
 // If the browser window is closed, prevent it from opening before all of the
 // clips are ready to be displayed
 ipcMain.on(constants.message.clip.clipsReady, (event) => {
+  win = windowManager.getMainWindow();
+
   if (!win.isVisible()) {
     win.show();
   }

@@ -3,53 +3,58 @@
   <head>
     <title>Clipt</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=3">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="../node_modules/ng-dialog/css/ngDialog.min.css" media="screen">
-    <link rel="stylesheet" href="../node_modules/ng-dialog/css/ngDialog-theme-default.min.css" media="screen">
+    <!-- Load CSS files -->
+    <link rel="stylesheet" href="../node_modules/angular-material/angular-material.min.css" media="screen">
     <link rel="stylesheet" href="public/css/font-awesome.min.css" media="screen">
     <link rel="stylesheet" href="public/css/main.css" media="screen">
-    <!-- <link rel="stylesheet" href="public/css/main.min.css" media="screen"> -->
+    <link rel="stylesheet" href="public/css/about.css" media="screen">
+    <link rel="stylesheet" href="public/css/settings.css" media="screen">
+    <link rel="stylesheet" href="public/css/modals.css" media="screen">
 
-    <script>
-      if (typeof module === 'object') {
-        window.module = module; module = undefined;
-      }
-    </script>
-
+    <!-- Load JavaScript files -->
     <script src="../node_modules/angular/angular.min.js"></script>
-    <script src="../node_modules/ng-dialog/js/ngDialog.min.js"></script>
+    <script src="../node_modules/angular-animate/angular-animate.min.js"></script>
+    <script src="../node_modules/angular-aria/angular-aria.min.js"></script>
+    <script src="../node_modules/angular-material/angular-material.min.js"></script>
     <script src="public/js/app.js"></script>
     <script src="public/js/controllers/mainController.js"></script>
+    <script src="public/js/controllers/aboutController.js"></script>
+    <script src="public/js/controllers/settingsController.js"></script>
     <script src="public/js/services/mainService.js"></script>
-    <!-- <script src="public/js/main.min.js"></script> -->
-
-    <script>
-      if (window.module) {
-        module = window.module;
-      }
-    </script>
+    <script src="public/js/services/aboutService.js"></script>
+    <script src="public/js/services/settingsService.js"></script>
   </head>
 
-  <body ng-app="clipt" ng-controller="MainCtrl">
-    <ul id="clip-list">
-      <li class="clip-item" ng-repeat="clip in clips | filter: search" ng-dblclick="copyClip($event, $index)">
-        <i class="delete-clip fa fa-trash-o" ng-click="deleteClip($index)"></i>
-        <div class="clip">
-          {{clip.text}}
+  <body ng-app="clipt">
+    <div ng-controller="MainCtrl">
+      <!-- Main page of the application -->
+      <div id="clip-list-container">
+        <md-list id="clip-list">
+          <md-list-item class="clip-item" ng-repeat="clip in clips | filter: search" ng-dblclick="copyClip($event, $index)">
+            <i class="delete-clip fa fa-trash-o" ng-click="deleteClip($index)"></i>
+            <div class="clip">
+              {{clip.text}}
+            </div>
+          </md-list-item>
+        </md-list>
+      </div>
+
+      <!-- Ensures the last clip doesn't get hidden behind the search bar -->
+      <div id="clip-list-search-spacer"></div>
+
+      <!-- Search bar -->
+      <div id="clip-search">
+        <i class="fa fa-search"></i>
+        <input type="text" placeholder="Search..." ng-model="search">
+      </div>
+
+      <!-- Popup when copying a clip -->
+      <div id="copy-popup-container">
+        <div id="copy-popup-message">
+          Copied!
         </div>
-      </li>
-    </ul>
-
-    <div id="clip-list-search-spacer"></div>
-
-    <div id="clip-search">
-      <i class="fa fa-search"></i><input type="text" placeholder="Search..." ng-model="search">
-    </div>
-
-    <div id="copy-popup-container">
-      <div id="copy-popup-message">
-        Copied!
       </div>
     </div>
   </body>

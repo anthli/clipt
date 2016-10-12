@@ -16,9 +16,10 @@
   "license": "MIT",
   "dependencies": {
     "angular": "latest",
+    "angular-animate": "latest",
+    "angular-material": "latest",
     "jquery": "latest",
-    "nedb": "latest",
-    "ng-dialog": "latest"
+    "nedb": "latest"
   },
   "devDependencies": {
     "electron": "latest",
