@@ -10,8 +10,6 @@
     <link rel="stylesheet" href="public/css/font-awesome.min.css" media="screen">
     <link rel="stylesheet" href="public/css/main.css" media="screen">
     <link rel="stylesheet" href="public/css/about.css" media="screen">
-    <link rel="stylesheet" href="public/css/settings.css" media="screen">
-    <link rel="stylesheet" href="public/css/modals.css" media="screen">
 
     <!-- Load JavaScript files -->
     <script src="../node_modules/angular/angular.min.js"></script>
@@ -21,10 +19,8 @@
     <script src="public/js/app.js"></script>
     <script src="public/js/controllers/mainController.js"></script>
     <script src="public/js/controllers/aboutController.js"></script>
-    <script src="public/js/controllers/settingsController.js"></script>
     <script src="public/js/services/mainService.js"></script>
     <script src="public/js/services/aboutService.js"></script>
-    <script src="public/js/services/settingsService.js"></script>
   </head>
 
   <body ng-app="clipt">
@@ -35,7 +31,8 @@
           <md-list-item class="clip-item" ng-repeat="clip in clips | filter: search" ng-dblclick="copyClip($event, $index)">
             <i class="delete-clip fa fa-trash-o" ng-click="deleteClip($index)"></i>
             <div class="clip">
-              {{clip.text}}
+              <div class="clip-type">{{clip.type}}</div>
+              <div class="clip-text">{{clip.text}}</div>
             </div>
           </md-list-item>
         </md-list>

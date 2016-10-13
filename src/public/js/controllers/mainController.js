@@ -8,7 +8,7 @@ app.controller('MainCtrl', function($scope, $rootScope, $mdDialog, Main) {
   $scope.clips = globalClips;
   $scope.search = '';
 
-  // Copy the clip at the given index
+  // Signal the main process to copy the clip at the given index
   $scope.copyClip = ($event, index) => {
     // Prevent a double-click registering when rapidly deleting clips
     if (!angular.element($event.target).hasClass('delete-clip')) {
@@ -16,7 +16,7 @@ app.controller('MainCtrl', function($scope, $rootScope, $mdDialog, Main) {
     }
   };
 
-  // Delete the clip at the given index
+  // Signal the main process to delete the clip at the given index
   $scope.deleteClip = (index) => {
     Main.deleteClip($scope.clips, index);
   };
@@ -31,20 +31,21 @@ app.controller('MainCtrl', function($scope, $rootScope, $mdDialog, Main) {
     });
   });
 
+  // Since the main process successfully deleted the clip from the database,
+  // delete the clip from the client-side
+  ipcRenderer.on('clip-deleted', (event, index) => {
+    $scope.$apply(() => {
+      $scope.clips.splice(index, 1);
+      globalClips = $scope.clips;
+    });
+  });
+
   // Open the About modal
   ipcRenderer.on('about', (event) => {
     $mdDialog.show({
       templateUrl: 'views/modals/about.html',
       controller: 'AboutCtrl',
       clickOutsideToClose: true
-    });
-  });
-
-  // Open the Settings modal
-  ipcRenderer.on('settings', (event) => {
-    $mdDialog.show({
-      templateUrl: 'views/modals/settings.html',
-      controller: 'SettingsCtrl'
     });
   });
 }).$inject = ['$scope', '$rootScope', '$mdDialog', 'Main'];

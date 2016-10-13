@@ -5,17 +5,18 @@ const dir = __dirname;
 exports.appName = 'Clipt';
 
 exports.clipType = {
-  image: 'image',
-  text: 'text'
+  image: 'Image',
+  text: 'Text'
 }
 
 exports.db = {
-  dir: '.db',
-  file: 'clipt.db',
-  path: 'userData',
+  path: '.db/clipt.sqlite3',
+  userData: 'userData',
 }
 
 exports.indexHtml = `file://${dir}/../index.html`;
+
+exports.settingsHtml = `file://${dir}/../views/modals/settings.html`;
 
 exports.message = {
   app: {
@@ -29,6 +30,7 @@ exports.message = {
   clip: {
     clips: 'clips',
     clipCopied: 'clip-copied',
+    clipDeleted: 'clip-deleted',
     clipsReady: 'clips-ready',
     deleteClip: 'delete-clip'
   },
@@ -39,6 +41,7 @@ exports.message = {
 
 exports.modal = {
   about: 'about',
+  readyToShow: 'ready-to-show',
   settings: 'settings'
 }
 
@@ -46,6 +49,32 @@ exports.platform = {
   mac: 'darwin',
   win: 'win32'
 };
+
+// Database queries
+exports.query = {
+  createTable: `
+    CREATE TABLE IF NOT EXISTS clip (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      text TEXT NOT NULL,
+      type TEXT NOT NULL
+    );
+  `,
+  getAllRows: `
+    SELECT * FROM clip ORDER BY id DESC
+  `,
+  getLastInsertedRow: `
+    SELECT * FROM clip
+    WHERE id = (
+     SELECT last_insert_rowid()
+    );
+  `,
+  insertRow: `
+    INSERT INTO clip (text, type) VALUES ($1, $2);
+  `,
+  deleteRow: `
+    DELETE FROM clip WHERE id = $1
+  `
+}
 
 exports.shortcut = {
   open: {

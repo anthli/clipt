@@ -11,7 +11,7 @@ important!
 
 ## Features
 - Displays clips in descending order (latest to earliest) so the most recent
-  clips appear at the top, and the oldest ones at the bottom
+  clips appear at the top and the oldest ones at the bottom
 - Clips can be deleted on demand
 - Searching for clips can be easily done through the search bar at the bottom
 - Supports copying of text
@@ -30,6 +30,7 @@ To start developing, clone the repo and run the following:
 
 ```bash
 $ npm install
+$ npm run rebuild
 $ npm start
 ```
 

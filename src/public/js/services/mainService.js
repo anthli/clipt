@@ -26,7 +26,7 @@ app.factory('Main', function() {
     // When the trash icon is clicked, notify the main process that the clip it
     // belongs should be deleted
     deleteClip: (clips, index) => {
-      ipcRenderer.send('delete-clip', clips[index]._id);
+      ipcRenderer.send('delete-clip', clips[index].id, index);
     }
   }
 });

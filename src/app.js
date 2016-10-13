@@ -13,7 +13,7 @@ const createWindow = require('./lib/configureWindow');
 const createShortcuts = require('./lib/configureShortcuts');
 const createTray = require('./lib/configureTray');
 const db = require('./lib/db');
-const windowManager = require('./lib/windowManager');;
+const windowManager = require('./lib/windowManager');
 
 let win;
 
@@ -24,7 +24,7 @@ const watcher = clipboardWatcher({
     // New clip containing the type, timestamp, and text
     let txtClip = clip(constants.clipType.text, {text: text});
 
-    db.addClip(txtClip, (err, doc) => {
+    db.addClip(txtClip, (err, row) => {
       if (err) {
         console.error(err);
         return;
@@ -111,24 +111,15 @@ ipcMain.on(constants.message.clip.clipsReady, (event) => {
   }
 });
 
-// Delete the clip selected in the window and send the remaining clips back
-// to be displayed
-ipcMain.on(constants.message.clip.deleteClip, (event, id) => {
-  db.deleteClip(id, (err, count) => {
+// Delete the clip selected in the window and send its index back to the
+// renderer so it can delete the clip on the client-side
+ipcMain.on(constants.message.clip.deleteClip, (event, id, index) => {
+  db.deleteClip(id, (err) => {
     if (err) {
       console.error(err);
       return;
     }
 
-    // Retrieve all clips and send them to the renderer
-    db.getClips((err, clips) => {
-      if (err) {
-        console.error(err);
-        return;
-      }
-
-      // Send the remaining clips to the renderer
-      win.webContents.send(constants.message.clip.clips, clips);
-    });
+    win.webContents.send(constants.message.clip.clipDeleted, index);
   });
 });

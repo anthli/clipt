@@ -1,6 +1,7 @@
 'use strict';
 
 const {
+  BrowserWindow,
   Menu,
   Tray
 } = require('electron');
@@ -68,7 +69,22 @@ module.exports = () => {
         win = windowManager.getMainWindow();
 
         if (win) {
-          win.webContents.send(constants.modal.settings);
+          // Set up the Settings modal window
+          let settingsModal = new BrowserWindow({
+            height: 400,
+            modal: true,
+            resizable: false,
+            show: false,
+            title: constants.appName,
+            width: 600
+          });
+
+          settingsModal.loadURL(constants.settingsHtml);
+
+          // Show the Settings modal once ready
+          settingsModal.once(constants.modal.readyToShow, () => {
+            settingsModal.show();
+          });
         }
       }
     },

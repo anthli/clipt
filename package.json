@@ -19,15 +19,17 @@
     "angular-animate": "latest",
     "angular-material": "latest",
     "jquery": "latest",
-    "nedb": "latest"
+    "sqlite3": "latest"
   },
   "devDependencies": {
     "electron": "latest",
     "electron-builder": "latest",
-    "electron-packager": "latest"
+    "electron-packager": "latest",
+    "electron-rebuild": "latest"
   },
   "scripts": {
     "start": "electron .",
+    "rebuild": "./node_modules/.bin/electron-rebuild",
     "pack": "build --dir",
     "dist": "build"
   },
