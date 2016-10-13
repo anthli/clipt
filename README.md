@@ -7,7 +7,7 @@ With Clipt, whatever you copy will be stored and can be used at a later
 time. Never again will you have to worry about copying over something
 important!
 
-![alt text](./assets/images/demo.png)
+![alt text](./src/assets/images/demo.png)
 
 ## Features
 - Displays clips in descending order (latest to earliest) so the most recent
