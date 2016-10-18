@@ -25,7 +25,7 @@ exports.message = {
     didFinishLoad: 'did-finish-load',
     ready: 'ready',
     willQuit: 'will-quit',
-    windowsAllClosed:'window-all-closed'
+    windowsAllClosed: 'window-all-closed'
   },
   clip: {
     clips: 'clips',

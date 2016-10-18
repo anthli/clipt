@@ -129,7 +129,18 @@ ipcMain.on(constants.message.titleBar.buttonClicked, (event, button) => {
 ipcMain.on(constants.message.clip.clipsReady, (event) => {
   win = windowManager.getMainWindow();
 
-  if (win && !win.isMinimized()) {
+  if (win) {
+    // Ignore showing the window if it's minimized
+    if (win.isMinimized()) {
+      return;
+    }
+
+    // Ignore showing the window if it's visible and out of focus to prevent
+    // it from appearing and hovering over all other windows
+    if (win.isVisible() && !win.isFocused()) {
+      return;
+    }
+
     win.show();
   }
 });

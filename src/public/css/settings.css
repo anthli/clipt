@@ -4,15 +4,14 @@
     "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
     "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
-  font-weight: 400;
 
   -webkit-user-select: none;
-  user-select: none;
 }
 
-html, body {
+html, body, div[ng-view] {
   height: 100%;
   margin: 0;
+  overflow-y: hidden;
   padding: 0;
   width: 100%;
 }

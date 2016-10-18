@@ -27,7 +27,7 @@ module.exports = () => {
       return;
     }
 
-    // Send the clips to the renderer once it's finishsed loading
+    // Send the clips to the renderer once it's finished loading
     win.webContents.on(constants.message.app.didFinishLoad, () => {
       win.webContents.send(constants.message.clip.clips, clips);
     });

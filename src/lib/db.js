@@ -13,11 +13,6 @@ const db = new sqlite3.Database(path.join(
   constants.db.path
 ));
 
-// db.exec(`
-//   DROP TABLE IF EXISTS clip;
-//   DROP TABLE IF EXISTS starred_clip;
-// `);
-
 // Create the tables if they does not exist
 db.exec(queries.createTables);
 
@@ -52,6 +47,7 @@ exports.addClip = (clip, cb) => {
   });
 };
 
+// Star a clip in the database given its id
 exports.starClip = (id, cb) => {
   db.run(queries.starClip, id, (err) => {
     if (err) {

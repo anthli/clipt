@@ -1,0 +1,32 @@
+#clipt-about {
+  margin: 10px;
+}
+
+#about-image-container {
+  display: block;
+  margin: 0 auto 20px auto;
+}
+
+#about-image {
+  display: block;
+  height: 60px;
+  margin: 0 auto 20px auto;
+  width: 60px;
+}
+
+#about-content-container {
+  text-align: center;
+}
+
+#about-title {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+#about-content {
+  font-size: 14px;
+}
+
+#about-version {
+  margin-bottom: 10px;
+}

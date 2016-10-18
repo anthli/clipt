@@ -4,7 +4,7 @@ app.factory('Main', function() {
   return {
     // When a clip is double-clicked on, send it back to the main process
     // for its data to be written to the clipboard
-    copyClip: (event, clip) => {
+    copyClip: function(event, clip) {
       // Prevent a double-click registering when starring or deleting clips
       let elem = angular.element(event.target);
       if (elem.hasClass('star-clip') || elem.hasClass('delete-clip')) {
@@ -21,7 +21,7 @@ app.factory('Main', function() {
       });
 
       // Fade the popup message out after 750 ms
-      setTimeout(() => {
+      setTimeout(function() {
         popupContainer.fadeOut(150);
       }, 500);
 
@@ -30,13 +30,13 @@ app.factory('Main', function() {
 
     // When the star icon is clicked, notify the main process that the clip it
     // belongs to should be starred
-    starClip: (clip) => {
+    starClip: function(clip) {
       console.log(clip);
     },
 
     // When the trash icon is clicked, notify the main process that the clip it
     // belongs should be deleted
-    deleteClip: (clip, index) => {
+    deleteClip: function(clip, index) {
       ipcRenderer.send('delete-clip', clip.id, index);
     }
   }

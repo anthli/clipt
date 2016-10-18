@@ -11,7 +11,7 @@ const app = angular.module('clipt', [
   ]
 );
 
-const config = ($routeProvider) => {
+const config = function($routeProvider) {
   $routeProvider
 
   // Main page of the application
