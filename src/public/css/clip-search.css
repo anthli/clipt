@@ -1,0 +1,25 @@
+#clip-search-container {
+  align-items: center;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  bottom: 0;
+  color: rgba(38, 50, 56, 0.5);
+  display: flex;
+  margin-left: -1px;
+  width: 100%;
+  z-index: 2;
+}
+
+#clip-search-container i {
+  left: 10px;
+  position: absolute;
+}
+
+#clip-search-container input {
+  border: 0;
+  font-size: 14px;
+  height: 18px;
+  outline: none;
+  padding: 10px 10px 10px 32px;
+  width: 100%;
+}

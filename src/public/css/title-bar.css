@@ -1,0 +1,122 @@
+#title-bar {
+  background-color: #333333;
+  height: 30px;
+  margin: 0;
+  padding: 0;
+
+  -webkit-app-region: drag;
+  -webkit-user-select: none;
+}
+
+#title-bar-buttons {
+  position: fixed;
+  right: 0;
+  top: 0;
+
+  -webkit-app-region: no-drag;
+}
+
+#title-bar-buttons button {
+  background-color: transparent;
+  border: none;
+  height: 30px;
+  outline: 0;
+  position: fixed;
+  width: 30px;
+
+  transition: all ease-out 300ms;
+}
+
+#title-bar-buttons button:hover {
+  background-color: #808080;
+
+  transition: all ease-out 300ms;
+}
+
+#title-bar-buttons button span {
+  background-color: #ffffff;
+  height: 2px;
+  position: absolute;
+}
+
+#minimize-button {
+  right: 90px;
+}
+
+#minimize-button span {
+  left: 7px;
+  top: 14px;
+  width: 16px;
+}
+
+#maximize-button {
+  right: 50px;
+}
+
+#maximize-button span {
+  width: 6px;
+}
+
+#maximize-button span:nth-child(1) {
+  left: 4px;
+  top: 8px;
+
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+#maximize-button span:nth-child(2) {
+  left: 6px;
+  top: 6px;
+}
+
+#maximize-button span:nth-child(3) {
+  left: 6px;
+  top: 9px;
+  width: 8px;
+
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+#maximize-button span:nth-child(4) {
+  left: 20px;
+  top: 20px;
+
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+#maximize-button span:nth-child(5) {
+  left: 17px;
+  top: 22px;
+}
+
+#maximize-button span:nth-child(6) {
+  left: 16px;
+  top: 19px;
+  width: 8px;
+
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+#close-button {
+  right: 10px;
+}
+
+#close-button span {
+  left: 3px;
+  top: 14px;
+  width: 24px;
+}
+
+#close-button span:nth-child(1) {
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+#close-button span:nth-child(2) {
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}

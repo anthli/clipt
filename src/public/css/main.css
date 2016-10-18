@@ -4,112 +4,21 @@
     "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
     "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
-  font-weight: 400;
 
   -webkit-user-select: none;
-  user-select: none;
 }
 
-html, body {
+html, body, div[ng-view] {
   height: 100%;
   margin: 0;
+  overflow-y: hidden;
   padding: 0;
   width: 100%;
 }
 
-#clip-list-container, #clip-list {
-  margin: 0;
-  padding: 0;
-}
-
-.clip-item {
-  /*align-items: center;*/
-  /*display: flex;*/
-  height: 80px;
-  margin: 0;
-  padding: 0;
-}
-
-.delete-clip {
-  color: #ef9a9a;
-  font-size: 24px;
-  margin-left: -6px;
-  z-index: 1;
-}
-
-.delete-clip:hover {
-  color: #f44336;
-}
-
-.delete-clip, .delete-clip:hover {
-  transition: all ease-out 300ms;
-}
-
-.clip {
-  overflow: hidden;
-  padding-left: 10px;
-  width: 100%;
-}
-
-.clip-type {
-  font-size: 16px;
-}
-
-.clip-text {
-  font-size: 14px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-#copy-popup-container {
-  background-color: #808080;
-  border-radius: 6px;
-  display: none;
-  height: 30px;
-  margin-left: -30px;
-  margin-top: -32px;
-  position: absolute;
-  width: 60px;
-  z-index: 3;
-}
-
-#copy-popup-message {
-  color: #ffffff;
-  font-size: 12px;
-  margin: auto;
-}
-
-#clip-list-search-spacer {
-  height: 42px;
-}
-
-#clip-search {
-  align-items: center;
-  background-color: #ffffff;
-  border: 1px solid #dddddd;
-  bottom: 0;
-  color: rgba(38, 50, 56, 0.5);
-  display: flex;
-  left: -1px;
-  position: fixed;
-  width: 100%;
-  z-index: 2;
-}
-
-#clip-search i {
-  position: absolute;
-  left: 10px;
-}
-
-#clip-search input {
-  border: 0;
-  font-size: 14px;
-  height: 20px;
-  padding: 10px 10px 10px 32px;
-  width: 100%;
-}
-
-#clip-search input:focus {
-  outline: none;
+#toolbar {
+  background-color: #1a1a1a;
+  height: 50px;
+  max-height: 50px;
+  min-height: 50px;
 }

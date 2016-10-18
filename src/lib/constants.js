@@ -36,6 +36,9 @@ exports.message = {
   },
   tray: {
     doubleClick: 'double-click'
+  },
+  titleBar: {
+    buttonClicked: 'title-bar-button-clicked'
   }
 }
 
@@ -50,38 +53,18 @@ exports.platform = {
   win: 'win32'
 };
 
-// Database queries
-exports.query = {
-  createTable: `
-    CREATE TABLE IF NOT EXISTS clip (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      text TEXT NOT NULL,
-      type TEXT NOT NULL
-    );
-  `,
-  getAllRows: `
-    SELECT * FROM clip ORDER BY id DESC
-  `,
-  getLastInsertedRow: `
-    SELECT * FROM clip
-    WHERE id = (
-     SELECT last_insert_rowid()
-    );
-  `,
-  insertRow: `
-    INSERT INTO clip (text, type) VALUES ($1, $2);
-  `,
-  deleteRow: `
-    DELETE FROM clip WHERE id = $1
-  `
-}
-
 exports.shortcut = {
   open: {
     key: 'CommandOrControl+`',
     error: 'Failed to register CommandOrControl+`'
   }
 };
+
+exports.titleBar = {
+  close: 'close',
+  maximize: 'maximize',
+  minimize: 'minimize'
+}
 
 exports.tray = {
   icon: {

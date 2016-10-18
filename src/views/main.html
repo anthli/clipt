@@ -1,0 +1,31 @@
+<md-content id="clip-list-container">
+  <div infinite-scroll="loadMoreClips()" infinite-scroll-container="'#clip-list-container'" infinite-scroll-disabled="busy" infinite-scroll-distance="0">
+    <md-list id="clip-list">
+      <md-list-item class="clip-item" ng-repeat="clip in clips | filter: search | limitTo: clipDisplayCount" ng-dblclick="copyClip($event, $index)">
+        <div class="clip">
+          <div class="clip-type">{{clip.type}}</div>
+          <div class="clip-text">{{clip.text}}</div>
+        </div>
+        <div class="clip-button-container">
+          <i class="star-clip fa fa-star-o" ng-click="starClip($index)"></i>
+          <i class="delete-clip fa fa-trash-o" ng-click="deleteClip($index)"></i>
+        </div>
+        <div style="clear: both;"></div>
+      </md-list-item>
+      <div ng-show="busy">Loading data...</div>
+    </md-list>
+  </div>
+</md-content>
+
+<!-- Search bar -->
+<div id="clip-search-container">
+  <i class="fa fa-search"></i>
+  <input type="text" placeholder="Search..." ng-model="search">
+</div>
+
+<!-- Popup when copying a clip -->
+<div id="copy-popup-container">
+  <div id="copy-popup-message">
+    Copied!
+  </div>
+</div>

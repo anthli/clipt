@@ -18,7 +18,9 @@
     "angular": "latest",
     "angular-animate": "latest",
     "angular-material": "latest",
+    "angular-route": "latest",
     "jquery": "latest",
+    "ng-infinite-scroll": "latest",
     "sqlite3": "latest"
   },
   "devDependencies": {

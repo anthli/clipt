@@ -1,0 +1,59 @@
+.clip-item, .clip-item .md-button {
+  margin: 0;
+  min-height: 72px;
+  padding: 0 !important;
+}
+
+.clip-item .clip-button-container {
+  display: none;
+}
+
+.clip-item:hover .clip-button-container {
+  display: inline;
+}
+
+.clip-button-container {
+  width: 32px;
+  z-index: 1;
+}
+
+.star-clip {
+  margin-left: -1px;
+}
+
+.star-clip:hover {
+  color: #fff000;
+}
+
+.delete-clip:hover {
+  color: #f44336;
+}
+
+.star-clip, .delete-clip {
+  color: #b3b3b3;
+  font-size: 20px;
+  outline: none;
+  z-index: 1;
+}
+
+.star-clip, .star-clip:hover,
+.delete-clip, .delete-clip:hover {
+  transition: all ease-out 300ms;
+}
+
+.clip {
+  overflow: hidden;
+  padding: 0 10px;
+  width: 100%;
+}
+
+.clip-type {
+  font-size: 14px;
+}
+
+.clip-text {
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

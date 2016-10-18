@@ -9,7 +9,6 @@ const path = require('path');
 
 const constants = require('./constants');
 const createWindow = require('./configureWindow');
-const createShortcuts = require('./configureShortcuts');
 const windowManager = require('./windowManager');
 
 let tray;

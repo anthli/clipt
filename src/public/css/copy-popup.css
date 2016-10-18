@@ -1,0 +1,17 @@
+#copy-popup-container {
+  background-color: #808080;
+  border-radius: 6px;
+  display: none;
+  height: 30px;
+  margin-left: -30px;
+  margin-top: -32px;
+  position: absolute;
+  width: 60px;
+  z-index: 3;
+}
+
+#copy-popup-message {
+  color: #ffffff;
+  font-size: 12px;
+  margin: auto;
+}

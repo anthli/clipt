@@ -30,7 +30,7 @@ const watcher = clipboardWatcher({
         return;
       }
 
-      // Only refresh the clips if the window is open
+      // Only refresh the clips if the window is open and visible
       if (win) {
         db.getClips((err, clips) => {
           if (err) {
@@ -68,8 +68,6 @@ app.on(constants.message.app.ready, () => {
   createWindow();
   createShortcuts();
   createTray();
-
-  win = windowManager.getMainWindow();
 });
 
 // Quit when all windows are closed
@@ -82,12 +80,12 @@ app.on(constants.message.app.windowsAllClosed, () => {
 });
 
 app.on(constants.message.app.activate, () => {
+  win = windowManager.getMainWindow();
+
   // On macOS it is common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open
   if (!win) {
     createWindow();
-    createShortcuts();
-    createTray();
   }
 });
 
@@ -101,12 +99,37 @@ app.on(constants.message.app.willQuit, () => {
 
 /* ipcMain configuration */
 
+ipcMain.on(constants.message.titleBar.buttonClicked, (event, button) => {
+  win = windowManager.getMainWindow();
+
+  if (win) {
+    switch (button) {
+      case constants.titleBar.close:
+        win.close();
+        break;
+
+      case constants.titleBar.maximize:
+        if (win.isMaximized()) {
+          win.unmaximize();
+        } else {
+          win.maximize();
+        }
+
+        break;
+
+      case constants.titleBar.minimize:
+        win.minimize();
+        break;
+    }
+  }
+});
+
 // If the browser window is closed, prevent it from opening before all of the
 // clips are ready to be displayed
 ipcMain.on(constants.message.clip.clipsReady, (event) => {
   win = windowManager.getMainWindow();
 
-  if (!win.isVisible()) {
+  if (win && !win.isMinimized()) {
     win.show();
   }
 });

@@ -1,0 +1,8 @@
+#clip-list-container {
+  height: calc(100% - 120px);
+  width: 100%;
+}
+
+#clip-list {
+  padding: 0;
+}

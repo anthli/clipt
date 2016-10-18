@@ -1,5 +1,9 @@
 'use strict';
 
-app.controller('AboutCtrl', ($scope) => {
+const aboutCtrl = function($scope) {
 
-}).$inject = ['$scope'];
+};
+
+aboutCtrl.$inject = ['$scope'];
+
+app.controller('AboutCtrl', aboutCtrl);
