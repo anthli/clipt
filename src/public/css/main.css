@@ -11,14 +11,14 @@
 html, body, div[ng-view] {
   height: 100%;
   margin: 0;
-  overflow-y: hidden;
+  overflow: hidden;
   padding: 0;
   width: 100%;
 }
 
 #toolbar {
   background-color: #1a1a1a;
-  height: 50px;
-  max-height: 50px;
-  min-height: 50px;
+  height: 100%;
+  position: fixed;
+  width: 50px;
 }

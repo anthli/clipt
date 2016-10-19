@@ -30,8 +30,14 @@ app.factory('Main', function() {
 
     // When the star icon is clicked, notify the main process that the clip it
     // belongs to should be starred
-    starClip: function(clip) {
-      console.log(clip);
+    starClip: function(clip, index) {
+      ipcRenderer.send('star-clip', clip.id, index);
+    },
+
+    // When the star icon is clicked after being starred, notify the main
+    // process that the clip it belongs to should be unstarred
+    unstarClip: function(clip, index) {
+      ipcRenderer.send('unstar-clip', clip.starred_clip_id, index);
     },
 
     // When the trash icon is clicked, notify the main process that the clip it

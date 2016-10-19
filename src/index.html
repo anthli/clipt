@@ -32,11 +32,15 @@
   </head>
 
   <body ng-app="clipt">
+    <!-- Title bar -->
     <div id="title-bar" ng-controller="TitleBarCtrl">
       <div id="title-bar-buttons">
+        <!-- Minimize button -->
         <button id="minimize-button" ng-click="clickTitleBarButton('minimize')">
           <span></span>
         </button>
+
+        <!-- Maximize button -->
         <button id="maximize-button" ng-click="clickTitleBarButton('maximize')">
           <span></span>
           <span></span>
@@ -45,6 +49,8 @@
           <span></span>
           <span></span>
         </button>
+
+        <!-- Close button -->
         <button id="close-button" ng-click="clickTitleBarButton('close')">
           <span></span>
           <span></span>
@@ -52,6 +58,7 @@
       </div>
     </div>
 
+    <!-- Side bar -->
     <md-toolbar id="toolbar" >
 
     </md-toolbar>

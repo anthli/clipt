@@ -29,14 +29,16 @@ exports.message = {
   },
   clip: {
     clips: 'clips',
-    clipCopied: 'clip-copied',
-    clipDeleted: 'clip-deleted',
-    clipsReady: 'clips-ready',
-    deleteClip: 'delete-clip'
+    copied: 'clip-copied',
+    deleted: 'clip-deleted',
+    ready: 'clips-ready',
+    delete: 'delete-clip',
+    star: 'star-clip',
+    starred: 'clip-starred',
+    unstar: 'unstar-clip',
+    unstarred: 'clip-unstarred'
   },
-  tray: {
-    doubleClick: 'double-click'
-  },
+  link: 'link',
   titleBar: {
     buttonClicked: 'title-bar-button-clicked'
   }
@@ -79,7 +81,6 @@ exports.tray = {
       quit: 'Quit Clipt'
     },
     role: {
-      about: 'about',
       quit: 'quit'
     },
     type: {

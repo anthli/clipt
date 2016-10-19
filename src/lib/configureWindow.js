@@ -20,14 +20,14 @@ module.exports = () => {
   // Load index.html
   win.loadURL(path.normalize(constants.indexHtml));
 
-  // Retrieve all clips and send them to the renderer
+  // Retrieve all Clips and send them to the renderer
   db.getClips((err, clips) => {
     if (err) {
       console.error(err);
       return;
     }
 
-    // Send the clips to the renderer once it's finished loading
+    // Send the Clips to the renderer once it's finished loading
     win.webContents.on(constants.message.app.didFinishLoad, () => {
       win.webContents.send(constants.message.clip.clips, clips);
     });

@@ -6,9 +6,9 @@ let globalClips = [];
 
 const mainCtrl = function($scope, $rootScope, $mdDialog, Main) {
   $scope.clips = globalClips;
-  $scope.search = '';
   $scope.clipDisplayCount = 20;
   $scope.busy = false;
+  $scope.search = '';
 
   // Load more clips when scrolled to the bottom of the list. This prevents
   // clips from loading in all at once and slowing down the UI
@@ -27,23 +27,49 @@ const mainCtrl = function($scope, $rootScope, $mdDialog, Main) {
     Main.copyClip($event, $scope.clips[index]);
   };
 
-  // Signal the main process to start the clip at the given index
-  $scope.starClip = function(index) {
-    Main.starClip($scope.clips[index]);
-  }
+  // Check to see if the clip should be starred or unstarred
+  $scope.checkStar = function(index) {
+    let clip = $scope.clips[index];
+
+    // Unstar the clip
+    if (clip.starred_clip_id) {
+      Main.unstarClip(clip, index);
+      return;
+    }
+
+    // Star the clip
+    Main.starClip(clip, index);
+  };
 
   // Signal the main process to delete the clip at the given index
   $scope.deleteClip = function(index) {
     Main.deleteClip($scope.clips[index], index);
   };
 
-  // Render the clips that were received from the main process
+  // ipcRenderer Configuration
+
+  // Render the clips that were received from the main process and notify the
+  // main process that the clips are ready to be displayed
   ipcRenderer.on('clips', function(event, clips) {
     $scope.$apply(function() {
       globalClips = $scope.clips = clips;
-
-      // Notify the main process that the clips are ready to be displayed
       ipcRenderer.send('clips-ready');
+    });
+  });
+
+  // Star the clip at the given index by assigning its starred_clip_id
+  ipcRenderer.on('clip-starred', function(event, index, starred_clip_id) {
+    $scope.$apply(function() {
+      $scope.clips[index].starred_clip_id = starred_clip_id;
+      globalClips = $scope.clips;
+    });
+  });
+
+  // Unstar the clip at the given index by settings its starred_clip_id to null
+  ipcRenderer.on('clip-unstarred', function(event, index) {
+    $scope.$apply(function() {
+      $scope.clips[index].starred_clip_id = null;
+      globalClips = $scope.clips;
     });
   });
 

@@ -1,6 +1,6 @@
 'use strict';
 
-// Create a new clip object containing:
+// Create a new Clip object containing:
 //   1. The type of data (Text, Image, etc.)
 //   2. The current Unix timestamp
 //   3. The an object of the copied data

@@ -25,7 +25,7 @@ const imageHasDiff = (oldImg, newImg) => {
   return !oldImg.isEmpty() && oldImg.toDataURL() !== newImg.toDataURL();
 };
 
-// Take the data from the clip and write it to the clipboard
+// Take the data from the Clip and write it to the Clipboard
 ipcMain.on(constants.message.clip.clipCopied, (event, clip) => {
   switch (clip.type) {
     case constants.clipType.text:
@@ -54,11 +54,11 @@ module.exports = (opts) => {
     const newTxt = clipboard.readText();
     const newImg = clipboard.readImage();
 
-    // Data was copied from a clip in the window
+    // Data was copied from a Clip in the window
     if (copiedFromClip) {
       copiedFromClip = false;
 
-      // Prevent copying from a clip registering as a copy from the system
+      // Prevent copying from a Clip registering as a copy from the system
       if (newImg.isEmpty()) {
         currTxt = newTxt;
         return;

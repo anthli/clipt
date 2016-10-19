@@ -4,6 +4,7 @@ const {
   app,
   globalShortcut,
   ipcMain,
+  shell
 } = require('electron');
 
 const clip = require('./lib/clip');
@@ -21,10 +22,10 @@ let win;
 const watcher = clipboardWatcher({
   onTextChange: (text) => {
     win = windowManager.getMainWindow();
-    // New clip containing the type, timestamp, and text
+    // New Clip containing the type, timestamp, and text
     let txtClip = clip(constants.clipType.text, {text: text});
 
-    db.addClip(txtClip, (err, row) => {
+    db.addClip(txtClip, (err, clip) => {
       if (err) {
         console.error(err);
         return;
@@ -46,7 +47,7 @@ const watcher = clipboardWatcher({
 
   // onImageChange: (text, image) => {
   //   win = windowManager.getMainWindow();
-  //   // New clip containing the type, timestamp, and image
+  //   // New Clip containing the type, timestamp, and image
   //   let imgClip = clip(constants.clipType.image, {
   //     text: text,
   //     image: image
@@ -126,7 +127,7 @@ ipcMain.on(constants.message.titleBar.buttonClicked, (event, button) => {
 
 // If the browser window is closed, prevent it from opening before all of the
 // clips are ready to be displayed
-ipcMain.on(constants.message.clip.clipsReady, (event) => {
+ipcMain.on(constants.message.clip.ready, (event) => {
   win = windowManager.getMainWindow();
 
   if (win) {
@@ -145,15 +146,46 @@ ipcMain.on(constants.message.clip.clipsReady, (event) => {
   }
 });
 
-// Delete the clip selected in the window and send its index back to the
-// renderer so it can delete the clip on the client-side
-ipcMain.on(constants.message.clip.deleteClip, (event, id, index) => {
+// Star the Clip selected in the window and send its index back to the
+// renderer along with its starred_clip_id so it can star the Clip
+ipcMain.on(constants.message.clip.star, (event, id, index) => {
+  db.starClip(id, (err, clip) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+
+    win.webContents.send(constants.message.clip.starred, index, clip.id);
+  });
+});
+
+// Unstar the Clip selected in the window and send its index back to the
+// renderer so it can unstar the Clip
+ipcMain.on(constants.message.clip.unstar, (event, id, index) => {
+  db.unstarClip(id, (err) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+
+    win.webContents.send(constants.message.clip.unstarred, index);
+  });
+});
+
+// Delete the Clip selected in the window and send its index back to the
+// renderer so it can delete the Clip
+ipcMain.on(constants.message.clip.delete, (event, id, index) => {
   db.deleteClip(id, (err) => {
     if (err) {
       console.error(err);
       return;
     }
 
-    win.webContents.send(constants.message.clip.clipDeleted, index);
+    win.webContents.send(constants.message.clip.deleted, index);
   });
+});
+
+// Open the link in the desktop's default browser
+ipcMain.on(constants.message.link, (event, link) => {
+  shell.openExternal(link);
 });

@@ -5,20 +5,20 @@
   bottom: 0;
   color: rgba(38, 50, 56, 0.5);
   display: flex;
-  margin-left: -1px;
-  width: 100%;
+  margin-left: 49px;
+  width: calc(100% - 50px);
   z-index: 2;
 }
 
 #clip-search-container i {
-  left: 10px;
+  left: 60px;
   position: absolute;
 }
 
 #clip-search-container input {
   border: 0;
   font-size: 14px;
-  height: 18px;
+  height: 20px;
   outline: none;
   padding: 10px 10px 10px 32px;
   width: 100%;

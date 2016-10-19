@@ -28,7 +28,7 @@
 }
 
 #title-bar-buttons button:hover {
-  background-color: #808080;
+  background-color: #b4b4b4;
 
   transition: all ease-out 300ms;
 }
