@@ -18,6 +18,11 @@ const config = function($routeProvider) {
   .when('/', {
     templateUrl: 'views/main.html',
     controller: 'MainCtrl'
+  })
+
+  .when('/starred', {
+    templateUrl: 'views/main.html',
+    controller: 'MainCtrl'
   });
 };
 

@@ -8,6 +8,7 @@
   -webkit-user-select: none;
 }
 
+/* Title bar button */
 #title-bar-buttons {
   position: fixed;
   right: 0;
@@ -23,14 +24,10 @@
   outline: 0;
   position: fixed;
   width: 30px;
-
-  transition: all ease-out 300ms;
 }
 
 #title-bar-buttons button:hover {
   background-color: #b4b4b4;
-
-  transition: all ease-out 300ms;
 }
 
 #title-bar-buttons button span {
@@ -39,6 +36,7 @@
   position: absolute;
 }
 
+/* Minimize button */
 #minimize-button {
   right: 90px;
 }
@@ -49,6 +47,7 @@
   width: 16px;
 }
 
+/* Maximize button */
 #maximize-button {
   right: 50px;
 }
@@ -60,9 +59,6 @@
 #maximize-button span:nth-child(1) {
   left: 4px;
   top: 8px;
-
-  -webkit-transform: rotate(90deg);
-  transform: rotate(90deg);
 }
 
 #maximize-button span:nth-child(2) {
@@ -74,17 +70,11 @@
   left: 6px;
   top: 9px;
   width: 8px;
-
-  -webkit-transform: rotate(45deg);
-  transform: rotate(45deg);
 }
 
 #maximize-button span:nth-child(4) {
   left: 20px;
   top: 20px;
-
-  -webkit-transform: rotate(90deg);
-  transform: rotate(90deg);
 }
 
 #maximize-button span:nth-child(5) {
@@ -96,11 +86,9 @@
   left: 16px;
   top: 19px;
   width: 8px;
-
-  -webkit-transform: rotate(45deg);
-  transform: rotate(45deg);
 }
 
+/* Close button */
 #close-button {
   right: 10px;
 }
@@ -109,14 +97,4 @@
   left: 3px;
   top: 14px;
   width: 24px;
-}
-
-#close-button span:nth-child(1) {
-  -webkit-transform: rotate(45deg);
-  transform: rotate(45deg);
-}
-
-#close-button span:nth-child(2) {
-  -webkit-transform: rotate(-45deg);
-  transform: rotate(-45deg);
 }

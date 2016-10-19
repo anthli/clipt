@@ -16,9 +16,22 @@ html, body, div[ng-view] {
   width: 100%;
 }
 
-#toolbar {
+/* Side bar menu */
+#menu {
   background-color: #1a1a1a;
   height: 100%;
   position: fixed;
   width: 50px;
+}
+
+.menu-icon {
+  color: #b3b3b3;
+  display: block;
+  font-size: 30px;
+  margin: 15px auto;
+  outline: none;
+}
+
+.menu-icon:hover, .menu-icon.active {
+  color: #e6e6e6;
 }

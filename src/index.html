@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../node_modules/angular-material/angular-material.min.css" media="screen">
     <link rel="stylesheet" href="public/css/font-awesome.min.css" media="screen">
     <link rel="stylesheet" href="public/css/about.css" media="screen">
+    <link rel="stylesheet" href="public/css/animations.css" media="screen">
     <link rel="stylesheet" href="public/css/clip-list.css" media="screen">
     <link rel="stylesheet" href="public/css/clip-search.css" media="screen">
     <link rel="stylesheet" href="public/css/clip.css" media="screen">
@@ -26,6 +27,7 @@
     <script src="public/js/app.js"></script>
     <script src="public/js/controllers/aboutController.js"></script>
     <script src="public/js/controllers/mainController.js"></script>
+    <script src="public/js/controllers/menuController.js"></script>
     <script src="public/js/controllers/titleBarController.js"></script>
     <script src="public/js/services/mainService.js"></script>
     <script src="public/js/services/titleBarService.js"></script>
@@ -58,9 +60,10 @@
       </div>
     </div>
 
-    <!-- Side bar -->
-    <md-toolbar id="toolbar" >
-
+    <!-- Side bar menu -->
+    <md-toolbar id="menu" ng-controller="MenuCtrl">
+      <i class="menu-icon fa fa-home" ng-class="{active: activeMenu === 'Home'}" ng-click="setActiveMenu('Home')"></i>
+      <i class="menu-icon fa fa-star" ng-class="{active: activeMenu === 'Starred'}" ng-click="setActiveMenu('Starred')"></i>
     </md-toolbar>
 
     <div ng-view autoscroll="true"></div>

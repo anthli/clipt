@@ -1,17 +1,17 @@
 'use strict';
 
-// Keep track of the current clips to prevent them from disappearing
+// Keep track of the current Clips to prevent them from disappearing
 // when changing scopes
 let globalClips = [];
 
-const mainCtrl = function($scope, $rootScope, $mdDialog, Main) {
+const mainCtrl = function($scope, $location, $mdDialog, Main) {
   $scope.clips = globalClips;
   $scope.clipDisplayCount = 20;
   $scope.busy = false;
   $scope.search = '';
 
   // Load more clips when scrolled to the bottom of the list. This prevents
-  // clips from loading in all at once and slowing down the UI
+  // Clips from loading in all at once and slowing down the UI
   $scope.loadMoreClips = function() {
     if ($scope.busy) {
       return;
@@ -22,34 +22,51 @@ const mainCtrl = function($scope, $rootScope, $mdDialog, Main) {
     $scope.busy = false;
   }
 
-  // Signal the main process to copy the clip at the given index
+  // Signal the main process to copy the Clip at the given index
   $scope.copyClip = function($event, index) {
     Main.copyClip($event, $scope.clips[index]);
   };
 
-  // Check to see if the clip should be starred or unstarred
+  // Signal the main process to delete the Clip at the given index
+  $scope.deleteClip = function(index) {
+    Main.deleteClip($scope.clips[index], index);
+  };
+
+  // Check to see if the Clip should be starred or unstarred
   $scope.checkStar = function(index) {
     let clip = $scope.clips[index];
 
-    // Unstar the clip
+    // Unstar the Clip
     if (clip.starred_clip_id) {
       Main.unstarClip(clip, index);
       return;
     }
 
-    // Star the clip
+    // Star the Clip
     Main.starClip(clip, index);
   };
 
-  // Signal the main process to delete the clip at the given index
-  $scope.deleteClip = function(index) {
-    Main.deleteClip($scope.clips[index], index);
+  // Retrieve the starred_clip_id of the Clip at the given index
+  $scope.clipIsStarred = function(index) {
+    return $scope.clips[index].starred_clip_id;
+  }
+
+  // Determine which set of Clips to show based on the current path
+  $scope.checkCurrentPath = function(index) {
+    switch ($location.path()) {
+      // Home page shows all Clips
+      case '/':
+        return true;
+
+      case '/starred':
+        return $scope.clipIsStarred(index);
+    }
   };
 
   // ipcRenderer Configuration
 
-  // Render the clips that were received from the main process and notify the
-  // main process that the clips are ready to be displayed
+  // Render the Clips that were received from the main process and notify the
+  // main process that the Clips are ready to be displayed
   ipcRenderer.on('clips', function(event, clips) {
     $scope.$apply(function() {
       globalClips = $scope.clips = clips;
@@ -57,7 +74,7 @@ const mainCtrl = function($scope, $rootScope, $mdDialog, Main) {
     });
   });
 
-  // Star the clip at the given index by assigning its starred_clip_id
+  // Star the Clip at the given index by assigning its starred_clip_id
   ipcRenderer.on('clip-starred', function(event, index, starred_clip_id) {
     $scope.$apply(function() {
       $scope.clips[index].starred_clip_id = starred_clip_id;
@@ -65,7 +82,7 @@ const mainCtrl = function($scope, $rootScope, $mdDialog, Main) {
     });
   });
 
-  // Unstar the clip at the given index by settings its starred_clip_id to null
+  // Unstar the Clip at the given index by settings its starred_clip_id to null
   ipcRenderer.on('clip-unstarred', function(event, index) {
     $scope.$apply(function() {
       $scope.clips[index].starred_clip_id = null;
@@ -73,8 +90,8 @@ const mainCtrl = function($scope, $rootScope, $mdDialog, Main) {
     });
   });
 
-  // Since the main process successfully deleted the clip from the database,
-  // delete the clip from the client-side
+  // Since the main process successfully deleted the Clip from the database,
+  // delete the Clip from the client-side
   ipcRenderer.on('clip-deleted', function(event, index) {
     $scope.$apply(function() {
       $scope.clips.splice(index, 1);
@@ -92,6 +109,6 @@ const mainCtrl = function($scope, $rootScope, $mdDialog, Main) {
   });
 };
 
-mainCtrl.$inject = ['$scope', '$rootScope', '$mdDialog', 'Main'];
+mainCtrl.$inject = ['$scope', '$location', '$mdDialog', 'Main'];
 
 app.controller('MainCtrl', mainCtrl);

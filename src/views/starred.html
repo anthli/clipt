@@ -2,11 +2,7 @@
   <div infinite-scroll="loadMoreClips()" infinite-scroll-container="'#clip-list-container'" infinite-scroll-disabled="busy" infinite-scroll-distance="0">
     <!-- List of Clips -->
     <md-list id="clip-list">
-      <!--
-        Filter based on search and limit it to the given display count. If the
-        current path is '/starred', show only starred Clips
-      -->
-      <md-list-item class="clip-item" ng-repeat="clip in clips | filter: search | limitTo: clipDisplayCount" ng-if="checkCurrentPath($index)" ng-dblclick="copyClip($event, $index)">
+      <md-list-item class="clip-item" ng-repeat="clip in clips | filter: search | limitTo: clipDisplayCount" ng-if="clipIsStarred($index)" ng-dblclick="copyClip($event, $index)">
         <!-- Star and Delete buttons -->
         <div class="clip-button-container">
           <!-- Change the star icon depending on whether the clip is starred or not -->
@@ -24,16 +20,3 @@
     </md-list>
   </div>
 </md-content>
-
-<!-- Search Bar -->
-<div id="clip-search-container">
-  <i class="fa fa-search"></i>
-  <input type="text" placeholder="Search..." ng-model="search">
-</div>
-
-<!-- Popup when copying a Clip -->
-<div id="copy-popup-container">
-  <div id="copy-popup-message">
-    Copied!
-  </div>
-</div>

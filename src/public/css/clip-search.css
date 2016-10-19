@@ -10,11 +10,13 @@
   z-index: 2;
 }
 
+/* Search bar icon */
 #clip-search-container i {
   left: 60px;
   position: absolute;
 }
 
+/* Search bar text input area */
 #clip-search-container input {
   border: 0;
   font-size: 14px;

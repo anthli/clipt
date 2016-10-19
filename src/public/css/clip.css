@@ -13,17 +13,9 @@
   opacity: 1;
 }
 
-.clip-button-container,
-.clip-item:hover .clip-button-container,
-.star-clip, .star-clip:hover,
-.delete-clip, .delete-clip:hover {
-  transition: all ease-out 300ms;
-}
-
 .clip-button-container {
-  height: 72px;
   margin-left: 7px;
-  height: 72px;
+  min-height: 72px;
   position: absolute;
   width: 0;
   z-index: 1;
@@ -36,16 +28,13 @@
   z-index: 1;
 }
 
+.star-clip:hover,
+.starred {
+  color: #ffdc00;
+}
+
 .star-clip {
   margin-left: -1px;
-}
-
-.star-clip:hover {
-  color: #fff000;
-}
-
-.starred {
-  color: #fff000;
 }
 
 .delete-clip:hover {
@@ -54,7 +43,7 @@
 
 .clip {
   overflow: hidden;
-  padding: 0 30px;
+  padding: 0 10px 0 30px;
   width: 100%;
 }
 

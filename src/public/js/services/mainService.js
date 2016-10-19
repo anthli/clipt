@@ -28,6 +28,12 @@ app.factory('Main', function() {
       ipcRenderer.send('clip-copied', clip);
     },
 
+    // When the trash icon is clicked, notify the main process that the clip it
+    // belongs should be deleted
+    deleteClip: function(clip, index) {
+      ipcRenderer.send('delete-clip', clip.id, index);
+    },
+
     // When the star icon is clicked, notify the main process that the clip it
     // belongs to should be starred
     starClip: function(clip, index) {
@@ -38,12 +44,6 @@ app.factory('Main', function() {
     // process that the clip it belongs to should be unstarred
     unstarClip: function(clip, index) {
       ipcRenderer.send('unstar-clip', clip.starred_clip_id, index);
-    },
-
-    // When the trash icon is clicked, notify the main process that the clip it
-    // belongs should be deleted
-    deleteClip: function(clip, index) {
-      ipcRenderer.send('delete-clip', clip.id, index);
     }
   }
 });

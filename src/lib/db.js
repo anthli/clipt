@@ -13,11 +13,6 @@ const db = new sqlite3.Database(path.join(
   constants.db.path
 ));
 
-// db.exec(`
-//   DROP TABLE IF EXISTS clip;
-//   DROP TABLE IF EXISTS starred_clip;
-// `);
-
 // Create the tables if they does not exist
 db.exec(queries.createTables);
 
