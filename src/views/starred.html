@@ -1,18 +1,20 @@
 <md-content class="clip-list-container" id="starred">
-  <!-- List of Clips -->
+  <!-- List of starred Clips -->
   <md-list id="clip-list" infinite-scroll="loadMoreClips()" infinite-scroll-container="'#starred'" infinite-scroll-disabled="busy" infinite-scroll-distance="0">
-    <li class="clip-item" ng-repeat="clip in clips | filter: search | limitTo: clipDisplayCount track by clip.id" ng-dblclick="copyClip($event, $index)">
-      <!-- Star and Delete buttons -->
-      <div class="clip-button-container">
-        <!-- Change the star icon depending on whether the clip is starred or not -->
-        <i class="star-clip" ng-class="clips[$index].starred_clip_id ? 'starred fa fa-star' : 'fa fa-star-o'" ng-click="checkStar($index)"></i>
-        <i class="delete-clip fa fa-trash-o" ng-click="deleteClip($index)"></i>
-      </div>
+    <li ng-repeat="clip in clips | filter: search | limitTo: clipDisplayCount track by clip.id" ng-dblclick="copyClip($event, $index)">
+      <div class="clip-container">
+        <!-- Unstar and Delete buttons -->
+        <div class="clip-button-container">
+          <!-- Change the star icon depending on whether the clip is starred or not -->
+          <i class="star-clip" ng-class="isStarred($index) ? 'starred fa fa-star' : 'fa fa-star-o'" ng-click="checkStar($index)"></i>
+          <i class="delete-clip fa fa-trash-o" ng-click="deleteClip($index)"></i>
+        </div>
 
-      <!-- Clip type and text -->
-      <div class="clip">
-        <div class="clip-type">{{::clip.type}}</div>
-        <div class="clip-text">{{::clip.text}}</div>
+        <!-- Clip type and text -->
+        <div class="clip">
+          <div class="clip-type">{{::clip.type}}</div>
+          <div class="clip-text">{{::clip.text}}</div>
+        </div>
       </div>
     </li>
   </md-list>

@@ -125,6 +125,7 @@ ipcMain.on(constants.message.titleBar.buttonClicked, (event, button) => {
   }
 });
 
+// Retrieve all Clips from the database and send them to the renderer
 ipcMain.on(constants.message.clip.fetch, (event) => {
   win = windowManager.getMainWindow();
 

@@ -1,4 +1,4 @@
-.clip-item {
+.clip-container {
   align-items: center;
   border-bottom: 1px solid #e6e6e6;
   display: flex;
@@ -8,12 +8,12 @@
   padding: 0 !important;
 }
 
-.clip-item:hover {
+.clip-container:hover {
   background-color: #e6e6e6;
   border-color: #e6e6e6;
 }
 
-.clip-item:active {
+.clip-container:active {
   background-color: #b3b3b3;
   border-color: #b3b3b3;
 }
@@ -23,7 +23,7 @@
 }
 
 .clip-button-container .starred,
-.clip-item:hover .clip-button-container i {
+.clip-container:hover .clip-button-container i {
   opacity: 1;
 }
 

@@ -10,7 +10,7 @@
 }
 
 /* Title bar button */
-#title-bar-buttons {
+#title-bar-button-container {
   position: fixed;
   right: 0;
   top: 0;
@@ -18,7 +18,7 @@
   -webkit-app-region: no-drag;
 }
 
-#title-bar-buttons button {
+#title-bar-button-container button {
   background-color: transparent;
   border: none;
   height: 30px;
@@ -27,11 +27,11 @@
   width: 30px;
 }
 
-#title-bar-buttons button:hover {
+#title-bar-button-container button:hover {
   background-color: #b3b3b3;
 }
 
-#title-bar-buttons button span {
+#title-bar-button-container button span {
   background-color: #ffffff;
   height: 2px;
   position: absolute;
