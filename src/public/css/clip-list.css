@@ -5,6 +5,10 @@
 }
 
 #clip-list {
-  list-style: none;
   padding: 0;
+}
+
+#clip-list li {
+  list-style: none;
+  outline: none;
 }
