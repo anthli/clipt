@@ -26,7 +26,7 @@ const imageHasDiff = (oldImg, newImg) => {
 };
 
 // Take the data from the Clip and write it to the Clipboard
-ipcMain.on(constants.message.clip.clipCopied, (event, clip) => {
+ipcMain.on(constants.message.clip.copied, (event, clip) => {
   switch (clip.type) {
     case constants.clipType.text:
       clipboard.writeText(clip.text);

@@ -10,12 +10,10 @@ exports.createTables = `
   CREATE TABLE IF NOT EXISTS starred_clip (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     clip_id INTEGER NOT NULL UNIQUE,
-    FOREIGN KEY(clip_id) REFERENCES clip(id)
+    FOREIGN KEY(clip_id) REFERENCES clip(id) ON DELETE CASCADE
   );
-`;
 
-exports.deleteClip = `
-  DELETE FROM clip WHERE id = $1;
+  PRAGMA foreign_keys = ON;
 `;
 
 exports.getAllClips = `
@@ -46,6 +44,10 @@ exports.insertClip = `
 
 exports.starClip = `
   INSERT INTO starred_clip (clip_id) VALUES($1);
+`;
+
+exports.deleteClip = `
+  DELETE FROM clip WHERE id = $1;
 `;
 
 exports.unstarClip = `

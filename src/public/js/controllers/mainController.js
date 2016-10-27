@@ -1,26 +1,37 @@
 'use strict';
 
-// Keep track of the current Clips to prevent them from disappearing
-// when changing scopes
-let globalClips = [];
+const mainId = 'main-clip-list-container';
+const starredId = 'starred-clip-list-container'
 
 const mainCtrl = function($scope, $location, $mdDialog, Main) {
-  $scope.clips = globalClips;
-  $scope.clipDisplayCount = 20;
+  $scope.clips;
+  $scope.clipDisplayCount = 10;
   $scope.busy = false;
   $scope.search = '';
 
-  // Load more clips when scrolled to the bottom of the list. This prevents
-  // Clips from loading in all at once and slowing down the UI
-  $scope.loadMoreClips = function() {
-    if ($scope.busy) {
-      return;
-    }
+  $scope.$on('$routeChangeSuccess', function() {
+    // Get all Clips
+    Main.getAllClips(function(clips) {
+      $scope.$apply(function() {
+        // Set $scope.clips depending on the path of the current window
+        switch ($location.path()) {
+          case '/':
+            $scope.clips = clips;
+            break;
 
-    $scope.busy = true;
-    $scope.clipDisplayCount += 10;
-    $scope.busy = false;
-  }
+          // Filter out all clips that are not starred
+          case '/starred':
+            $scope.clips = clips.filter(function(clip) {
+              return clip.starred_clip_id;
+            });
+
+            break;
+        }
+
+        ipcRenderer.send('clips-ready');
+      });
+    });
+  });
 
   // Signal the main process to copy the Clip at the given index
   $scope.copyClip = function($event, index) {
@@ -46,47 +57,35 @@ const mainCtrl = function($scope, $location, $mdDialog, Main) {
     Main.starClip(clip, index);
   };
 
-  // Retrieve the starred_clip_id of the Clip at the given index
-  $scope.clipIsStarred = function(index) {
-    return $scope.clips[index].starred_clip_id;
-  }
-
-  // Determine which set of Clips to show based on the current path
-  $scope.checkCurrentPath = function(index) {
-    switch ($location.path()) {
-      // Home page shows all Clips
-      case '/':
-        return true;
-
-      case '/starred':
-        return $scope.clipIsStarred(index);
+  // Load more clips when scrolled to the bottom of the list. This prevents
+  // Clips from loading in all at once and slowing down the UI
+  $scope.loadMoreClips = function() {
+    if ($scope.busy) {
+      return;
     }
+
+    $scope.busy = true;
+    $scope.clipDisplayCount += 10;
+    $scope.busy = false;
   };
 
   // ipcRenderer Configuration
-
-  // Render the Clips that were received from the main process and notify the
-  // main process that the Clips are ready to be displayed
-  ipcRenderer.on('clips', function(event, clips) {
-    $scope.$apply(function() {
-      globalClips = $scope.clips = clips;
-      ipcRenderer.send('clips-ready');
-    });
-  });
 
   // Star the Clip at the given index by assigning its starred_clip_id
   ipcRenderer.on('clip-starred', function(event, index, starred_clip_id) {
     $scope.$apply(function() {
       $scope.clips[index].starred_clip_id = starred_clip_id;
-      globalClips = $scope.clips;
     });
   });
 
-  // Unstar the Clip at the given index by settings its starred_clip_id to null
+  // Unstar the Clip at the given index by setting its starred_clip_id to null
+  // and immediately delete it from the list of starred Clips
   ipcRenderer.on('clip-unstarred', function(event, index) {
     $scope.$apply(function() {
       $scope.clips[index].starred_clip_id = null;
-      globalClips = $scope.clips;
+      $scope.clips = $scope.clips.filter(function(clip) {
+        return clip.starred_clip_id;
+      });
     });
   });
 
@@ -95,7 +94,6 @@ const mainCtrl = function($scope, $location, $mdDialog, Main) {
   ipcRenderer.on('clip-deleted', function(event, index) {
     $scope.$apply(function() {
       $scope.clips.splice(index, 1);
-      globalClips = $scope.clips;
     });
   });
 

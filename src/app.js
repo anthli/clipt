@@ -125,6 +125,19 @@ ipcMain.on(constants.message.titleBar.buttonClicked, (event, button) => {
   }
 });
 
+ipcMain.on(constants.message.clip.fetch, (event) => {
+  win = windowManager.getMainWindow();
+
+  db.getClips((err, clips) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+
+    win.webContents.send(constants.message.clip.clips, clips);
+  });
+});
+
 // If the browser window is closed, prevent it from opening before all of the
 // clips are ready to be displayed
 ipcMain.on(constants.message.clip.ready, (event) => {

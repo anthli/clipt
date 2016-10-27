@@ -63,17 +63,6 @@ exports.starClip = (id, cb) => {
   });
 };
 
-// Unstar a Clip in the database given its id
-exports.unstarClip = (id, cb) => {
-  db.run(queries.unstarClip, id, (err) => {
-    if (err) {
-      return cb(err);
-    }
-
-    cb(null);
-  });
-}
-
 // Delete a Clip in the database given its id
 exports.deleteClip = (id, cb) => {
   db.run(queries.deleteClip, id, (err) => {
@@ -84,3 +73,14 @@ exports.deleteClip = (id, cb) => {
     cb(null);
   });
 };
+
+// Unstar a Clip in the database given its clip_id
+exports.unstarClip = (id, cb) => {
+  db.run(queries.unstarClip, id, (err) => {
+    if (err) {
+      return cb(err);
+    }
+
+    cb(null);
+  });
+}

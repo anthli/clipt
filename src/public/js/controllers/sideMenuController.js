@@ -1,6 +1,6 @@
 'use strict';
 
-const menuCtrl = function($scope, $location) {
+const sideMenuCtrl = function($scope, $location) {
   $scope.menuItems = [
     'Home',
     'Starred'
@@ -17,13 +17,14 @@ const menuCtrl = function($scope, $location) {
       case 'Home':
         $location.path('/');
         break;
+
       case 'Starred':
         $location.path('/starred');
         break;
     }
-  }
+  };
 };
 
-menuCtrl.$inject = ['$scope', '$location'];
+sideMenuCtrl.$inject = ['$scope', '$location'];
 
-app.controller('MenuCtrl', menuCtrl);
+app.controller('SideMenuCtrl', sideMenuCtrl);

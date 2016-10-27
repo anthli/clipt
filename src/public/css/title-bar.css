@@ -1,11 +1,12 @@
 #title-bar {
-  background-color: #333333;
+  background-color: #262626;
   height: 30px;
   margin: 0;
   padding: 0;
 
   -webkit-app-region: drag;
   -webkit-user-select: none;
+  user-select: none;
 }
 
 /* Title bar button */
@@ -27,7 +28,7 @@
 }
 
 #title-bar-buttons button:hover {
-  background-color: #b4b4b4;
+  background-color: #b3b3b3;
 }
 
 #title-bar-buttons button span {

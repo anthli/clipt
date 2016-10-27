@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="public/css/clip.css" media="screen">
     <link rel="stylesheet" href="public/css/copy-popup.css" media="screen">
     <link rel="stylesheet" href="public/css/main.css" media="screen">
+    <link rel="stylesheet" href="public/css/side-menu.css" media="screen">
     <link rel="stylesheet" href="public/css/title-bar.css" media="screen">
 
     <!-- Load JavaScript files -->
@@ -27,7 +28,7 @@
     <script src="public/js/app.js"></script>
     <script src="public/js/controllers/aboutController.js"></script>
     <script src="public/js/controllers/mainController.js"></script>
-    <script src="public/js/controllers/menuController.js"></script>
+    <script src="public/js/controllers/sideMenuController.js"></script>
     <script src="public/js/controllers/titleBarController.js"></script>
     <script src="public/js/services/mainService.js"></script>
     <script src="public/js/services/titleBarService.js"></script>
@@ -61,10 +62,17 @@
     </div>
 
     <!-- Side bar menu -->
-    <md-toolbar id="menu" ng-controller="MenuCtrl">
-      <i class="menu-icon fa fa-home" ng-class="{active: activeMenu === 'Home'}" ng-click="setActiveMenu('Home')"></i>
-      <i class="menu-icon fa fa-star" ng-class="{active: activeMenu === 'Starred'}" ng-click="setActiveMenu('Starred')"></i>
+    <md-toolbar id="side-menu" ng-controller="SideMenuCtrl">
+      <i class="side-menu-icon fa fa-home" ng-class="{active: activeMenu === 'Home'}" ng-click="setActiveMenu('Home')"></i>
+      <i class="side-menu-icon fa fa-star" ng-class="{active: activeMenu === 'Starred'}" ng-click="setActiveMenu('Starred')"></i>
     </md-toolbar>
+
+    <!-- Popup when copying a Clip -->
+    <div id="copy-popup-container">
+      <div id="copy-popup-message">
+        Copied!
+      </div>
+    </div>
 
     <div ng-view autoscroll="true"></div>
   </body>

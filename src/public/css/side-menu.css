@@ -1,0 +1,18 @@
+#side-menu {
+  background-color: #333333;
+  height: 100%;
+  position: fixed;
+  width: 50px;
+}
+
+.side-menu-icon {
+  color: #a6a6a6;
+  display: block;
+  font-size: 30px;
+  margin: 12px auto;
+  outline: none;
+}
+
+.side-menu-icon:hover, .side-menu-icon.active {
+  color: #ffffff;
+}

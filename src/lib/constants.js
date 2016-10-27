@@ -30,9 +30,10 @@ exports.message = {
   clip: {
     clips: 'clips',
     copied: 'clip-copied',
-    deleted: 'clip-deleted',
-    ready: 'clips-ready',
     delete: 'delete-clip',
+    deleted: 'clip-deleted',
+    fetch: 'fetch-clips',
+    ready: 'clips-ready',
     star: 'star-clip',
     starred: 'clip-starred',
     unstar: 'unstar-clip',

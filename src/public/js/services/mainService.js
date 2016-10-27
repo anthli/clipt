@@ -1,7 +1,17 @@
 'use strict';
 
-app.factory('Main', function() {
+const mainFactory = function() {
   return {
+    // Render the Clips that were received from the main process and notify the
+    // main process that the Clips are ready to be displayed
+    getAllClips: function(cb) {
+      ipcRenderer.send('fetch-clips');
+
+      ipcRenderer.on('clips', function(event, clips) {
+        cb(clips);
+      });
+    },
+
     // When a clip is double-clicked on, send it back to the main process
     // for its data to be written to the clipboard
     copyClip: function(event, clip) {
@@ -46,4 +56,6 @@ app.factory('Main', function() {
       ipcRenderer.send('unstar-clip', clip.starred_clip_id, index);
     }
   }
-});
+};
+
+app.factory('Main', mainFactory);

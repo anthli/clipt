@@ -1,7 +1,6 @@
 #title-bar-buttons button, #title-bar-buttons button:hover,
-.menu-icon, .menu-icon:hover,
+.clip-item,
 .clip-button-container,
-.clip-item:hover .clip-button-container,
 .star-clip, .star-clip:hover,
 .delete-clip, .delete-clip:hover {
   transition: all ease-out 300ms;

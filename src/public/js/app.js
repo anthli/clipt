@@ -14,14 +14,15 @@ const app = angular.module('clipt', [
 const config = function($routeProvider) {
   $routeProvider
 
-  // Main page of the application
+  // Home page of the application
   .when('/', {
     templateUrl: 'views/main.html',
     controller: 'MainCtrl'
   })
 
+  // Starred Clips page of the application
   .when('/starred', {
-    templateUrl: 'views/main.html',
+    templateUrl: 'views/starred.html',
     controller: 'MainCtrl'
   });
 };

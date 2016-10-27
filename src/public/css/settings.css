@@ -6,12 +6,13 @@
     sans-serif;
 
   -webkit-user-select: none;
+  user-select: none;
 }
 
 html, body, div[ng-view] {
   height: 100%;
   margin: 0;
-  overflow-y: hidden;
+  overflow: hidden;
   padding: 0;
   width: 100%;
 }

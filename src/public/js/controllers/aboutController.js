@@ -7,7 +7,7 @@ const aboutCtrl = function($scope) {
   // Signal the main process to open the given link
   $scope.openLink = function(link) {
     ipcRenderer.send('link', link);
-  }
+  };
 };
 
 aboutCtrl.$inject = ['$scope'];

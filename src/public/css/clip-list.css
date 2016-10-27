@@ -1,4 +1,4 @@
-#clip-list-container {
+.clip-list-container {
   height: calc(100% - 70px);
   margin-left: 50px;
   width: calc(100% - 50px);
