@@ -16,8 +16,8 @@ const fileDir = './.db/files/';
 let copiedFromClip = false;
 
 // Checks if the oldText is different from the newText
-const textHasDiff = (oldTxt, newTxt) => {
-  return oldTxt !== newTxt;
+const textHasDiff = (oldText, newText) => {
+  return oldText !== newText;
 };
 
 // Checks if the oldImg is different from the newImg
@@ -26,15 +26,15 @@ const imageHasDiff = (oldImg, newImg) => {
 };
 
 // Take the data from the Clip and write it to the Clipboard
-ipcMain.on(constants.message.clip.copied, (event, clip) => {
+ipcMain.on(constants.Message.Ipc.ClipCopied, (event, clip) => {
   switch (clip.type) {
-    case constants.clipType.text:
+    case constants.ClipType.Text:
       clipboard.writeText(clip.text);
-      break
+      break;
 
-    // case constants.clipType.image:
+    // case constants.ClipType.Image:
     //   clipboard.writeImage(clip.image);
-    //   break
+    //   break;
   }
 
   copiedFromClip = true;
@@ -46,12 +46,12 @@ module.exports = (opts) => {
   const watchDelay = opts.watchDelay || 1000;
 
   // The text/image from the current copy
-  let currTxt = clipboard.readText();
+  let currText = clipboard.readText();
   let currImg = clipboard.readImage();
 
   const intervalId = setInterval(() => {
     // Text or image from the latest copy
-    const newTxt = clipboard.readText();
+    const newText = clipboard.readText();
     const newImg = clipboard.readImage();
 
     // Data was copied from a Clip in the window
@@ -60,7 +60,7 @@ module.exports = (opts) => {
 
       // Prevent copying from a Clip registering as a copy from the system
       if (newImg.isEmpty()) {
-        currTxt = newTxt;
+        currText = newText;
         return;
       }
       else {
@@ -73,14 +73,15 @@ module.exports = (opts) => {
     // isEmpty() will detect whether only text was copied, or if an image was
     // copied. When copying an image, the name of the file is registered as a
     // change in copied text
-    if (textHasDiff(currTxt, newTxt) || imageHasDiff(currImg, newImg)) {
+    if (textHasDiff(currText, newText) || imageHasDiff(currImg, newImg)) {
       switch (newImg.isEmpty()) {
         // Only text was copied
         case true:
           if (opts.onTextChange) {
-            currTxt = newTxt;
-            return opts.onTextChange(newTxt);
+            currText = newText;
+            return opts.onTextChange(newText);
           }
+
         // An image was copied
         case false:
           // An image was copied

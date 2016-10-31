@@ -13,14 +13,14 @@ module.exports = () => {
     width: 768,
     height: 576,
     show: false,
-    title: constants.appName
+    title: constants.AppName
   });
 
   // Load index.html
-  win.loadURL(path.normalize(constants.indexHtml));
+  win.loadURL(path.normalize(constants.IndexHtml));
 
   // Dereference the window when it closes
-  win.on(constants.message.app.closed, () => {
+  win.on(constants.Message.App.Closed, () => {
     win = null;
     windowManager.setMainWindow(win);
   });

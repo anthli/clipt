@@ -10,16 +10,13 @@ important!
 ![alt text](./src/assets/images/demo.png)
 
 ## Features
-- Displays clips in descending order (latest to earliest) so the most recent
-  clips appear at the top and the oldest ones at the bottom
-- Clips can be deleted on demand
-- Searching for clips can be easily done through the search bar at the bottom
-- Supports copying of text
-- Application can be opened using `` Ctrl/Cmd + ` `` (for now)
+- Clips are displayed top to bottom in descending order (latest to earliest)
+- Ability to favorite and delete Clips on demand
+- Customizable shortcut to open and close the application
+- Minimizing to the menu/task bar without the application quitting
 
 ## Features To Be Added
 - Copying of images
-- Configuring application shortcuts
 
 ## Development
 

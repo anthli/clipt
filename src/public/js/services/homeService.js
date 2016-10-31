@@ -1,15 +1,15 @@
 'use strict';
 
-const mainFactory = function() {
+const homeFactory = () => {
   return {
     // Notify the main process to retrieve all Clips
-    getAllClips: function() {
+    getAllClips: () => {
       ipcRenderer.send('fetch-clips');
     },
 
     // When a Clip is double-clicked on, send it back to the main process
     // for its data to be written to the clipboard
-    copyClip: function(event, clip) {
+    copyClip: (event, clip) => {
       // Prevent a double-click registering when starring or deleting Clips
       let elem = angular.element(event.target);
       if (elem.hasClass('star-clip') || elem.hasClass('delete-clip')) {
@@ -26,7 +26,7 @@ const mainFactory = function() {
       });
 
       // Fade the popup message out after 750 ms
-      setTimeout(function() {
+      setTimeout(() => {
         popupContainer.fadeOut(150);
       }, 500);
 
@@ -35,22 +35,22 @@ const mainFactory = function() {
 
     // When the trash icon is clicked, notify the main process that the Clip it
     // belongs should be deleted
-    deleteClip: function(clip, index) {
+    deleteClip: (clip, index) => {
       ipcRenderer.send('delete-clip', clip.id, index);
     },
 
     // When the star icon is clicked, notify the main process that the Clip it
     // belongs to should be starred
-    starClip: function(clip, index) {
+    starClip: (clip, index) => {
       ipcRenderer.send('star-clip', clip.id, index);
     },
 
     // When the star icon is clicked after being starred, notify the main
     // process that the Clip it belongs to should be unstarred
-    unstarClip: function(clip, index) {
+    unstarClip: (clip, index) => {
       ipcRenderer.send('unstar-clip', clip.starred_clip_id, index);
     }
   }
 };
 
-app.factory('Main', mainFactory);
+app.factory('Home', homeFactory);

@@ -10,18 +10,19 @@ let win;
 
 // Set up the shortcuts to be used by the application
 module.exports = () => {
-  const open = globalShortcut.register(constants.shortcut.open.key, () => {
+  const open = globalShortcut.register(constants.Shortcut.OpenKey, () => {
     win = windowManager.getMainWindow();
 
     // Toggles opening and closing the window
     if (win) {
       win.destroy();
-    } else {
+    }
+    else {
       createWindow();
     }
   });
 
   if (!open) {
-    console.error(constants.shortcut.open.error);
+    console.error(constants.Shortcut.OpenError);
   }
 }

@@ -2,7 +2,7 @@
 
 const titleBarCtrl = function($scope, TitleBar) {
   // Signal the main process that one of the title bar buttons was clicked on
-  $scope.clickTitleBarButton = function(button) {
+  $scope.clickTitleBarButton = (button) => {
     TitleBar.clickTitleBarButton(button);
   };
 };

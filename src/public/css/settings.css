@@ -1,22 +1,4 @@
-* {
-  cursor: default !important;
-  font-family: -apple-system, BlinkMacSystemFont,
-    "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
-    "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-
-  -webkit-user-select: none;
-  user-select: none;
-}
-
-html, body, div[ng-view] {
-  height: 100%;
-  margin: 0;
-  overflow: hidden;
-  padding: 0;
-  width: 100%;
-}
-
 #clipt-settings {
+  margin-left: 50px;
   padding: 20px 0 0 20px;
 }

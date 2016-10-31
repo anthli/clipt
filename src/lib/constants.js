@@ -2,91 +2,81 @@
 
 const dir = __dirname;
 
-exports.appName = 'Clipt';
+exports.AppName = 'Clipt';
 
-exports.clipType = {
-  image: 'Image',
-  text: 'Text'
-}
-
-exports.db = {
-  path: '.db/clipt.sqlite3',
-  userData: 'userData',
-}
-
-exports.indexHtml = `file://${dir}/../index.html`;
-
-exports.settingsHtml = `file://${dir}/../views/modals/settings.html`;
-
-exports.message = {
-  app: {
-    activate: 'activate',
-    closed: 'closed',
-    didFinishLoad: 'did-finish-load',
-    ready: 'ready',
-    willQuit: 'will-quit',
-    windowsAllClosed: 'window-all-closed'
-  },
-  clip: {
-    clips: 'clips',
-    copied: 'clip-copied',
-    delete: 'delete-clip',
-    deleted: 'clip-deleted',
-    fetch: 'fetch-clips',
-    ready: 'clips-ready',
-    star: 'star-clip',
-    starred: 'clip-starred',
-    unstar: 'unstar-clip',
-    unstarred: 'clip-unstarred'
-  },
-  link: 'link',
-  titleBar: {
-    buttonClicked: 'title-bar-button-clicked'
-  }
-}
-
-exports.modal = {
-  about: 'about',
-  readyToShow: 'ready-to-show',
-  settings: 'settings'
-}
-
-exports.platform = {
-  mac: 'darwin',
-  win: 'win32'
+exports.ClipType = {
+  Image: 'Image',
+  Text: 'Text'
 };
 
-exports.shortcut = {
-  open: {
-    key: 'CommandOrControl+`',
-    error: 'Failed to register CommandOrControl+`'
+exports.Db = {
+  Path: '.db/clipt.sqlite3',
+  UserData: 'userData',
+};
+
+exports.IndexHtml = `file://${dir}/../index.html`;
+
+exports.Message = {
+  App: {
+    Activate: 'activate',
+    Closed: 'closed',
+    DidFinishLoad: 'did-finish-load',
+    Ready: 'ready',
+    WillQuit: 'will-quit',
+    WindowsAllClosed: 'window-all-closed'
+  },
+  Ipc: {
+    ClipCopied: 'clip-copied',
+    ClipDeleted: 'clip-deleted',
+    Clips: 'clips',
+    ClipsReady: 'clips-ready',
+    ClipStarred: 'clip-starred',
+    ClipUnstarred: 'clip-unstarred',
+    DeleteClip: 'delete-clip',
+    FetchClips: 'fetch-clips',
+    OpenLink: 'link',
+    StarClip: 'star-clip',
+    UnstarClip: 'unstar-clip'
+  },
+  TitleBar: {
+    ButtonClicked: 'title-bar-button-clicked'
   }
 };
 
-exports.titleBar = {
-  close: 'close',
-  maximize: 'maximize',
-  minimize: 'minimize'
-}
+exports.Modal = {
+  About: 'about',
+  ReadyToShow: 'ready-to-show',
+  Settings: 'settings'
+};
 
-exports.tray = {
-  icon: {
-    mac: `${dir}/../assets/images/icon@2x.png`,
-    win: `${dir}/../assets/images/icon.ico`
-  },
-  menu: {
-    label: {
-      about: 'About Clipt',
-      preferences: 'Preferences...',
-      show: 'Show',
-      quit: 'Quit Clipt'
-    },
-    role: {
-      quit: 'quit'
-    },
-    type: {
-      normal: 'normal',
-      separator: 'separator'
-    }
+exports.Platform = {
+  Mac: 'darwin',
+  Win: 'win32'
+};
+
+exports.SettingsHtml = `file://${dir}/../views/modals/settings.html`;
+
+exports.Shortcut = {
+  OpenKey: 'CommandOrControl+`',
+  OpenError: 'Failed to register CommandOrControl+`'
+};
+
+exports.TitleBar = {
+  Close: 'close',
+  Maximize: 'maximize',
+  Minimize: 'minimize'
+};
+
+exports.Tray = {
+  MacIcon: `${dir}/../assets/images/icon@2x.png`,
+  WinIcon: `${dir}/../assets/images/icon.ico`,
+  Menu: {
+    AboutLabel: 'About Clipt',
+    PreferencesLabel: 'Preferences...',
+    QuitLabel: 'Quit Clipt',
+    QuitRole: 'quit',
+    ShowLabel: 'Show',
+    TypeNormal: 'normal',
+    TypeSeparator: 'separator'
   }
 };

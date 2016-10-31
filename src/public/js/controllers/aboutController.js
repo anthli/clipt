@@ -5,7 +5,7 @@ const aboutCtrl = function($scope) {
   $scope.appVersion = require('electron').remote.app.getVersion();
 
   // Signal the main process to open the given link
-  $scope.openLink = function(link) {
+  $scope.openLink = (link) => {
     ipcRenderer.send('link', link);
   };
 };

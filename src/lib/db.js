@@ -9,8 +9,8 @@ const queries = require('./queries');
 
 // Load the SQLite database
 const db = new sqlite3.Database(path.join(
-  app.getPath(constants.db.userData),
-  constants.db.path
+  app.getPath(constants.Db.UserData),
+  constants.Db.Path
 ));
 
 // Create the tables if they does not exist

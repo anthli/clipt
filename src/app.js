@@ -23,9 +23,9 @@ const watcher = clipboardWatcher({
   onTextChange: (text) => {
     win = windowManager.getMainWindow();
     // New Clip containing the type, timestamp, and text
-    let txtClip = clip(constants.clipType.text, {text: text});
+    let textClip = clip(constants.ClipType.Text, {text: text});
 
-    db.addClip(txtClip, (err, clip) => {
+    db.addClip(textClip, (err, clip) => {
       if (err) {
         console.error(err);
         return;
@@ -39,7 +39,7 @@ const watcher = clipboardWatcher({
             return;
           }
 
-          win.webContents.send(constants.message.clip.clips, clips);
+          win.webContents.send(constants.Message.Ipc.Clips, clips);
         });
       }
     });
@@ -48,7 +48,7 @@ const watcher = clipboardWatcher({
   // onImageChange: (text, image) => {
   //   win = windowManager.getMainWindow();
   //   // New Clip containing the type, timestamp, and image
-  //   let imgClip = clip(constants.clipType.image, {
+  //   let imgClip = clip(constants.ClipType.Image, {
   //     text: text,
   //     image: image
   //   });
@@ -64,7 +64,7 @@ const watcher = clipboardWatcher({
 
 /* app configuration */
 
-app.on(constants.message.app.ready, () => {
+app.on(constants.Message.App.Ready, () => {
   // Initialize each component of the application
   createWindow();
   createShortcuts();
@@ -72,15 +72,15 @@ app.on(constants.message.app.ready, () => {
 });
 
 // Quit when all windows are closed
-app.on(constants.message.app.windowsAllClosed, () => {
+app.on(constants.Message.App.WindowsAllClosed, () => {
   // On macOS it is common for applications and their menu bar
   // to stay active until the user quits explicitly with Cmd + Q
-  // if (process.platform !== constants.platform.mac) {
+  // if (process.platform !== constants.Platform.Mac) {
   //   app.quit();
   // }
 });
 
-app.on(constants.message.app.activate, () => {
+app.on(constants.Message.App.Activate, () => {
   win = windowManager.getMainWindow();
 
   // On macOS it is common to re-create a window in the app when the
@@ -90,7 +90,7 @@ app.on(constants.message.app.activate, () => {
   }
 });
 
-app.on(constants.message.app.willQuit, () => {
+app.on(constants.Message.App.WillQuit, () => {
   // Unregister all shortcuts used by the app
   globalShortcut.unregisterAll();
 
@@ -100,25 +100,26 @@ app.on(constants.message.app.willQuit, () => {
 
 /* ipcMain configuration */
 
-ipcMain.on(constants.message.titleBar.buttonClicked, (event, button) => {
+ipcMain.on(constants.Message.TitleBar.ButtonClicked, (event, button) => {
   win = windowManager.getMainWindow();
 
   if (win) {
     switch (button) {
-      case constants.titleBar.close:
+      case constants.TitleBar.Close:
         win.close();
         break;
 
-      case constants.titleBar.maximize:
+      case constants.TitleBar.Maximize:
         if (win.isMaximized()) {
           win.unmaximize();
-        } else {
+        }
+        else {
           win.maximize();
         }
 
         break;
 
-      case constants.titleBar.minimize:
+      case constants.TitleBar.Minimize:
         win.minimize();
         break;
     }
@@ -126,7 +127,7 @@ ipcMain.on(constants.message.titleBar.buttonClicked, (event, button) => {
 });
 
 // Retrieve all Clips from the database and send them to the renderer
-ipcMain.on(constants.message.clip.fetch, (event) => {
+ipcMain.on(constants.Message.Ipc.FetchClips, (event) => {
   win = windowManager.getMainWindow();
 
   db.getClips((err, clips) => {
@@ -135,13 +136,13 @@ ipcMain.on(constants.message.clip.fetch, (event) => {
       return;
     }
 
-    win.webContents.send(constants.message.clip.clips, clips);
+    win.webContents.send(constants.Message.Ipc.Clips, clips);
   });
 });
 
 // If the browser window is closed, prevent it from opening before all of the
 // clips are ready to be displayed
-ipcMain.on(constants.message.clip.ready, (event) => {
+ipcMain.on(constants.Message.Ipc.ClipsReady, (event) => {
   win = windowManager.getMainWindow();
 
   if (win) {
@@ -162,44 +163,44 @@ ipcMain.on(constants.message.clip.ready, (event) => {
 
 // Star the Clip selected in the window and send its index back to the
 // renderer along with its starred_clip_id so it can star the Clip
-ipcMain.on(constants.message.clip.star, (event, id, index) => {
+ipcMain.on(constants.Message.Ipc.StarClip, (event, id, index) => {
   db.starClip(id, (err, clip) => {
     if (err) {
       console.error(err);
       return;
     }
 
-    win.webContents.send(constants.message.clip.starred, index, clip.id);
+    win.webContents.send(constants.Message.Ipc.ClipStarred, index, clip.id);
   });
 });
 
 // Unstar the Clip selected in the window and send its index back to the
 // renderer so it can unstar the Clip
-ipcMain.on(constants.message.clip.unstar, (event, id, index) => {
+ipcMain.on(constants.Message.Ipc.UnstarClip, (event, id, index) => {
   db.unstarClip(id, (err) => {
     if (err) {
       console.error(err);
       return;
     }
 
-    win.webContents.send(constants.message.clip.unstarred, index);
+    win.webContents.send(constants.Message.Ipc.ClipUnstarred, index);
   });
 });
 
 // Delete the Clip selected in the window and send its index back to the
 // renderer so it can delete the Clip
-ipcMain.on(constants.message.clip.delete, (event, id, index) => {
+ipcMain.on(constants.Message.Ipc.DeleteClip, (event, id, index) => {
   db.deleteClip(id, (err) => {
     if (err) {
       console.error(err);
       return;
     }
 
-    win.webContents.send(constants.message.clip.deleted, index);
+    win.webContents.send(constants.Message.Ipc.ClipDeleted, index);
   });
 });
 
 // Open the link in the desktop's default browser
-ipcMain.on(constants.message.link, (event, link) => {
+ipcMain.on(constants.Message.Ipc.OpenLink, (event, link) => {
   shell.openExternal(link);
 });

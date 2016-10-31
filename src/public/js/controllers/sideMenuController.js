@@ -2,24 +2,25 @@
 
 const sideMenuCtrl = function($scope, $location) {
   $scope.menuItems = [
-    'Home',
-    'Starred'
+    'home',
+    'starred',
+    'settings'
   ];
 
-  // Set Home as default
+  // Set Main as default menu
   $scope.activeMenu = $scope.menuItems[0];
 
   // Set the active menu
-  $scope.setActiveMenu = function(menu) {
+  $scope.setActiveMenu = (menu) => {
     $scope.activeMenu = menu;
 
     switch ($scope.activeMenu) {
-      case 'Home':
+      case 'home':
         $location.path('/');
         break;
 
-      case 'Starred':
-        $location.path('/starred');
+      default:
+        $location.path('/' + menu);
         break;
     }
   };

@@ -11,19 +11,25 @@ const app = angular.module('clipt', [
   ]
 );
 
-const config = function($routeProvider) {
+const config = ($routeProvider) => {
   $routeProvider
 
-  // Home page of the application
+  // Home page
   .when('/', {
-    templateUrl: 'views/main.html',
-    controller: 'MainCtrl'
+    templateUrl: 'views/home.html',
+    controller: 'HomeCtrl'
   })
 
-  // Starred Clips page of the application
+  // Starred Clips page
   .when('/starred', {
     templateUrl: 'views/starred.html',
-    controller: 'MainCtrl'
+    controller: 'HomeCtrl'
+  })
+
+  // Settings page
+  .when('/settings', {
+    templateUrl: 'views/modals/settings.html',
+    controller: 'SettingsCtrl'
   });
 };
 

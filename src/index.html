@@ -14,7 +14,8 @@
     <link rel="stylesheet" href="public/css/clip-search.css" media="screen">
     <link rel="stylesheet" href="public/css/clip.css" media="screen">
     <link rel="stylesheet" href="public/css/copy-popup.css" media="screen">
-    <link rel="stylesheet" href="public/css/main.css" media="screen">
+    <link rel="stylesheet" href="public/css/home.css" media="screen">
+    <link rel="stylesheet" href="public/css/settings.css" media="screen">
     <link rel="stylesheet" href="public/css/side-menu.css" media="screen">
     <link rel="stylesheet" href="public/css/title-bar.css" media="screen">
 
@@ -27,10 +28,12 @@
     <script src="../node_modules/ng-infinite-scroll/build/ng-infinite-scroll.min.js"></script>
     <script src="public/js/app.js"></script>
     <script src="public/js/controllers/aboutController.js"></script>
-    <script src="public/js/controllers/mainController.js"></script>
+    <script src="public/js/controllers/homeController.js"></script>
+    <script src="public/js/controllers/settingsController.js"></script>
     <script src="public/js/controllers/sideMenuController.js"></script>
     <script src="public/js/controllers/titleBarController.js"></script>
-    <script src="public/js/services/mainService.js"></script>
+    <script src="public/js/services/homeService.js"></script>
+    <script src="public/js/services/settingsService.js"></script>
     <script src="public/js/services/titleBarService.js"></script>
   </head>
 
@@ -63,8 +66,9 @@
 
     <!-- Side bar menu -->
     <md-toolbar id="side-menu" ng-controller="SideMenuCtrl">
-      <i class="side-menu-icon fa fa-home" ng-class="{active: activeMenu === 'Home'}" ng-click="setActiveMenu('Home')"></i>
-      <i class="side-menu-icon fa fa-star" ng-class="{active: activeMenu === 'Starred'}" ng-click="setActiveMenu('Starred')"></i>
+      <i class="side-menu-icon fa fa-home" ng-class="{active: activeMenu === 'home'}" ng-click="setActiveMenu('home')"></i>
+      <i class="side-menu-icon fa fa-star" ng-class="{active: activeMenu === 'starred'}" ng-click="setActiveMenu('starred')"></i>
+      <i class="side-menu-icon fa fa-cog" ng-class="{active: activeMenu === 'settings'}" ng-click="setActiveMenu('settings')"></i>
     </md-toolbar>
 
     <!-- Popup when copying a Clip -->
