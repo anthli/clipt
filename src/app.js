@@ -7,14 +7,14 @@ const {
   shell
 } = require('electron');
 
-const clip = require('./lib/clip');
-const clipboardWatcher = require('./lib/clipboardWatcher');
-const constants = require('./lib/constants');
-const createWindow = require('./lib/configureWindow');
-const createShortcuts = require('./lib/configureShortcuts');
-const createTray = require('./lib/configureTray');
-const db = require('./lib/db');
-const windowManager = require('./lib/windowManager');
+const clip = require('./utils/clip');
+const clipboardWatcher = require('./utils/clipboardWatcher');
+const constants = require('./utils/constants');
+const createWindow = require('./utils/configureWindow');
+const createShortcuts = require('./utils/configureShortcuts');
+const createTray = require('./utils/configureTray');
+const db = require('./utils/db');
+const windowManager = require('./utils/windowManager');
 
 let win;
 
@@ -100,7 +100,7 @@ app.on(constants.Message.App.WillQuit, () => {
 
 /* ipcMain configuration */
 
-ipcMain.on(constants.Message.TitleBar.ButtonClicked, (event, button) => {
+ipcMain.on(constants.Message.Ipc.TitleBarButtonClicked, (event, button) => {
   win = windowManager.getMainWindow();
 
   if (win) {

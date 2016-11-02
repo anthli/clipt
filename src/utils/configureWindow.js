@@ -17,7 +17,7 @@ module.exports = () => {
   });
 
   // Load index.html
-  win.loadURL(path.normalize(constants.IndexHtml));
+  win.loadURL(path.normalize(constants.Html.Index));
 
   // Dereference the window when it closes
   win.on(constants.Message.App.Closed, () => {

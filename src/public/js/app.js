@@ -2,10 +2,14 @@
 
 const {ipcRenderer} = require('electron');
 const $ = require('jquery');
+const _ = require('lodash');
+
+const constants = require('./public/js/utils/constants');
 
 const app = angular.module('clipt', [
   'infinite-scroll',
   'ngAnimate',
+  'ngAria',
   'ngMaterial',
   'ngRoute'
   ]
@@ -15,21 +19,21 @@ const config = ($routeProvider) => {
   $routeProvider
 
   // Home page
-  .when('/', {
-    templateUrl: 'views/home.html',
-    controller: 'HomeCtrl'
+  .when(constants.Path.Home, {
+    templateUrl: constants.Html.Home,
+    controller: constants.Controller.Home
   })
 
   // Starred Clips page
-  .when('/starred', {
-    templateUrl: 'views/starred.html',
-    controller: 'HomeCtrl'
+  .when(constants.Path.Starred, {
+    templateUrl: constants.Html.Starred,
+    controller: constants.Controller.Home
   })
 
   // Settings page
-  .when('/settings', {
-    templateUrl: 'views/modals/settings.html',
-    controller: 'SettingsCtrl'
+  .when(constants.Path.Settings, {
+    templateUrl: constants.Html.Settings,
+    controller: constants.Controller.Settings
   });
 };
 

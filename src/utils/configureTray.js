@@ -78,7 +78,7 @@ module.exports = () => {
             width: 600
           });
 
-          settingsModal.loadURL(constants.SettingsHtml);
+          settingsModal.loadURL(constants.Html.Settings);
 
           // Show the Settings modal once ready
           settingsModal.once(constants.Modal.ReadyToShow, () => {

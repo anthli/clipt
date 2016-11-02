@@ -4,7 +4,7 @@ const homeFactory = () => {
   return {
     // Notify the main process to retrieve all Clips
     getAllClips: () => {
-      ipcRenderer.send('fetch-clips');
+      ipcRenderer.send(constants.Message.Ipc.FetchClips);
     },
 
     // When a Clip is double-clicked on, send it back to the main process
@@ -30,25 +30,29 @@ const homeFactory = () => {
         popupContainer.fadeOut(150);
       }, 500);
 
-      ipcRenderer.send('clip-copied', clip);
+      ipcRenderer.send(constants.Message.Ipc.ClipCopied, clip);
     },
 
     // When the trash icon is clicked, notify the main process that the Clip it
     // belongs should be deleted
     deleteClip: (clip, index) => {
-      ipcRenderer.send('delete-clip', clip.id, index);
+      ipcRenderer.send(constants.Message.Ipc.DeleteClip, clip.id, index);
     },
 
     // When the star icon is clicked, notify the main process that the Clip it
     // belongs to should be starred
     starClip: (clip, index) => {
-      ipcRenderer.send('star-clip', clip.id, index);
+      ipcRenderer.send(constants.Message.Ipc.StarClip, clip.id, index);
     },
 
     // When the star icon is clicked after being starred, notify the main
     // process that the Clip it belongs to should be unstarred
     unstarClip: (clip, index) => {
-      ipcRenderer.send('unstar-clip', clip.starred_clip_id, index);
+      ipcRenderer.send(
+        constants.Message.Ipc.UnstarClip,
+        clip.starred_clip_id,
+        index
+      );
     }
   }
 };

@@ -56,15 +56,15 @@ const homeCtrl = function($scope, $location, $mdDialog, Home) {
 
   // Render the Clips that were received from the main process and notify the
   // main process that the Clips are ready to be displayed
-  ipcRenderer.on('clips', (event, clips) => {
+  ipcRenderer.on(constants.Message.Ipc.Clips, (event, clips) => {
     // Set $scope.clips depending on the path of the current window
     switch ($location.path()) {
-      case '/':
+      case constants.Path.Home:
         $scope.clips = clips;
         break;
 
       // Filter out all clips that are not starred
-      case '/starred':
+      case constants.Path.Starred:
         $scope.clips = clips.filter((clip) => {
           return clip.starred_clip_id;
         });
@@ -72,22 +72,22 @@ const homeCtrl = function($scope, $location, $mdDialog, Home) {
         break;
     }
 
-    ipcRenderer.send('clips-ready');
+    ipcRenderer.send(constants.Message.Ipc.ClipsReady);
     $scope.$digest();
   });
 
   // Star the Clip at the given index by assigning its starred_clip_id
-  ipcRenderer.on('clip-starred', (event, index, starred_clip_id) => {
-    $scope.clips[index].starred_clip_id = starred_clip_id;
+  ipcRenderer.on(constants.Message.Ipc.ClipStarred, (event, index, id) => {
+    $scope.clips[index].starred_clip_id = id;
     $scope.$digest();
   });
 
   // Unstar the Clip at the given index by setting its starred_clip_id to null
   // and immediately delete it from the list of starred Clips
-  ipcRenderer.on('clip-unstarred', (event, index) => {
+  ipcRenderer.on(constants.Message.Ipc.ClipUnstarred, (event, index) => {
     $scope.clips[index].starred_clip_id = null;
 
-    if ($location.path() === '/starred') {
+    if ($location.path() === constants.Path.Starred) {
       $scope.clips.splice(index, 1);
     }
 
@@ -96,16 +96,16 @@ const homeCtrl = function($scope, $location, $mdDialog, Home) {
 
   // Since the main process successfully deleted the Clip from the database,
   // delete the Clip from the client-side
-  ipcRenderer.on('clip-deleted', (event, index) => {
+  ipcRenderer.on(constants.Message.Ipc.ClipDeleted, (event, index) => {
     $scope.clips.splice(index, 1);
     $scope.$digest();
   });
 
   // Open the About modal
-  ipcRenderer.on('about', (event) => {
+  ipcRenderer.on(constants.Modal.About, (event) => {
     $mdDialog.show({
-      templateUrl: 'views/modals/about.html',
-      controller: 'AboutCtrl',
+      templateUrl: constants.Html.About,
+      controller: constants.Controller.About,
       clickOutsideToClose: true
     });
   });

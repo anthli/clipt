@@ -14,7 +14,10 @@ exports.Db = {
   UserData: 'userData',
 };
 
-exports.IndexHtml = `file://${dir}/../index.html`;
+exports.Html = {
+  Index: `file://${dir}/../index.html`,
+  Settings: `file://${dir}/../views/modals/settings.html`
+};
 
 exports.Message = {
   App: {
@@ -36,10 +39,8 @@ exports.Message = {
     FetchClips: 'fetch-clips',
     OpenLink: 'link',
     StarClip: 'star-clip',
+    TitleBarButtonClicked: 'title-bar-button-clicked',
     UnstarClip: 'unstar-clip'
-  },
-  TitleBar: {
-    ButtonClicked: 'title-bar-button-clicked'
   }
 };
 
@@ -53,8 +54,6 @@ exports.Platform = {
   Mac: 'darwin',
   Win: 'win32'
 };
-
-exports.SettingsHtml = `file://${dir}/../views/modals/settings.html`;
 
 exports.Shortcut = {
   OpenKey: 'CommandOrControl+`',

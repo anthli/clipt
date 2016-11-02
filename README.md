@@ -22,11 +22,12 @@ important!
 
 ### Requirements
 - [Node.js](https://goo.gl/QXkkAl)
+- [Yarn](https://goo.gl/QRG7dO) (optional, but significantly faster than npm)
 
 To start developing, clone the repo and run the following:
 
 ```bash
-$ npm install
+$ npm/yarn install
 $ npm run rebuild
 $ npm start
 ```

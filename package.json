@@ -17,9 +17,11 @@
   "dependencies": {
     "angular": "latest",
     "angular-animate": "latest",
+    "angular-aria": "latest",
     "angular-material": "latest",
     "angular-route": "latest",
     "jquery": "latest",
+    "lodash": "latest",
     "ng-infinite-scroll": "latest",
     "sqlite3": "latest"
   },
