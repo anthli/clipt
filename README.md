@@ -12,11 +12,12 @@ important!
 ## Features
 - Clips are displayed top to bottom in descending order (latest to earliest)
 - Ability to favorite and delete Clips on demand
-- Customizable shortcut to open and close the application
+- Customizable shortcut to open and close the application window
 - Minimizing to the menu/task bar without the application quitting
 
 ## Features To Be Added
 - Copying of images
+- More settings that might utilize more shortcuts
 
 ## Development
 
