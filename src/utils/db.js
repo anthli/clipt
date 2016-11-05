@@ -8,10 +8,10 @@ const constants = require('./constants');
 const queries = require('./queries');
 
 // Load the SQLite database
-const db = new sqlite3.Database(path.join(
-  app.getPath(constants.Db.UserData),
-  constants.Db.Path
-));
+const userDataPath = app.getPath(constants.UserData);
+const dbAbsDir = path.join(userDataPath, constants.DbDir);
+const dbAbsPath = dbAbsDir + constants.DbFile;
+const db = new sqlite3.Database(dbAbsPath);
 
 // Create the tables if they does not exist
 db.exec(queries.createTables);
@@ -83,4 +83,4 @@ exports.unstarClip = (id, cb) => {
 
     cb(null);
   });
-}
+};

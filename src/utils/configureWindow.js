@@ -20,7 +20,7 @@ module.exports = () => {
   win.loadURL(path.normalize(constants.Html.Index));
 
   // Dereference the window when it closes
-  win.on(constants.Message.App.Closed, () => {
+  win.on(constants.App.Closed, () => {
     win = null;
     windowManager.setMainWindow(win);
   });

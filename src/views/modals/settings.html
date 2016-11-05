@@ -1,4 +1,8 @@
-<div id="clipt-settings">
-  Hotkeys:
-  Open/close application: {{shortcut}}
-</div>
+<md-content id="clipt-settings">
+  <div id="settings-title">Shortcuts</div>
+
+  <md-input-container id="open-close" class="task-container">
+    <label>Open/Close Window</label>
+    <input id="open-close" class="task" ng-model="(shortcuts | filter: {task:'open-close'})[0].shortcut">
+  </md-input-container>
+</md-content>

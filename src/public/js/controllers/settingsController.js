@@ -1,87 +1,124 @@
 'use strict';
 
+const Accelerators = constants.Accelerators;
+const Modifiers = constants.Modifiers;
+const Actions = constants.Actions;
+
+let shortcuts = [];
+
 const settingsCtrl = function($scope, Settings) {
   // Lists of each key pressed when configuring a shortcut
-  let ctrlOrCmd = [];
+  let accelerators = [];
   let modifiers = [];
   let actions = [];
-  $scope.shortcut = '';
+  $scope.shortcuts = shortcuts;
 
-  // Reset every field to take in a new shortcut
+  // Reset every field and the task's shortcut if it exists
   const reset = () => {
-    ctrlOrCmd = [];
+    accelerators = [];
     modifiers = [];
     actions = [];
-    $scope.shortcut = '';
-  }
+
+    let task = $(document.activeElement).attr('id');
+    if (task) {
+      Settings.register(task, null);
+    }
+  };
 
   // Source: https://goo.gl/25tloa
-  const constructShortcut = () => {
-    if (ctrlOrCmd.length > 0) {
-      modifiers.sort();
-      actions.sort();
+  // Register the created shortcut
+  const registerShortcut = () => {
+    let task = $(document.activeElement).attr('id');
 
-      if (actions.length > 0) {
-        let shortcut = [ctrlOrCmd.join('+')];
+    // Make sure a shortcut input field is selected to register a shortcut
+    if (task) {
+      if (accelerators.length > 0) {
+        modifiers.sort();
+        actions.sort();
 
-        if (modifiers.length > 0) {
-          shortcut.push(modifiers.join('+'));
+        if (actions.length > 0) {
+          let shortcut = [accelerators.join('+')];
+
+          if (modifiers.length > 0) {
+            shortcut.push(modifiers.join('+'));
+          }
+
+          shortcut.push(actions.join('+'));
+          Settings.register(task, shortcut.join('+'));
         }
-
-        shortcut.push(actions.join('+'));
-        $scope.shortcut = shortcut.join('+');
       }
     }
   };
 
-  // Record keydown events, then construct the shortcut
+  // Register the current shortcut with the given task
+  $scope.register = (task) => {
+    Settings.register(task, $scope.shortcut);
+  };
+
+  // Source: https://goo.gl/GrkqVb
+  // Record keydown events
   $scope.keyDown = (e) => {
     const key = e.which;
 
-    if (constants.CtrlOrCmd[key]) {
-      ctrlOrCmd = [constants.CtrlOrCmd[key]];
+    if (Accelerators[key]) {
+      accelerators = [Accelerators[key]];
     }
-    else if (constants.Modifier[key]) {
-      modifiers.push(constants.Modifier[key]);
+    else if (Modifiers[key]) {
+      modifiers.push(Modifiers[key]);
     }
-    else if (constants.Action[key]) {
-      actions = [constants.Action[key]];
+    else if (Actions[key]) {
+      actions = [Actions[key]];
     }
 
-    constructShortcut();
+    registerShortcut();
+    e.preventDefault();
   };
 
+  // Source: https://goo.gl/KAMmyp
   // Delete any record of keydown events
   $scope.keyUp = (e) => {
     const key = e.which;
 
-    if (constants.CtrlOrCmd[key]) {
-      _.remove(ctrlOrCmd, (value) => value === constants.CtrlOrCmd[key]);
+    if (Accelerators[key]) {
+      _.remove(accelerators, (value) => value === Accelerators[key]);
     }
-    else if (constants.Modifier[key]) {
-      _.remove(modifiers, (value) => value === constants.Modifier[key]);
+    else if (Modifiers[key]) {
+      _.remove(modifiers, (value) => value === Modifiers[key]);
     }
-    else if (constants.Action[key]) {
-      _.remove(actions, (value) => value === constants.Action[key]);
+    else if (Actions[key]) {
+      _.remove(actions, (value) => value === Actions[key]);
     }
     else if (key === 27) {
       reset();
     }
-  };
 
-  $scope.register = (task) => {
-    Settings.register(task, $scope.shortcut);
-  }
+    registerShortcut();
+  };
 
   // Detect keydown events
   $(document).keydown((e) => {
-    $scope.keyDown(e);
-    $scope.$digest();
+    // Only register the keydown event if focused on an input
+    if($(document.activeElement).attr('class').indexOf('task') > -1) {
+      $scope.keyDown(e);
+      $scope.$digest();
+    }
   });
 
   // Detect keyup events
   $(document).keyup((e) => {
-    $scope.keyUp(e);
+    // Only register the keyup event if focused on an input
+    if($(document.activeElement).attr('class').indexOf('task') > -1) {
+      $scope.keyUp(e);
+      $scope.$digest();
+    }
+  });
+
+  // ipcRenderer Configuration
+  ipcRenderer.send(constants.Ipc.FetchSettings);
+
+  // Render the settings sent from the main process
+  ipcRenderer.on(constants.Ipc.Settings, (event, settings) => {
+    shortcuts = $scope.shortcuts = settings.shortcuts;
     $scope.$digest();
   });
 };

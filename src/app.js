@@ -39,7 +39,7 @@ const watcher = clipboardWatcher({
             return;
           }
 
-          win.webContents.send(constants.Message.Ipc.Clips, clips);
+          win.webContents.send(constants.Ipc.Clips, clips);
         });
       }
     });
@@ -64,7 +64,7 @@ const watcher = clipboardWatcher({
 
 /* app configuration */
 
-app.on(constants.Message.App.Ready, () => {
+app.on(constants.App.Ready, () => {
   // Initialize each component of the application
   createWindow();
   createShortcuts();
@@ -72,7 +72,7 @@ app.on(constants.Message.App.Ready, () => {
 });
 
 // Quit when all windows are closed
-app.on(constants.Message.App.WindowsAllClosed, () => {
+app.on(constants.App.WindowsAllClosed, () => {
   // On macOS it is common for applications and their menu bar
   // to stay active until the user quits explicitly with Cmd + Q
   // if (process.platform !== constants.Platform.Mac) {
@@ -80,7 +80,7 @@ app.on(constants.Message.App.WindowsAllClosed, () => {
   // }
 });
 
-app.on(constants.Message.App.Activate, () => {
+app.on(constants.App.Activate, () => {
   win = windowManager.getMainWindow();
 
   // On macOS it is common to re-create a window in the app when the
@@ -90,7 +90,7 @@ app.on(constants.Message.App.Activate, () => {
   }
 });
 
-app.on(constants.Message.App.WillQuit, () => {
+app.on(constants.App.WillQuit, () => {
   // Unregister all shortcuts used by the app
   globalShortcut.unregisterAll();
 
@@ -100,7 +100,7 @@ app.on(constants.Message.App.WillQuit, () => {
 
 /* ipcMain configuration */
 
-ipcMain.on(constants.Message.Ipc.TitleBarButtonClicked, (event, button) => {
+ipcMain.on(constants.Ipc.TitleBarButtonClicked, (event, button) => {
   win = windowManager.getMainWindow();
 
   if (win) {
@@ -127,7 +127,7 @@ ipcMain.on(constants.Message.Ipc.TitleBarButtonClicked, (event, button) => {
 });
 
 // Retrieve all Clips from the database and send them to the renderer
-ipcMain.on(constants.Message.Ipc.FetchClips, (event) => {
+ipcMain.on(constants.Ipc.FetchClips, (event) => {
   win = windowManager.getMainWindow();
 
   db.getClips((err, clips) => {
@@ -136,13 +136,13 @@ ipcMain.on(constants.Message.Ipc.FetchClips, (event) => {
       return;
     }
 
-    win.webContents.send(constants.Message.Ipc.Clips, clips);
+    win.webContents.send(constants.Ipc.Clips, clips);
   });
 });
 
 // If the browser window is closed, prevent it from opening before all of the
 // clips are ready to be displayed
-ipcMain.on(constants.Message.Ipc.ClipsReady, (event) => {
+ipcMain.on(constants.Ipc.ClipsReady, (event) => {
   win = windowManager.getMainWindow();
 
   if (win) {
@@ -163,44 +163,44 @@ ipcMain.on(constants.Message.Ipc.ClipsReady, (event) => {
 
 // Star the Clip selected in the window and send its index back to the
 // renderer along with its starred_clip_id so it can star the Clip
-ipcMain.on(constants.Message.Ipc.StarClip, (event, id, index) => {
+ipcMain.on(constants.Ipc.StarClip, (event, id, index) => {
   db.starClip(id, (err, clip) => {
     if (err) {
       console.error(err);
       return;
     }
 
-    win.webContents.send(constants.Message.Ipc.ClipStarred, index, clip.id);
+    win.webContents.send(constants.Ipc.ClipStarred, index, clip.id);
   });
 });
 
 // Unstar the Clip selected in the window and send its index back to the
 // renderer so it can unstar the Clip
-ipcMain.on(constants.Message.Ipc.UnstarClip, (event, id, index) => {
+ipcMain.on(constants.Ipc.UnstarClip, (event, id, index) => {
   db.unstarClip(id, (err) => {
     if (err) {
       console.error(err);
       return;
     }
 
-    win.webContents.send(constants.Message.Ipc.ClipUnstarred, index);
+    win.webContents.send(constants.Ipc.ClipUnstarred, index);
   });
 });
 
 // Delete the Clip selected in the window and send its index back to the
 // renderer so it can delete the Clip
-ipcMain.on(constants.Message.Ipc.DeleteClip, (event, id, index) => {
+ipcMain.on(constants.Ipc.DeleteClip, (event, id, index) => {
   db.deleteClip(id, (err) => {
     if (err) {
       console.error(err);
       return;
     }
 
-    win.webContents.send(constants.Message.Ipc.ClipDeleted, index);
+    win.webContents.send(constants.Ipc.ClipDeleted, index);
   });
 });
 
 // Open the link in the desktop's default browser
-ipcMain.on(constants.Message.Ipc.OpenLink, (event, link) => {
+ipcMain.on(constants.Ipc.OpenLink, (event, link) => {
   shell.openExternal(link);
 });

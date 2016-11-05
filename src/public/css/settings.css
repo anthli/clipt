@@ -2,3 +2,19 @@
   margin-left: 50px;
   padding: 20px 0 0 20px;
 }
+
+#settings-title {
+  margin-bottom: 20px;
+}
+
+md-input-container:not(.md-input-invalid).md-input-focused label {
+  color: #262626;
+}
+
+md-input-container:not(.md-input-invalid).md-input-focused .md-input {
+  border-color: #262626;
+}
+
+.task-container input {
+  border-color: rgba(38, 38, 38, 0.2);
+}

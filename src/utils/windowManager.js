@@ -7,7 +7,7 @@ const windows = {};
 
 exports.setMainWindow = (win) => {
   windows.main = win;
-}
+};
 
 exports.getMainWindow = () => {
   return windows.main;

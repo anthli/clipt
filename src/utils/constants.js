@@ -3,15 +3,15 @@
 const dir = __dirname;
 
 exports.AppName = 'Clipt';
+exports.DbFile = 'clipt.sqlite3';
+exports.DbDir = '.db/',
+exports.SettingsFile = 'settings.json';
+exports.SettingsDir = '.settings/';
+exports.UserData = 'userData';
 
 exports.ClipType = {
   Image: 'Image',
   Text: 'Text'
-};
-
-exports.Db = {
-  Path: '.db/clipt.sqlite3',
-  UserData: 'userData',
 };
 
 exports.Html = {
@@ -19,35 +19,37 @@ exports.Html = {
   Settings: `file://${dir}/../views/modals/settings.html`
 };
 
-exports.Message = {
-  App: {
-    Activate: 'activate',
-    Closed: 'closed',
-    DidFinishLoad: 'did-finish-load',
-    Ready: 'ready',
-    WillQuit: 'will-quit',
-    WindowsAllClosed: 'window-all-closed'
-  },
-  Ipc: {
-    ClipCopied: 'clip-copied',
-    ClipDeleted: 'clip-deleted',
-    Clips: 'clips',
-    ClipsReady: 'clips-ready',
-    ClipStarred: 'clip-starred',
-    ClipUnstarred: 'clip-unstarred',
-    DeleteClip: 'delete-clip',
-    FetchClips: 'fetch-clips',
-    OpenLink: 'link',
-    StarClip: 'star-clip',
-    TitleBarButtonClicked: 'title-bar-button-clicked',
-    UnstarClip: 'unstar-clip'
-  }
+exports.App = {
+  Activate: 'activate',
+  Closed: 'closed',
+  DidFinishLoad: 'did-finish-load',
+  Ready: 'ready',
+  WillQuit: 'will-quit',
+  WindowsAllClosed: 'window-all-closed'
 };
 
-exports.Modal = {
-  About: 'about',
-  ReadyToShow: 'ready-to-show',
-  Settings: 'settings'
+exports.Error = {
+  ENOENT: 'ENOENT',
+  EEXIST: 'EEXIST'
+};
+
+exports.Ipc = {
+  AboutModal: 'about-modal',
+  ClipCopied: 'clip-copied',
+  ClipDeleted: 'clip-deleted',
+  Clips: 'clips',
+  ClipsReady: 'clips-ready',
+  ClipStarred: 'clip-starred',
+  ClipUnstarred: 'clip-unstarred',
+  DeleteClip: 'delete-clip',
+  FetchClips: 'fetch-clips',
+  FetchSettings: 'fetch-settings',
+  OpenLink: 'open-link',
+  RegisterShortcut: 'register-shortcut',
+  Settings: 'settings',
+  StarClip: 'star-clip',
+  TitleBarButtonClicked: 'title-bar-button-clicked',
+  UnstarClip: 'unstar-clip'
 };
 
 exports.Platform = {
@@ -56,8 +58,8 @@ exports.Platform = {
 };
 
 exports.Shortcut = {
-  OpenKey: 'CommandOrControl+`',
-  OpenError: 'Failed to register CommandOrControl+`'
+  OpenCloseTask: 'open-close',
+  OpenCloseError: 'Failed to register open-close'
 };
 
 exports.TitleBar = {

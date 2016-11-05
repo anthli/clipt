@@ -21,6 +21,7 @@
     "angular-material": "latest",
     "angular-route": "latest",
     "jquery": "latest",
+    "jsonfile": "latest",
     "lodash": "latest",
     "ng-infinite-scroll": "latest",
     "sqlite3": "latest"

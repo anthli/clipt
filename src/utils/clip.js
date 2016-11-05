@@ -12,12 +12,12 @@ module.exports = (type, data) => {
   switch (type) {
     case 'Text':
       obj.text = data.text;
-      break
+      break;
 
     case 'Image':
       obj.text = data.text;
       obj.image = data.image;
-      break
+      break;
   }
 
   return obj;

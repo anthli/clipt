@@ -55,7 +55,7 @@ module.exports = () => {
         win = windowManager.getMainWindow();
 
         if (win) {
-          win.webContents.send(constants.Modal.About);
+          win.webContents.send(constants.Ipc.AboutModal);
         }
       }
     },
@@ -78,7 +78,7 @@ module.exports = () => {
             width: 600
           });
 
-          settingsModal.loadURL(constants.Html.Settings);
+          settingsModal.loadURL(path.normalize(constants.Html.Settings));
 
           // Show the Settings modal once ready
           settingsModal.once(constants.Modal.ReadyToShow, () => {
