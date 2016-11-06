@@ -6,10 +6,10 @@ const {
   ipcMain
 } = require('electron');
 const _ = require('lodash');
-const fs = require('fs');
 const jsonfile = require('jsonfile');
 const path = require('path');
 
+const checkPath = require('./checkPath');
 const constants = require('./constants');
 const createWindow = require('./configureWindow');
 const windowManager = require('./windowManager');
@@ -18,24 +18,8 @@ let settings;
 let win;
 
 const userDataPath = app.getPath(constants.UserData);
-const settingsAbsDir = path.join(userDataPath, constants.SettingsDir);
-const settingsAbsPath = settingsAbsDir + constants.SettingsFile;
-
-// Check if the settings file exists, and create it if it doesn't
-const checkSettings = () => {
-  try {
-    fs.statSync(settingsAbsPath);
-  }
-  catch (err) {
-    try {
-      fs.mkdirSync(settingsAbsDir);
-    }
-    catch (err) {
-    }
-
-    jsonfile.writeFileSync(settingsAbsPath, {shortcuts: []}, {spaces: 2});
-  }
-};
+const settingsDir = path.join(userDataPath, constants.UserDir);
+const settingsPath = settingsDir + constants.SettingsFile;
 
 // Register global shortcuts for the application
 const registerGlobalShortcut = (task, shortcut) => {
@@ -63,8 +47,12 @@ const registerGlobalShortcut = (task, shortcut) => {
 
 // Set up the shortcuts to be used by the application
 module.exports = () => {
-  checkSettings();
-  settings = jsonfile.readFileSync(settingsAbsPath);
+  // Create settings.json if it doesn't exist
+  if (!checkPath(settingsDir, constants.SettingsFile)) {
+    jsonfile.writeFileSync(settingsPath, {shortcuts: []}, {spaces: 2});
+  }
+
+  settings = jsonfile.readFileSync(settingsPath);
 
   // Register each task's shortcut
   _.each(settings.shortcuts, (obj) => {
@@ -105,7 +93,7 @@ module.exports = () => {
     }
 
     // Write the new settings to settings.json
-    jsonfile.writeFile(settingsAbsPath, settings, {spaces: 2}, (err) => {
+    jsonfile.writeFile(settingsPath, settings, {spaces: 2}, (err) => {
       if (err) {
         console.error(err);
       }

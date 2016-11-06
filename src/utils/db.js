@@ -4,14 +4,21 @@ const {app} = require('electron');
 const path = require('path');
 const sqlite3 = require('sqlite3');
 
+const checkPath = require('./checkPath');
 const constants = require('./constants');
 const queries = require('./queries');
 
-// Load the SQLite database
 const userDataPath = app.getPath(constants.UserData);
-const dbAbsDir = path.join(userDataPath, constants.DbDir);
-const dbAbsPath = dbAbsDir + constants.DbFile;
-const db = new sqlite3.Database(dbAbsPath);
+const dbDir = path.join(userDataPath, constants.UserDir);
+
+// Create the database file if it doesn't exist
+const dbPath = dbDir + constants.DbFile;
+if (!checkPath(dbDir, constants.DbFile)) {
+  fs.writeFileSync(dbPath);
+}
+
+// Load the SQLite database
+const db = new sqlite3.Database(dbPath);
 
 // Create the tables if they does not exist
 db.exec(queries.createTables);

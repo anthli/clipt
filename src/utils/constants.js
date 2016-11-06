@@ -4,10 +4,9 @@ const dir = __dirname;
 
 exports.AppName = 'Clipt';
 exports.DbFile = 'clipt.sqlite3';
-exports.DbDir = '.db/',
 exports.SettingsFile = 'settings.json';
-exports.SettingsDir = '.settings/';
 exports.UserData = 'userData';
+exports.UserDir = 'User/';
 
 exports.ClipType = {
   Image: 'Image',
