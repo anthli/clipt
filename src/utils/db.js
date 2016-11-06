@@ -11,13 +11,12 @@ const queries = require('./queries');
 const userDataPath = app.getPath(constants.UserData);
 const dbDir = path.join(userDataPath, constants.UserDir);
 
-// Create the database file if it doesn't exist
-const dbPath = dbDir + constants.DbFile;
-if (!checkPath(dbDir, constants.DbFile)) {
-  fs.writeFileSync(dbPath);
-}
+// Create User folder if it doesn't exist. Instead of using fs to create
+// clipt.sqlite3, sqlite3 will correctly create the file if needed
+checkPath(dbDir, constants.DbFile);
 
 // Load the SQLite database
+const dbPath = dbDir + constants.DbFile;
 const db = new sqlite3.Database(dbPath);
 
 // Create the tables if they does not exist
