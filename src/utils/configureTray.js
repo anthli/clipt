@@ -59,11 +59,16 @@ module.exports = () => {
           height: 250,
           modal: true,
           resizable: false,
-          show: true,
+          show: false,
           width: 250
         });
 
         aboutModal.loadURL(path.normalize(constants.Html.About));
+
+        // Show the About modal once ready
+        aboutModal.once(constants.App.ReadyToShow, () => {
+          aboutModal.show();
+        });
       }
     },
 

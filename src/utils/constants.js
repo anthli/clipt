@@ -24,6 +24,7 @@ exports.App = {
   Closed: 'closed',
   DidFinishLoad: 'did-finish-load',
   Ready: 'ready',
+  ReadyToShow: 'ready-to-show',
   WillQuit: 'will-quit',
   WindowsAllClosed: 'window-all-closed'
 };
@@ -51,10 +52,6 @@ exports.Ipc = {
   TitleBarButtonClicked: 'title-bar-button-clicked',
   UnstarClip: 'unstar-clip'
 };
-
-exports.Modal = {
-  ReadyToShow: 'ready-to-show'
-}
 
 exports.Platform = {
   Mac: 'darwin',
