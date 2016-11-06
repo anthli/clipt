@@ -46,48 +46,29 @@ module.exports = () => {
         }
       }
     },
+
     {type: constants.Tray.Menu.TypeSeparator},
+
     // About Clipt
     {
       label: constants.Tray.Menu.AboutLabel,
       type: constants.Tray.Menu.TypeNormal,
       click: () => {
-        win = windowManager.getMainWindow();
+        // Set up the About modal window
+        let aboutModal = new BrowserWindow({
+          height: 250,
+          modal: true,
+          resizable: false,
+          show: true,
+          width: 250
+        });
 
-        if (win) {
-          win.webContents.send(constants.Ipc.AboutModal);
-        }
+        aboutModal.loadURL(path.normalize(constants.Html.About));
       }
     },
+
     {type: constants.Tray.Menu.TypeSeparator},
-    // Preferences...
-    {
-      label: constants.Tray.Menu.PreferencesLabel,
-      type: constants.Tray.Menu.TypeNormal,
-      click: () => {
-        win = windowManager.getMainWindow();
 
-        if (win) {
-          // Set up the Settings modal window
-          let settingsModal = new BrowserWindow({
-            height: 400,
-            modal: true,
-            resizable: false,
-            show: false,
-            title: constants.AppName,
-            width: 600
-          });
-
-          settingsModal.loadURL(path.normalize(constants.Html.Settings));
-
-          // Show the Settings modal once ready
-          settingsModal.once(constants.Modal.ReadyToShow, () => {
-            settingsModal.show();
-          });
-        }
-      }
-    },
-    {type: constants.Tray.Menu.TypeSeparator},
     // Quit Clipt
     {
       label: constants.Tray.Menu.QuitLabel,

@@ -6,7 +6,7 @@ const aboutCtrl = function($scope) {
 
   // Signal the main process to open the given link
   $scope.openLink = (link) => {
-    ipcRenderer.send(constants.Ipc.OpenLink, link);
+    ipcRenderer.send('open-link', link);
   };
 };
 

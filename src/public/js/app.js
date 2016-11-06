@@ -3,8 +3,12 @@
 const {ipcRenderer} = require('electron');
 const $ = require('jquery');
 const _ = require('lodash');
+const path = require('path');
 
-const constants = require('./public/js/utils/constants');
+// Retrieve constants file
+const projectDir = __dirname.substring(0, __dirname.indexOf('src') + 3);
+const constantsPath = 'public/js/utils/constants';
+const constants = require(path.join(projectDir, constantsPath));
 
 const app = angular.module('clipt', [
   'infinite-scroll',

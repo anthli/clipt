@@ -1,22 +1,46 @@
-<div id="clipt-about">
-  <div id="about-image-container">
-    <img id="about-image" src="assets/images/about.png">
-  </div>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>About Clipt</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <div id="about-content-container">
-    <div id="about-app-name">Clipt</div>
+    <!-- Load CSS files -->
+    <link rel="stylesheet" href="../../public/css/about.css" media="screen">
 
-    <div id="about-content">
-      <div id="about-version">Version {{appVersion}}</div>
-      <div id="about-credits">Credits</div>
+    <!-- Load JavaScript files -->
+    <script src="../../../node_modules/angular/angular.js"></script>
+    <script src="../../../node_modules/angular-animate/angular-animate.js"></script>
+    <script src="../../../node_modules/angular-aria/angular-aria.js"></script>
+    <script src="../../../node_modules/angular-material/angular-material.js"></script>
+    <script src="../../../node_modules/angular-route/angular-route.js"></script>
+    <script src="../../../node_modules/ng-infinite-scroll/build/ng-infinite-scroll.js"></script>
+    <script src="../../public/js/app.js"></script>
+    <script src="../../public/js/controllers/aboutController.js"></script>
+  </head>
 
-      <div id="about-creditor">
-        Icons: <a href="" ng-click="openLink('https://goo.gl/C6pdp0')">Nicholas Merten</a>
+  <body ng-app="clipt" ng-controller="AboutCtrl">
+    <div id="clipt-about">
+      <div id="about-image-container">
+        <img id="about-image" src="../../assets/images/about.png">
       </div>
 
-      <div id="about-author">
-        Copyright © 2016 <a href="" ng-click="openLink('https://goo.gl/53rcXV')">Anthony Li</a>
+      <div id="about-content-container">
+        <div id="about-app-name">Clipt</div>
+
+        <div id="about-content">
+          <div id="about-version">Version {{appVersion}}</div>
+          <div id="about-credits">Credits</div>
+
+          <div id="about-creditor">
+            Icons: <a href="" ng-click="openLink('https://goo.gl/C6pdp0')">Nicholas Merten</a>
+          </div>
+
+          <div id="about-author">
+            Copyright © 2016 <a href="" ng-click="openLink('https://goo.gl/53rcXV')">Anthony Li</a>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
+  </body>
+</html>

@@ -51,7 +51,6 @@ exports.Controller = {
 };
 
 exports.Html = {
-  About: 'views/modals/about.html',
   Home: 'views/home.html',
   Settings: 'views/modals/settings.html',
   Starred: 'views/starred.html'

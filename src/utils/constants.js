@@ -14,8 +14,9 @@ exports.ClipType = {
 };
 
 exports.Html = {
-  Index: `file://${dir}/../index.html`,
-  Settings: `file://${dir}/../views/modals/settings.html`
+  About: `file://${dir}/../views/modals/About.html`,
+  Index: `file://${dir}/../index.html`
+
 };
 
 exports.App = {
@@ -50,6 +51,10 @@ exports.Ipc = {
   TitleBarButtonClicked: 'title-bar-button-clicked',
   UnstarClip: 'unstar-clip'
 };
+
+exports.Modal = {
+  ReadyToShow: 'ready-to-show'
+}
 
 exports.Platform = {
   Mac: 'darwin',

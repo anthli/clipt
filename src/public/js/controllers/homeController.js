@@ -100,15 +100,6 @@ const homeCtrl = function($scope, $location, $mdDialog, Home) {
     $scope.clips.splice(index, 1);
     $scope.$digest();
   });
-
-  // Open the About modal
-  ipcRenderer.on(constants.Ipc.About, (event) => {
-    $mdDialog.show({
-      templateUrl: constants.Html.About,
-      controller: constants.Controller.About,
-      clickOutsideToClose: true
-    });
-  });
 };
 
 homeCtrl.$inject = ['$scope', '$location', '$mdDialog', 'Home'];
