@@ -9,4 +9,4 @@ const titleBarCtrl = function($scope, TitleBar) {
 
 titleBarCtrl.$inject = ['$scope', 'TitleBar'];
 
-app.controller('TitleBarCtrl', titleBarCtrl);
+app.controller(constants.Controller.TitleBar, titleBarCtrl);

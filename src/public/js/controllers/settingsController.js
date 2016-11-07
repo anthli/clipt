@@ -125,4 +125,4 @@ const settingsCtrl = function($scope, Settings) {
 
 settingsCtrl.$inject = ['$scope', 'Settings'];
 
-app.controller('SettingsCtrl', settingsCtrl);
+app.controller(constants.Controller.Settings, settingsCtrl);

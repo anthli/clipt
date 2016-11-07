@@ -9,4 +9,4 @@ const settingsFactory = () => {
   }
 };
 
-app.factory('Settings', settingsFactory);
+app.factory(constants.Service.Settings, settingsFactory);

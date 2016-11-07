@@ -1,9 +1,9 @@
 'use strict';
 
-const homeFactory = () => {
+const clipFactory = ($location, $q) => {
   return {
-    // Notify the main process to retrieve all Clips
-    getAllClips: () => {
+    // Signal the main process to retrieve all Clips
+    fetchAllClips: () => {
       ipcRenderer.send(constants.Ipc.FetchClips);
     },
 
@@ -12,25 +12,24 @@ const homeFactory = () => {
     copyClip: (event, clip) => {
       // Prevent a double-click registering when starring or deleting Clips
       let elem = angular.element(event.target);
-      if (elem.hasClass('star-clip') || elem.hasClass('delete-clip')) {
-        return;
+      if (!elem.hasClass('star-clip') && !elem.hasClass('delete-clip')) {
+        // Fade the popup message in at the cursor's position when copying a
+        // Clip
+        let popupContainer = $('#copy-popup-container');
+        popupContainer.fadeIn(150);
+        popupContainer.css({
+          'display': 'flex',
+          'left': event.pageX,
+          'top': event.pageY
+        });
+
+        // Fade the popup message out after 750 ms
+        setTimeout(() => {
+          popupContainer.fadeOut(150);
+        }, 500);
+
+        ipcRenderer.send(constants.Ipc.ClipCopied, clip);
       }
-
-      // Fade the popup message in at the cursor's position when copying a Clip
-      let popupContainer = $('#copy-popup-container');
-      popupContainer.fadeIn(150);
-      popupContainer.css({
-        'display': 'flex',
-        'left': event.pageX,
-        'top': event.pageY
-      });
-
-      // Fade the popup message out after 750 ms
-      setTimeout(() => {
-        popupContainer.fadeOut(150);
-      }, 500);
-
-      ipcRenderer.send(constants.Ipc.ClipCopied, clip);
     },
 
     // When the trash icon is clicked, notify the main process that the Clip it
@@ -57,4 +56,6 @@ const homeFactory = () => {
   }
 };
 
-app.factory('Home', homeFactory);
+clipFactory.$inject = ['$location', '$q'];
+
+app.factory(constants.Service.Clip, clipFactory);

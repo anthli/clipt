@@ -10,6 +10,7 @@ module.exports = (dir, file) => {
   try {
     // Check if the file already exists
     fs.statSync(filePath);
+
     return true;
   }
   catch (err) {

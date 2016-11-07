@@ -47,10 +47,14 @@ exports.Actions = _.transform(_.range(26), (final, current) => { // letters
 exports.Controller = {
   About: 'AboutCtrl',
   Home: 'HomeCtrl',
-  Settings: 'SettingsCtrl'
+  Settings: 'SettingsCtrl',
+  SideMenu: 'SideMenuCtrl',
+  Starred: 'StarredCtrl',
+  TitleBar: 'TitleBarCtrl'
 };
 
 exports.Html = {
+  About: 'views/modals/about.html',
   Home: 'views/home.html',
   Settings: 'views/modals/settings.html',
   Starred: 'views/starred.html'
@@ -81,6 +85,12 @@ exports.Modal = {
 
 exports.Path = {
   Home: '/',
-  Starred: '/starred',
-  Settings: '/settings'
+  Starred: '/starred/',
+  Settings: '/settings/'
 };
+
+exports.Service = {
+  Clip: 'Clip',
+  Settings: 'Settings',
+  TitleBar: 'TitleBar'
+}

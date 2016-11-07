@@ -54,21 +54,12 @@ module.exports = () => {
       label: constants.Tray.Menu.AboutLabel,
       type: constants.Tray.Menu.TypeNormal,
       click: () => {
-        // Set up the About modal window
-        let aboutModal = new BrowserWindow({
-          height: 250,
-          modal: true,
-          resizable: false,
-          show: false,
-          width: 250
-        });
+        win = windowManager.getMainWindow();
 
-        aboutModal.loadURL(path.normalize(constants.Html.About));
-
-        // Show the About modal once ready
-        aboutModal.once(constants.App.ReadyToShow, () => {
-          aboutModal.show();
-        });
+        // Signal the renderer to open the About modal
+        if (win) {
+          win.webContents.send(constants.Ipc.AboutModal);
+        }
       }
     },
 

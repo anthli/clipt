@@ -28,6 +28,7 @@ const watcher = clipboardWatcher({
     db.addClip(textClip, (err, clip) => {
       if (err) {
         console.error(err);
+
         return;
       }
 
@@ -36,6 +37,7 @@ const watcher = clipboardWatcher({
         db.getClips((err, clips) => {
           if (err) {
             console.error(err);
+
             return;
           }
 
@@ -56,6 +58,7 @@ const watcher = clipboardWatcher({
   //   db.addClip(imgClip, (err, doc) => {
   //     if (err) {
   //       console.error(err);
+  //
   //       return;
   //     }
   //   });
@@ -107,6 +110,7 @@ ipcMain.on(constants.Ipc.TitleBarButtonClicked, (event, button) => {
     switch (button) {
       case constants.TitleBar.Close:
         win.close();
+
         break;
 
       case constants.TitleBar.Maximize:
@@ -121,6 +125,7 @@ ipcMain.on(constants.Ipc.TitleBarButtonClicked, (event, button) => {
 
       case constants.TitleBar.Minimize:
         win.minimize();
+
         break;
     }
   }
@@ -133,6 +138,7 @@ ipcMain.on(constants.Ipc.FetchClips, (event) => {
   db.getClips((err, clips) => {
     if (err) {
       console.error(err);
+
       return;
     }
 
@@ -161,8 +167,8 @@ ipcMain.on(constants.Ipc.ClipsReady, (event) => {
   }
 });
 
-// Star the Clip selected in the window and send its index back to the
-// renderer along with its starred_clip_id so it can star the Clip
+// Star the Clip selected in the application window and send the starred Clip's
+// id back to the renderer
 ipcMain.on(constants.Ipc.StarClip, (event, id, index) => {
   db.starClip(id, (err, clip) => {
     if (err) {
@@ -170,33 +176,33 @@ ipcMain.on(constants.Ipc.StarClip, (event, id, index) => {
       return;
     }
 
-    win.webContents.send(constants.Ipc.ClipStarred, index, clip.id);
+    win.webContents.send(constants.Ipc.ClipStarred, clip.id, index);
   });
 });
 
-// Unstar the Clip selected in the window and send its index back to the
-// renderer so it can unstar the Clip
+// Unstar the Clip selected in the application window
 ipcMain.on(constants.Ipc.UnstarClip, (event, id, index) => {
   db.unstarClip(id, (err) => {
     if (err) {
       console.error(err);
+
       return;
     }
 
-    win.webContents.send(constants.Ipc.ClipUnstarred, index);
+    win.webContents.send(constants.Ipc.ClipUnstarred, id, index);
   });
 });
 
-// Delete the Clip selected in the window and send its index back to the
-// renderer so it can delete the Clip
+// Delete the Clip selected in the application window
 ipcMain.on(constants.Ipc.DeleteClip, (event, id, index) => {
   db.deleteClip(id, (err) => {
     if (err) {
       console.error(err);
+
       return;
     }
 
-    win.webContents.send(constants.Ipc.ClipDeleted, index);
+    win.webContents.send(constants.Ipc.ClipDeleted, id, index);
   });
 });
 

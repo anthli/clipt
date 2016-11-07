@@ -14,13 +14,15 @@ const sideMenuCtrl = function($scope, $location) {
   $scope.setActiveMenu = (menu) => {
     $scope.activeMenu = menu;
 
-    switch ($scope.activeMenu) {
+    switch (menu) {
       case 'home':
         $location.path('/');
+
         break;
 
       default:
-        $location.path('/' + menu);
+        $location.path('/' + menu + '/');
+
         break;
     }
   };
@@ -28,4 +30,4 @@ const sideMenuCtrl = function($scope, $location) {
 
 sideMenuCtrl.$inject = ['$scope', '$location'];
 
-app.controller('SideMenuCtrl', sideMenuCtrl);
+app.controller(constants.Controller.SideMenu, sideMenuCtrl);

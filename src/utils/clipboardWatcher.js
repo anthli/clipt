@@ -61,6 +61,7 @@ module.exports = (opts) => {
       // Prevent copying from a Clip registering as a copy from the system
       if (newImg.isEmpty()) {
         currText = newText;
+
         return;
       }
       else {
@@ -79,6 +80,7 @@ module.exports = (opts) => {
         case true:
           if (opts.onTextChange) {
             currText = newText;
+
             return opts.onTextChange(newText);
           }
 
@@ -87,6 +89,7 @@ module.exports = (opts) => {
           // An image was copied
           // if (opts.onImageChange) {
           //   currImg = newImg;
+          //
           //   return opts.onImageChange(clipboard.readText(), newImg);
           // }
       }
