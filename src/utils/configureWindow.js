@@ -9,9 +9,10 @@ const windowManager = require('./windowManager');
 // Set up the browser window to be used with the app
 module.exports = () => {
   let win = new BrowserWindow({
-    frame: false,
-    width: 768,
-    height: 576,
+    autoHideMenuBar: true,
+    // frame: false,
+    width: 800,
+    height: 600,
     show: false,
     title: constants.AppName
   });

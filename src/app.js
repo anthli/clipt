@@ -74,15 +74,6 @@ app.on(constants.App.Ready, () => {
   createTray();
 });
 
-// Quit when all windows are closed
-app.on(constants.App.WindowsAllClosed, () => {
-  // On macOS it is common for applications and their menu bar
-  // to stay active until the user quits explicitly with Cmd + Q
-  // if (process.platform !== constants.Platform.Mac) {
-  //   app.quit();
-  // }
-});
-
 app.on(constants.App.Activate, () => {
   win = windowManager.getMainWindow();
 
@@ -100,6 +91,9 @@ app.on(constants.App.WillQuit, () => {
   // Stop the clipboard watcher
   watcher.stop();
 });
+
+// Don't quit the application when all windows are closed
+app.on(constants.App.WindowsAllClosed, () => {});
 
 /* ipcMain configuration */
 
@@ -167,8 +161,22 @@ ipcMain.on(constants.Ipc.ClipsReady, (event) => {
   }
 });
 
-// Star the Clip selected in the application window and send the starred Clip's
-// id back to the renderer
+// Delete the Clip selected in the application window based on its id and send
+// the id back to the renderer
+ipcMain.on(constants.Ipc.DeleteClip, (event, id) => {
+  db.deleteClip(id, (err) => {
+    if (err) {
+      console.error(err);
+
+      return;
+    }
+
+    win.webContents.send(constants.Ipc.ClipDeleted, id);
+  });
+});
+
+// Star the Clip selected in the application window based on its id and send
+// the starred Clip's id and index back to the renderer
 ipcMain.on(constants.Ipc.StarClip, (event, id, index) => {
   db.starClip(id, (err, clip) => {
     if (err) {
@@ -180,8 +188,9 @@ ipcMain.on(constants.Ipc.StarClip, (event, id, index) => {
   });
 });
 
-// Unstar the Clip selected in the application window
-ipcMain.on(constants.Ipc.UnstarClip, (event, id, index) => {
+// Unstar the Clip selected in the application window based on its id and send
+// its id back to the renderer
+ipcMain.on(constants.Ipc.UnstarClip, (event, id) => {
   db.unstarClip(id, (err) => {
     if (err) {
       console.error(err);
@@ -189,24 +198,9 @@ ipcMain.on(constants.Ipc.UnstarClip, (event, id, index) => {
       return;
     }
 
-    win.webContents.send(constants.Ipc.ClipUnstarred, id, index);
-  });
-});
-
-// Delete the Clip selected in the application window
-ipcMain.on(constants.Ipc.DeleteClip, (event, id, index) => {
-  db.deleteClip(id, (err) => {
-    if (err) {
-      console.error(err);
-
-      return;
-    }
-
-    win.webContents.send(constants.Ipc.ClipDeleted, id, index);
+    win.webContents.send(constants.Ipc.ClipUnstarred, id);
   });
 });
 
 // Open the link in the desktop's default browser
-ipcMain.on(constants.Ipc.OpenLink, (event, link) => {
-  shell.openExternal(link);
-});
+ipcMain.on(constants.Ipc.OpenLink, (event, link) => shell.openExternal(link));

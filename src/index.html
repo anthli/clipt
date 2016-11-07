@@ -40,14 +40,12 @@
 
   <body ng-app="clipt">
     <!-- Title bar -->
-    <div id="title-bar" ng-controller="TitleBarCtrl">
+    <!--<div id="title-bar" ng-controller="TitleBarCtrl">
       <div id="title-bar-button-container">
-        <!-- Minimize button -->
         <button id="minimize-button" ng-click="click('minimize')">
           <span></span>
         </button>
 
-        <!-- Maximize button -->
         <button id="maximize-button" ng-click="click('maximize')">
           <span></span>
           <span></span>
@@ -57,13 +55,12 @@
           <span></span>
         </button>
 
-        <!-- Close button -->
         <button id="close-button" ng-click="click('close')">
           <span></span>
           <span></span>
         </button>
       </div>
-    </div>
+    </div>-->
 
     <!-- Side bar menu -->
     <md-toolbar id="side-menu" ng-controller="SideMenuCtrl">
@@ -82,6 +79,7 @@
     <!-- About modal -->
     <div ng-controller="AboutCtrl"></div>
 
+    <!-- Main application -->
     <div ng-view autoscroll="true"></div>
   </body>
 </html>

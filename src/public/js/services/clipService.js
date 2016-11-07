@@ -1,6 +1,6 @@
 'use strict';
 
-const clipFactory = ($location, $q) => {
+const clipFactory = () => {
   return {
     // Signal the main process to retrieve all Clips
     fetchAllClips: () => {
@@ -32,30 +32,24 @@ const clipFactory = ($location, $q) => {
       }
     },
 
-    // When the trash icon is clicked, notify the main process that the Clip it
+    // When the trash icon is clicked, signal the main process that the Clip it
     // belongs should be deleted
     deleteClip: (clip, index) => {
       ipcRenderer.send(constants.Ipc.DeleteClip, clip.id, index);
     },
 
-    // When the star icon is clicked, notify the main process that the Clip it
+    // When the star icon is clicked, signal the main process that the Clip it
     // belongs to should be starred
     starClip: (clip, index) => {
       ipcRenderer.send(constants.Ipc.StarClip, clip.id, index);
     },
 
-    // When the star icon is clicked after being starred, notify the main
+    // When the star icon is clicked after being starred, signal the main
     // process that the Clip it belongs to should be unstarred
-    unstarClip: (clip, index) => {
-      ipcRenderer.send(
-        constants.Ipc.UnstarClip,
-        clip.starred_clip_id,
-        index
-      );
+    unstarClip: (clip) => {
+      ipcRenderer.send(constants.Ipc.UnstarClip, clip.starred_clip_id);
     }
   }
 };
-
-clipFactory.$inject = ['$location', '$q'];
 
 app.factory(constants.Service.Clip, clipFactory);

@@ -1,5 +1,6 @@
 .clip-list-container {
-  height: calc(100% - 70px);
+  /*height: calc(100% - 70px);*/
+  height: calc(100% - 40px);
   margin-left: 50px;
   width: calc(100% - 50px);
 }
