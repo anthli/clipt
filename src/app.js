@@ -67,6 +67,28 @@ const watcher = clipboardWatcher({
 
 /* app configuration */
 
+// Prevent multiple instances of the application from running
+const secondInstance = app.makeSingleInstance((argv, workingDirectory) => {
+  win = windowManager.getMainWindow();
+
+  // Refocus the primary window
+  if (win) {
+    if (win.isMinimized()) {
+      win.restore();
+    }
+
+    win.focus();
+  }
+  // Initialize a new window of the primary instance
+  else {
+    createWindow();
+  }
+});
+
+if (secondInstance) {
+  app.quit();
+}
+
 app.on(constants.App.Ready, () => {
   // Initialize each component of the application
   createWindow();
@@ -74,11 +96,10 @@ app.on(constants.App.Ready, () => {
   createTray();
 });
 
+// On macOS it is common to re-create a window in the app when the
+// dock icon is clicked and there are no other windows open
 app.on(constants.App.Activate, () => {
   win = windowManager.getMainWindow();
-
-  // On macOS it is common to re-create a window in the app when the
-  // dock icon is clicked and there are no other windows open
   if (!win) {
     createWindow();
   }
