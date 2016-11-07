@@ -7,7 +7,7 @@ const titleBarFactory = () => {
     click: (button) => {
       ipcRenderer.send(constants.Ipc.TitleBarButtonClicked, button);
     }
-  }
+  };
 };
 
 app.factory(constants.Service.TitleBar, titleBarFactory);

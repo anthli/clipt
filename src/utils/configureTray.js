@@ -78,4 +78,4 @@ module.exports = () => {
 
   // Link the context menu to the tray icon
   tray.setContextMenu(contextMenu);
-}
+};

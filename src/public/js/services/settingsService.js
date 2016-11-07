@@ -6,7 +6,7 @@ const settingsFactory = () => {
     register: (task, shortcut) => {
       ipcRenderer.send(constants.Ipc.RegisterShortcut, task, shortcut);
     }
-  }
+  };
 };
 
 app.factory(constants.Service.Settings, settingsFactory);

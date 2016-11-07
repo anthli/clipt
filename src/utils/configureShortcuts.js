@@ -59,7 +59,7 @@ module.exports = () => {
     if (obj.shortcut) {
       registerGlobalShortcut(obj.task, obj.shortcut);
     }
-  })
+  });
 
   // Send the settings to the renderer
   ipcMain.on(constants.Ipc.FetchSettings, (event) => {
@@ -103,4 +103,4 @@ module.exports = () => {
       win.webContents.send(constants.Ipc.Settings, settings);
     });
   });
-}
+};

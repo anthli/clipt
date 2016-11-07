@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 // Source: https://goo.gl/VT4OGk
 exports.Accelerators = {
@@ -93,4 +93,4 @@ exports.Service = {
   Clip: 'Clip',
   Settings: 'Settings',
   TitleBar: 'TitleBar'
-}
+};

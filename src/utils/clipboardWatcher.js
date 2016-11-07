@@ -1,7 +1,7 @@
 // Watches the system clipboard for changes in copied data
 // Source: https://goo.gl/Caaio7
 
-'use strict'
+'use strict';
 
 const {
   clipboard,
@@ -84,6 +84,8 @@ module.exports = (opts) => {
             return opts.onTextChange(newText);
           }
 
+          break;
+
         // An image was copied
         case false:
           // An image was copied
@@ -92,6 +94,8 @@ module.exports = (opts) => {
           //
           //   return opts.onImageChange(clipboard.readText(), newImg);
           // }
+          //
+          // break;
       }
     }
   }, watchDelay);
@@ -101,5 +105,5 @@ module.exports = (opts) => {
     stop: () => {
       clearInterval(intervalId);
     }
-  }
-}
+  };
+};

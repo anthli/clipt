@@ -28,4 +28,4 @@ module.exports = () => {
 
   // Store the main window in the window manager
   windowManager.setMainWindow(win);
-}
+};

@@ -176,15 +176,16 @@ ipcMain.on(constants.Ipc.DeleteClip, (event, id) => {
 });
 
 // Star the Clip selected in the application window based on its id and send
-// the starred Clip's id and index back to the renderer
+// the starred Clip's id and starred id back to the renderer
 ipcMain.on(constants.Ipc.StarClip, (event, id, index) => {
-  db.starClip(id, (err, clip) => {
+  db.starClip(id, (err, starredClip) => {
     if (err) {
       console.error(err);
+
       return;
     }
 
-    win.webContents.send(constants.Ipc.ClipStarred, clip.id, index);
+    win.webContents.send(constants.Ipc.ClipStarred, id, starredClip.id);
   });
 });
 

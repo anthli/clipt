@@ -13,7 +13,7 @@ const aboutCtrl = function($scope, $mdDialog) {
     $mdDialog.show({
       templateUrl: constants.Html.About,
       clickOutsideToClose: true,
-      controller: function() {this.scope = $scope},
+      controller: function() {this.scope = $scope;},
       controllerAs: constants.Controller.About
     });
   });
