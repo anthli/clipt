@@ -30,7 +30,7 @@ const registerGlobalShortcut = (task, shortcut) => {
           win.destroy();
         }
         else {
-          createWindow();
+          createWindow.start();
         }
       });
 
