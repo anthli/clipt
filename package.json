@@ -1,7 +1,7 @@
 {
   "name": "clipt",
   "productName": "Clipt",
-  "description": "A simple cross platform clipboard history manager.",
+  "description": "Cross platform clipboard history manager",
   "version": "0.0.1",
   "main": "src/app.js",
   "author": {
