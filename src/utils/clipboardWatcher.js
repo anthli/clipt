@@ -30,11 +30,14 @@ ipcMain.on(constants.Ipc.ClipCopied, (event, clip) => {
   switch (clip.type) {
     case constants.ClipType.Text:
       clipboard.writeText(clip.text);
+
       break;
 
-    // case constants.ClipType.Image:
-    //   clipboard.writeImage(clip.image);
-    //   break;
+    case constants.ClipType.Image:
+      // clipboard.writeImage(clip.image);
+      console.log(clip);
+
+      break;
   }
 
   copiedFromClip = true;
@@ -45,58 +48,51 @@ module.exports = (opts) => {
   // Default delay is 1000 ms
   const watchDelay = opts.watchDelay || 1000;
 
-  // The text/image from the current copy
+  // The text/image from the current clipboard
   let currText = clipboard.readText();
   let currImg = clipboard.readImage();
 
   const intervalId = setInterval(() => {
-    // Text or image from the latest copy
+    // Text or image from the latest change in the clipboard
     const newText = clipboard.readText();
     const newImg = clipboard.readImage();
 
-    // Data was copied from a Clip in the window
-    if (copiedFromClip) {
-      copiedFromClip = false;
+    switch (copiedFromClip) {
+      // Prevent copying from a Clip registering as a change in the clipboard
+      case true:
+        if (newImg.isEmpty()) {
+          currText = newText;
+        }
+        else {
+          currText = newText;
+          currImg = newImg;
+        }
 
-      // Prevent copying from a Clip registering as a copy from the system
-      if (newImg.isEmpty()) {
-        currText = newText;
+        copiedFromClip = false;
 
-        return;
-      }
-      else {
-        currImg = newImg;
-      }
+        break;
 
-      return;
-    }
-
-    // isEmpty() will detect whether only text was copied, or if an image was
-    // copied. When copying an image, the name of the file is registered as a
-    // change in copied text
-    if (textHasDiff(currText, newText) || imageHasDiff(currImg, newImg)) {
-      switch (newImg.isEmpty()) {
-        // Only text was copied
-        case true:
-          if (opts.onTextChange) {
+      case false:
+        // Detect whether only text was copied, or if an image was copied.
+        // When copying an image, the name of the file also counts as a change
+        // in the clipboard
+        if (textHasDiff(currText, newText) || imageHasDiff(currImg, newImg)) {
+          // Only text was copied
+          if (newImg.isEmpty()) {
             currText = newText;
 
             return opts.onTextChange(newText);
           }
-
-          break;
-
-        // An image was copied
-        case false:
           // An image was copied
-          // if (opts.onImageChange) {
-          //   currImg = newImg;
-          //
-          //   return opts.onImageChange(clipboard.readText(), newImg);
-          // }
-          //
-          // break;
-      }
+          else {
+            currText = newText;
+            currImg = newImg;
+
+            return opts.onImageChange(currText, newImg);
+          }
+        }
+
+        break;
     }
   }, watchDelay);
 

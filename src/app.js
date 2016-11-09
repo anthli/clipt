@@ -53,22 +53,24 @@ const watcher = clipboardWatcher({
     });
   },
 
-  // onImageChange: (text, image) => {
-  //   win = windowManager.getMainWindow();
-  //   // New Clip containing the type, timestamp, and image
-  //   let imgClip = clip(constants.ClipType.Image, {
-  //     text: text,
-  //     image: image
-  //   });
-  //
-  //   db.addClip(imgClip, (err, doc) => {
-  //     if (err) {
-  //       console.error(err);
-  //
-  //       return;
-  //     }
-  //   });
-  // }
+  onImageChange: (text, image) => {
+    win = windowManager.getMainWindow();
+    // New Clip containing the type, timestamp, and image
+    let imgClip = clip(constants.ClipType.Image, {
+      text: text,
+      image: image
+    });
+
+    console.log(imgClip);
+
+    // db.addClip(imgClip, (err, doc) => {
+    //   if (err) {
+    //     console.error(err);
+
+    //     return;
+    //   }
+    // });
+  }
 });
 
 /* app configuration */
