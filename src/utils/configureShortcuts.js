@@ -9,7 +9,6 @@ const _ = require('lodash');
 const jsonfile = require('jsonfile');
 const path = require('path');
 
-const checkPath = require('./checkPath');
 const constants = require('./constants');
 const createWindow = require('./configureWindow');
 const windowManager = require('./windowManager');
@@ -17,9 +16,7 @@ const windowManager = require('./windowManager');
 let settings;
 let win;
 
-const userDataPath = app.getPath(constants.UserData);
-const settingsDir = path.join(userDataPath, constants.UserDir);
-const settingsPath = settingsDir + constants.SettingsFile;
+const settingsPath = path.join(constants.UserDataDir, constants.SettingsFile);
 
 // Register global shortcuts for the application
 const registerGlobalShortcut = (task, shortcut) => {
@@ -45,15 +42,20 @@ const registerGlobalShortcut = (task, shortcut) => {
   }
 };
 
-// Set up the shortcuts to be used by the application
-module.exports = () => {
-  // Create settings.json if it doesn't exist
-  if (!checkPath(settingsDir, constants.SettingsFile)) {
-    jsonfile.writeFileSync(settingsPath, {shortcuts: []}, {spaces: 2});
+module.exports.configure = () => {
+  // Retrieve the settings file
+  try {
+    settings = jsonfile.readFileSync(settingsPath);
   }
+  // Create it since it doesn't exist yet
+  catch (err) {
+    jsonfile.writeFileSync(settingsPath, {shortcuts: []}, {spaces: 2});
+    settings = jsonfile.readFileSync(settingsPath);
+  }
+};
 
-  settings = jsonfile.readFileSync(settingsPath);
-
+// Set up the shortcuts to be used by the application
+module.exports.start = () => {
   // Register each task's shortcut
   _.each(settings.shortcuts, (obj) => {
     if (obj.shortcut) {
@@ -96,6 +98,8 @@ module.exports = () => {
     jsonfile.writeFile(settingsPath, settings, {spaces: 2}, (err) => {
       if (err) {
         console.error(err);
+
+        return;
       }
 
       // When written to settings.json, send the settings to the rendere again

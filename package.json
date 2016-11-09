@@ -23,6 +23,7 @@
     "jquery": "latest",
     "jsonfile": "latest",
     "lodash": "latest",
+    "mkdirp": "latest",
     "ng-infinite-scroll": "latest",
     "sqlite3": "latest"
   },

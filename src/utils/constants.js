@@ -1,12 +1,12 @@
 'use strict';
 
-const dir = __dirname;
+const {app} = require('electron');
+const path = require('path');
 
 exports.AppName = 'Clipt';
 exports.DbFile = 'clipt.sqlite3';
 exports.SettingsFile = 'settings.json';
-exports.UserData = 'userData';
-exports.UserDir = 'User/';
+exports.UserDataDir = path.join(app.getPath('userData'), 'User/');
 
 exports.ClipType = {
   Image: 'Image',
@@ -14,8 +14,8 @@ exports.ClipType = {
 };
 
 exports.Html = {
-  About: `file://${dir}/../views/modals/About.html`,
-  Index: `file://${dir}/../index.html`
+  About: `file://${__dirname}/../views/modals/About.html`,
+  Index: `file://${__dirname}/../index.html`
 
 };
 
@@ -70,8 +70,8 @@ exports.TitleBar = {
 };
 
 exports.Tray = {
-  MacIcon: `${dir}/../assets/images/icon@2x.png`,
-  WinIcon: `${dir}/../assets/images/icon.ico`,
+  MacIcon: `${__dirname}/../assets/images/icon@2x.png`,
+  WinIcon: `${__dirname}/../assets/images/icon.ico`,
   Menu: {
     AboutLabel: 'About Clipt',
     PreferencesLabel: 'Preferences...',

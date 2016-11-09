@@ -7,7 +7,7 @@ const constants = require('./constants');
 const windowManager = require('./windowManager');
 
 // Set up the browser window to be used with the app
-module.exports = () => {
+module.exports.start = () => {
   let win = new BrowserWindow({
     autoHideMenuBar: true,
     // frame: false,

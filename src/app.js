@@ -6,6 +6,7 @@ const {
   ipcMain,
   shell
 } = require('electron');
+const mkdirp = require('mkdirp');
 
 const clip = require('./utils/clip');
 const clipboardWatcher = require('./utils/clipboardWatcher');
@@ -17,6 +18,11 @@ const db = require('./utils/db');
 const windowManager = require('./utils/windowManager');
 
 let win;
+
+// Create the User data folder if it doesn't exist already
+mkdirp.sync(constants.UserDataDir);
+createShortcuts.configure();
+db.configure();
 
 // Start the clipboard watcher
 const watcher = clipboardWatcher({
@@ -81,7 +87,7 @@ const secondInstance = app.makeSingleInstance((argv, workingDirectory) => {
   }
   // Initialize a new window of the primary instance
   else {
-    createWindow();
+    createWindow.start();
   }
 });
 
@@ -91,9 +97,9 @@ if (secondInstance) {
 
 app.on(constants.App.Ready, () => {
   // Initialize each component of the application
-  createWindow();
-  createShortcuts();
-  createTray();
+  createWindow.start();
+  createShortcuts.start();
+  createTray.start();
 });
 
 // On macOS it is common to re-create a window in the app when the
@@ -101,7 +107,7 @@ app.on(constants.App.Ready, () => {
 app.on(constants.App.Activate, () => {
   win = windowManager.getMainWindow();
   if (!win) {
-    createWindow();
+    createWindow.start();
   }
 });
 

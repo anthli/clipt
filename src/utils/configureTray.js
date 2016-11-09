@@ -16,7 +16,7 @@ let contextMenu;
 let win;
 
 // Set up the tray icon to be used with the app
-module.exports = () => {
+module.exports.start = () => {
   // Detect which tray icon and context menu to use based on the system platform
   switch (process.platform) {
     // macOS
@@ -42,7 +42,7 @@ module.exports = () => {
         if (win) {
           win.show();
         } else {
-          createWindow();
+          createWindow.start();
         }
       }
     },
