@@ -10,10 +10,13 @@ important!
 ![alt text](./src/assets/images/demo.png)
 
 ## Features
-- Clips are displayed top to bottom in descending order (latest to earliest)
+- Clips are ordered by timestamp and displayed top to bottom in descending order
+  (latest to earliest)
 - Ability to favorite and delete Clips on demand
 - Customizable shortcut to open and close the application window
 - Minimizing to the menu/task bar without the application quitting
+- Prevention of duplicate Clips by updating timestamp of the existing Clip with
+  the same copied data
 
 ## Features To Be Added
 - Copying of images

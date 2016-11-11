@@ -29,22 +29,56 @@ module.exports.getClips = (cb) => {
   });
 };
 
-// Insert the given Clip into the database and return the last row inserted
-module.exports.addClip = (clip, cb) => {
-  let data = [clip.text, clip.type];
-
-  db.run(queries.insertClip, data, (err) => {
-    if (err) {
-      return cb(err, null);
+// Upsert the given Clip into the database and return the last row inserted
+module.exports.upsertClip = (clip, cb) => {
+  db.get(queries.findClip, clip.text, (err, row) => {
+    if(err) {
+      return cb(err);
     }
 
-    db.get(queries.getLastInsertedClip, (err, row) => {
-      if (err) {
-        return cb(err, null);
-      }
+    // Update the existing row's timestamp
+    if (row) {
+      let clipData = [clip.timestamp, row.id];
 
-      cb(null, row);
-    });
+      db.run(queries.updateClip, clipData, (err) => {
+        if (err) {
+          return cb(err);
+        }
+
+        cb(null);
+      });
+    }
+    // The row doesn't exist
+    else {
+      let clipData = [clip.text, clip.type, clip.timestamp];
+
+      db.run(queries.insertClip, clipData, (err) => {
+        if (err) {
+          return cb(err);
+        }
+
+        db.get(queries.getLastInsertedClip, (err, row) => {
+          if (err) {
+            return cb(err);
+          }
+
+          // Insert the image data into the database if there is any
+          if (clip.image) {
+            let imageData = [row.id, clip.image];
+
+            db.run(queries.insertImage, imageData, (err) => {
+              if (err) {
+                return cb(err);
+              }
+
+              return cb(null);
+            });
+          }
+
+          cb(null);
+        });
+      });
+    }
   });
 };
 

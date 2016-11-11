@@ -3,23 +3,23 @@
 const {app} = require('electron');
 const path = require('path');
 
-exports.AppName = 'Clipt';
-exports.DbFile = 'clipt.sqlite3';
-exports.SettingsFile = 'settings.json';
-exports.UserDataDir = path.join(app.getPath('userData'), 'User/');
+module.exports.AppName = 'Clipt';
+module.exports.DbFile = 'clipt.sqlite3';
+module.exports.SettingsFile = 'settings.json';
+module.exports.UserDataDir = path.join(app.getPath('userData'), 'User/');
 
-exports.ClipType = {
+module.exports.ClipType = {
   Image: 'Image',
   Text: 'Text'
 };
 
-exports.Html = {
+module.exports.Html = {
   About: `file://${__dirname}/../views/modals/About.html`,
   Index: `file://${__dirname}/../index.html`
 
 };
 
-exports.App = {
+module.exports.App = {
   Activate: 'activate',
   Closed: 'closed',
   DidFinishLoad: 'did-finish-load',
@@ -29,12 +29,12 @@ exports.App = {
   WindowsAllClosed: 'window-all-closed'
 };
 
-exports.Error = {
+module.exports.Error = {
   ENOENT: 'ENOENT',
   EEXIST: 'EEXIST'
 };
 
-exports.Ipc = {
+module.exports.Ipc = {
   AboutModal: 'about-modal',
   ClipCopied: 'clip-copied',
   ClipDeleted: 'clip-deleted',
@@ -53,23 +53,23 @@ exports.Ipc = {
   UnstarClip: 'unstar-clip'
 };
 
-exports.Platform = {
+module.exports.Platform = {
   Mac: 'darwin',
   Win: 'win32'
 };
 
-exports.Shortcut = {
+module.exports.Shortcut = {
   OpenCloseTask: 'open-close',
   OpenCloseError: 'Failed to register open-close'
 };
 
-exports.TitleBar = {
+module.exports.TitleBar = {
   Close: 'close',
   Maximize: 'maximize',
   Minimize: 'minimize'
 };
 
-exports.Tray = {
+module.exports.Tray = {
   MacIcon: `${__dirname}/../assets/images/icon@2x.png`,
   WinIcon: `${__dirname}/../assets/images/icon.ico`,
   Menu: {

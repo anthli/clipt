@@ -5,7 +5,8 @@
 
 const {
   clipboard,
-  ipcMain
+  ipcMain,
+  nativeImage
 } = require('electron');
 
 const constants = require('./constants');
@@ -34,8 +35,10 @@ ipcMain.on(constants.Ipc.ClipCopied, (event, clip) => {
       break;
 
     case constants.ClipType.Image:
-      // clipboard.writeImage(clip.image);
-      console.log(clip);
+      // Create the copied image from the Clip's buffer
+      let copiedImage = nativeImage.createFromBuffer(clip.image);
+      // clipboard.writeText(clip.text);
+      clipboard.writeImage(copiedImage);
 
       break;
   }
@@ -57,8 +60,8 @@ module.exports = (opts) => {
     const newText = clipboard.readText();
     const newImg = clipboard.readImage();
 
+    // Prevent copying from a Clip registering as a change in the clipboard
     switch (copiedFromClip) {
-      // Prevent copying from a Clip registering as a change in the clipboard
       case true:
         if (newImg.isEmpty()) {
           currText = newText;

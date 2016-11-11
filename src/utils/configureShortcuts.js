@@ -10,7 +10,7 @@ const jsonfile = require('jsonfile');
 const path = require('path');
 
 const constants = require('./constants');
-const createWindow = require('./configureWindow');
+const configureWindow = require('./configureWindow');
 const windowManager = require('./windowManager');
 
 let settings;
@@ -30,7 +30,7 @@ const registerGlobalShortcut = (task, shortcut) => {
           win.destroy();
         }
         else {
-          createWindow.start();
+          configureWindow.start();
         }
       });
 

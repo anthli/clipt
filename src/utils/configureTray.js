@@ -7,8 +7,8 @@ const {
 } = require('electron');
 const path = require('path');
 
+const configureWindow = require('./configureWindow');
 const constants = require('./constants');
-const createWindow = require('./configureWindow');
 const windowManager = require('./windowManager');
 
 let tray;
@@ -42,7 +42,7 @@ module.exports.start = () => {
         if (win) {
           win.show();
         } else {
-          createWindow.start();
+          configureWindow.start();
         }
       }
     },

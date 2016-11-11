@@ -1,10 +1,18 @@
 'use strict';
 
-exports.createTables = `
+module.exports.createTables = `
   CREATE TABLE IF NOT EXISTS clip (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     text TEXT NOT NULL,
-    type TEXT NOT NULL
+    type TEXT NOT NULL,
+    timestamp INTEGER NOT NULL
+  );
+
+  CREATE TABLE IF NOT EXISTS image_clip (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    clip_id INTEGER NOT NULL UNIQUE,
+    image BLOB NOT NULL,
+    FOREIGN KEY(clip_id) REFERENCES clip(id) ON DELETE CASCADE
   );
 
   CREATE TABLE IF NOT EXISTS starred_clip (
@@ -16,40 +24,54 @@ exports.createTables = `
   PRAGMA foreign_keys = ON;
 `;
 
-exports.getAllClips = `
-  SELECT C.id, C.text, C.type, S.id AS starred_clip_id
+module.exports.getAllClips = `
+  SELECT C.id, S.id AS starred_clip_id, C.type, C.timestamp, C.text, I.image
   FROM clip C
   LEFT JOIN starred_clip S
     ON C.id = S.clip_id
-  ORDER BY C.id DESC;
+  LEFT JOIN image_clip I
+    ON C.id = I.clip_id
+  ORDER BY C.timestamp DESC;
 `;
 
-exports.getLastInsertedClip = `
+module.exports.getLastInsertedClip = `
   SELECT * FROM clip
   WHERE id = (
     SELECT last_insert_rowid()
   );
 `;
 
-exports.getLastStarredClip = `
+module.exports.getLastStarredClip = `
   SELECT * FROM starred_clip
   WHERE id = (
     SELECT last_insert_rowid()
   );
 `;
 
-exports.insertClip = `
-  INSERT INTO clip (text, type) VALUES ($1, $2);
+module.exports.findClip = `
+  SELECT * FROM clip WHERE text = $1;
 `;
 
-exports.starClip = `
+module.exports.insertClip = `
+  INSERT INTO clip (text, type, timestamp) VALUES ($1, $2, $3);
+`;
+
+module.exports.updateClip = `
+  UPDATE clip SET timestamp = $1 WHERE id = $2;
+`;
+
+module.exports.insertImage = `
+  INSERT INTO image_clip (clip_id, image) VALUES($1, $2);
+`;
+
+module.exports.starClip = `
   INSERT INTO starred_clip (clip_id) VALUES($1);
 `;
 
-exports.deleteClip = `
+module.exports.deleteClip = `
   DELETE FROM clip WHERE id = $1;
 `;
 
-exports.unstarClip = `
+module.exports.unstarClip = `
   DELETE FROM starred_clip WHERE id = $1;
 `;
