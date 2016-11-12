@@ -2,7 +2,8 @@
 
 const {
   app,
-  globalShortcut
+  globalShortcut,
+  nativeImage
 } = require('electron');
 const mkdirp = require('mkdirp');
 
@@ -65,19 +66,13 @@ const watcher = clipboardWatcher({
   onImageChange: (text, image) => {
     // Create a byte array from the image's bitmap
     let buf = image.toBitmap();
-    let ab = buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength);
-    let byteArr = new Uint8Array(
-      buf.buffer,
-      buf.byteOffset,
-      buf.byteLength / Uint8Array.BYTES_PER_ELEMENT
-    );
 
-    // New Clip containing the type, text, and image
+    // New Clip containing the type, text, and image's bitmap
     let imgClip = clip(
       constants.ClipType.Image,
       {
         text: text,
-        image: byteArr
+        image: image.toBitmap()
       }
     );
 

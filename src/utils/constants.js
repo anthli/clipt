@@ -70,6 +70,7 @@ module.exports.TitleBar = {
 };
 
 module.exports.Tray = {
+  DoubleClick: 'double-click',
   MacIcon: `${__dirname}/../assets/images/icon@2x.png`,
   WinIcon: `${__dirname}/../assets/images/icon.ico`,
   Menu: {

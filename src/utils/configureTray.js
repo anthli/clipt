@@ -41,7 +41,8 @@ module.exports.start = () => {
 
         if (win) {
           win.show();
-        } else {
+        }
+        else {
           configureWindow.start();
         }
       }
@@ -78,4 +79,12 @@ module.exports.start = () => {
 
   // Link the context menu to the tray icon
   tray.setContextMenu(contextMenu);
+
+  // Open the application window when the tray icon is double-clicked on
+  tray.on(constants.Tray.DoubleClick, () => {
+    win = windowManager.getMainWindow();
+    if (!win) {
+      configureWindow.start();
+    }
+  });
 };

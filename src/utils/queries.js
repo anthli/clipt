@@ -56,12 +56,16 @@ module.exports.insertClip = `
   INSERT INTO clip (text, type, timestamp) VALUES ($1, $2, $3);
 `;
 
+module.exports.insertImage = `
+  INSERT INTO image_clip (clip_id, image) VALUES($1, $2);
+`;
+
 module.exports.updateClip = `
   UPDATE clip SET timestamp = $1 WHERE id = $2;
 `;
 
-module.exports.insertImage = `
-  INSERT INTO image_clip (clip_id, image) VALUES($1, $2);
+module.exports.updateImage = `
+  UPDATE image_clip SET image = $1 WHERE clip_id = $2;
 `;
 
 module.exports.starClip = `

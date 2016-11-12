@@ -45,6 +45,19 @@ module.exports.upsertClip = (clip, cb) => {
           return cb(err);
         }
 
+        // If it was an image Clip, update the image too
+        if (row.type === constants.ClipType.Image) {
+          let imageData = [clip.image, row.id];
+
+          db.run(queries.updateImage, imageData, (err) => {
+            if (err) {
+              return cb(err);
+            }
+
+            return cb(null);
+          })
+        }
+
         cb(null);
       });
     }
@@ -62,7 +75,7 @@ module.exports.upsertClip = (clip, cb) => {
             return cb(err);
           }
 
-          // Insert the image data into the database if there is any
+          // If the Clip is an image, insert the image into the database
           if (clip.image) {
             let imageData = [row.id, clip.image];
 

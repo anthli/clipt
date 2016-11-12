@@ -1,5 +1,7 @@
 'use strict';
 
+const constants = require('./constants');
+
 // Create a new Clip object containing:
 //   1. The type of data (Text, Image, etc.)
 //   2. The current Unix timestamp
@@ -12,13 +14,15 @@ module.exports = (type, data) => {
   };
 
   switch (type) {
-    case 'Text':
+    case constants.ClipType.Text:
       obj.text = data.text;
+
       break;
 
-    case 'Image':
+    case constants.ClipType.Image:
       obj.text = data.text;
       obj.image = data.image;
+
       break;
   }
 
