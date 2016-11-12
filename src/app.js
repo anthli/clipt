@@ -81,9 +81,6 @@ const watcher = clipboardWatcher({
       }
     );
 
-    console.log(imgClip.text);
-    console.log(imgClip.image);
-
     db.upsertClip(imgClip, (err) => {
       if (err) {
         console.error(err);

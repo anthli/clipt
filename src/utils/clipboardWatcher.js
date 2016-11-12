@@ -37,7 +37,6 @@ ipcMain.on(constants.Ipc.ClipCopied, (event, clip) => {
     case constants.ClipType.Image:
       // Create the copied image from the Clip's buffer
       let copiedImage = nativeImage.createFromBuffer(clip.image);
-      // clipboard.writeText(clip.text);
       clipboard.writeImage(copiedImage);
 
       break;
