@@ -22,11 +22,13 @@ module.exports.start = () => {
     // macOS
     case constants.Platform.Mac:
       tray = new Tray(path.normalize(constants.Tray.MacIcon));
+
       break;
 
     // Windows
     case constants.Platform.Win:
       tray = new Tray(path.normalize(constants.Tray.WinIcon));
+
       break;
   }
 

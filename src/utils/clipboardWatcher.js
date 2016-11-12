@@ -37,15 +37,7 @@ ipcMain.on(constants.Ipc.ClipCopied, (event, clip) => {
     case constants.ClipType.Image:
       // Create the copied image from the Clip's buffer
       let copiedImage = nativeImage.createFromBuffer(clip.image);
-      // clipboard.writeImage(copiedImage);
-
-      let test = nativeImage.createEmpty();
-      test.createFromPath('../../build/background.png');
-
-      console.log(test);
-
-      console.log(copiedImage.isEmpty());
-      console.log(copiedImage.getSize());
+      clipboard.writeImage(copiedImage);
 
       break;
   }
