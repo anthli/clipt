@@ -11,8 +11,7 @@ let db;
 
 module.exports.configure = () => {
   // Load the SQLite database
-  const dbPath = path.join(constants.UserDataDir, constants.DbFile);
-  db = new sqlite3.Database(dbPath);
+  db = new sqlite3.Database(constants.DbPath);
 
   // Create the tables if they does not exist
   db.exec(queries.createTables);
@@ -55,7 +54,7 @@ module.exports.upsertClip = (clip, cb) => {
             }
 
             return cb(null);
-          })
+          });
         }
 
         cb(null);

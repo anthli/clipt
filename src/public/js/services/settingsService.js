@@ -3,8 +3,13 @@
 const settingsFactory = () => {
   return {
     // Send the task and its shortcut to the main process for registration
-    register: (task, shortcut) => {
+    registerShortcut: (task, shortcut) => {
       ipcRenderer.send(constants.Ipc.RegisterShortcut, task, shortcut);
+    },
+
+    // Send the new image type to the main process
+    switchImageFormat: (format) => {
+      ipcRenderer.send(constants.Ipc.SwitchImageFormat, format);
     }
   };
 };

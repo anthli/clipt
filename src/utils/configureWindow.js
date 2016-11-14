@@ -26,6 +26,6 @@ module.exports.start = () => {
     windowManager.setMainWindow(win);
   });
 
-  // Store the main window in the window manager
+  // Store the main window
   windowManager.setMainWindow(win);
 };

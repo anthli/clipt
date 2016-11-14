@@ -3,10 +3,12 @@
 const {app} = require('electron');
 const path = require('path');
 
+const userDataDir = path.join(app.getPath('userData'), 'User/');
+
 module.exports.AppName = 'Clipt';
-module.exports.DbFile = 'clipt.sqlite3';
-module.exports.SettingsFile = 'settings.json';
-module.exports.UserDataDir = path.join(app.getPath('userData'), 'User/');
+module.exports.DbPath = path.join(userDataDir, 'clipt.sqlite3');
+module.exports.SettingsPath = path.join(userDataDir, 'settings.json');
+module.exports.UserDataDir = userDataDir;
 
 module.exports.ClipType = {
   Image: 'Image',
@@ -34,6 +36,11 @@ module.exports.Error = {
   EEXIST: 'EEXIST'
 };
 
+module.exports.ImageFormat = {
+  Jpg: 'jpg',
+  Png: 'png'
+};
+
 module.exports.Ipc = {
   AboutModal: 'about-modal',
   ClipCopied: 'clip-copied',
@@ -49,6 +56,7 @@ module.exports.Ipc = {
   RegisterShortcut: 'register-shortcut',
   Settings: 'settings',
   StarClip: 'star-clip',
+  SwitchImageFormat: 'switch-image-format',
   TitleBarButtonClicked: 'title-bar-button-clicked',
   UnstarClip: 'unstar-clip'
 };

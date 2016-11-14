@@ -91,6 +91,7 @@ module.exports.Ipc = {
   RegisterShortcut: 'register-shortcut',
   Settings: 'settings',
   StarClip: 'star-clip',
+  SwitchImageFormat: 'switch-image-format',
   TitleBarButtonClicked: 'title-bar-button-clicked',
   UnstarClip: 'unstar-clip'
 };

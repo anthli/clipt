@@ -4,24 +4,24 @@ const Accelerators = constants.Accelerators;
 const Modifiers = constants.Modifiers;
 const Actions = constants.Actions;
 
-let shortcuts = [];
+// Lists of each key pressed when configuring a shortcut
+let accelerators = [];
+let modifiers = [];
+let actions = [];
+let globalSettings = {};
 
 const settingsCtrl = function($scope, Settings) {
-  // Lists of each key pressed when configuring a shortcut
-  let accelerators = [];
-  let modifiers = [];
-  let actions = [];
-  $scope.shortcuts = shortcuts;
+  $scope.settings = globalSettings;
 
   // Reset every field and the task's shortcut if it exists
-  const reset = () => {
+  const resetShortcut = () => {
     accelerators = [];
     modifiers = [];
     actions = [];
 
     let task = $(document.activeElement).attr('id');
     if (task) {
-      Settings.register(task, null);
+      Settings.registerShortcut(task, null);
     }
   };
 
@@ -44,15 +44,10 @@ const settingsCtrl = function($scope, Settings) {
           }
 
           shortcut.push(actions.join('+'));
-          Settings.register(task, shortcut.join('+'));
+          Settings.registerShortcut(task, shortcut.join('+'));
         }
       }
     }
-  };
-
-  // Register the current shortcut with the given task
-  $scope.register = (task) => {
-    Settings.register(task, $scope.shortcut);
   };
 
   // Source: https://goo.gl/GrkqVb
@@ -89,11 +84,17 @@ const settingsCtrl = function($scope, Settings) {
       _.remove(actions, (value) => value === Actions[key]);
     }
     else if (key === 27) {
-      reset();
+      resetShortcut();
     }
 
     registerShortcut();
   };
+
+  // Switch the image type when a new format is selected
+  $scope.switchImageFormat = () => {
+    let format = $scope.settings.imageFormat;
+    Settings.switchImageFormat(format);
+  }
 
   // Detect keydown events
   $(document).keydown((e) => {
@@ -118,7 +119,7 @@ const settingsCtrl = function($scope, Settings) {
 
   // Render the settings sent from the main process
   ipcRenderer.on(constants.Ipc.Settings, (event, settings) => {
-    shortcuts = $scope.shortcuts = settings.shortcuts;
+    globalSettings = $scope.settings = settings;
     $scope.$digest();
   });
 };
