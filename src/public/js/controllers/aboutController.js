@@ -5,11 +5,11 @@ const aboutCtrl = function($scope, $mdDialog) {
   $scope.appVersion = require('electron').remote.app.getVersion();
 
   // Signal the main process to open the given link
-  $scope.openLink = (link) => {
+  $scope.openLink = link => {
     ipcRenderer.send(constants.Ipc.OpenLink, link);
   };
 
-  ipcRenderer.on(constants.Ipc.AboutModal, (event) => {
+  ipcRenderer.on(constants.Ipc.AboutModal, event => {
     $mdDialog.show({
       templateUrl: constants.Html.About,
       clickOutsideToClose: true,

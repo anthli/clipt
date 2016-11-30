@@ -11,9 +11,6 @@ const {
 
 const constants = require('./constants');
 
-// Directory where copied files are stored
-const fileDir = './.db/files/';
-
 let copiedFromClip = false;
 
 // Checks if the oldText is different from the newText
@@ -45,7 +42,7 @@ ipcMain.on(constants.Ipc.ClipCopied, (event, clip) => {
   copiedFromClip = true;
 });
 
-module.exports = (opts) => {
+module.exports = opts => {
   opts = opts || {};
   // Default delay is 1000 ms
   const watchDelay = opts.watchDelay || 1000;

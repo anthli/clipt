@@ -11,7 +11,7 @@ const sideMenuCtrl = function($scope, $location) {
   $scope.activeMenu = $scope.menuItems[0];
 
   // Set the active menu
-  $scope.setActiveMenu = (menu) => {
+  $scope.setActiveMenu = menu => {
     $scope.activeMenu = menu;
 
     switch (menu) {

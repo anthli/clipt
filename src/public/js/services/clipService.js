@@ -46,8 +46,14 @@ const clipFactory = () => {
 
     // When the star icon is clicked after being starred, signal the main
     // process that the Clip it belongs to should be unstarred
-    unstarClip: (clip) => {
+    unstarClip: clip => {
       ipcRenderer.send(constants.Ipc.UnstarClip, clip.starred_clip_id);
+    },
+
+    // Filter the given Clips by filtering out the ones that don't contain the
+    // query in their text
+    filterClips: (clips, query) => {
+      return _.filter(clips, clip => clip.text.indexOf(query) > -1);
     }
   };
 };

@@ -45,7 +45,7 @@ const sendClipsToRenderer = () => {
 
 // Start the clipboard watcher
 const watcher = clipboardWatcher({
-  onTextChange: (text) => {
+  onTextChange: text => {
     // New Clip containing the type, and text
     let textClip = clip(
       constants.ClipType.Text,
@@ -54,7 +54,7 @@ const watcher = clipboardWatcher({
       }
     );
 
-    db.upsertClip(textClip, (err) => {
+    db.upsertClip(textClip, err => {
       if (err) {
         console.error(err);
 
@@ -92,7 +92,7 @@ const watcher = clipboardWatcher({
       }
     );
 
-    db.upsertClip(imgClip, (err) => {
+    db.upsertClip(imgClip, err => {
       if (err) {
         console.error(err);
 
@@ -188,7 +188,7 @@ ipcMain.on(constants.Ipc.TitleBarButtonClicked, (event, button) => {
 });
 
 // Retrieve all Clips from the database and send them to the renderer
-ipcMain.on(constants.Ipc.FetchClips, (event) => {
+ipcMain.on(constants.Ipc.FetchClips, event => {
   win = windowManager.getMainWindow();
 
   db.getClips((err, clips) => {
@@ -204,7 +204,7 @@ ipcMain.on(constants.Ipc.FetchClips, (event) => {
 
 // If the browser window is closed, prevent it from opening before all of the
 // clips are ready to be displayed
-ipcMain.on(constants.Ipc.ClipsReady, (event) => {
+ipcMain.on(constants.Ipc.ClipsReady, event => {
   win = windowManager.getMainWindow();
 
   if (win) {
@@ -254,7 +254,7 @@ ipcMain.on(constants.Ipc.StarClip, (event, id, index) => {
 // Unstar the Clip selected in the application window based on its id and send
 // its id back to the renderer
 ipcMain.on(constants.Ipc.UnstarClip, (event, id) => {
-  db.unstarClip(id, (err) => {
+  db.unstarClip(id, err => {
     if (err) {
       console.error(err);
 

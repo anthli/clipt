@@ -20,7 +20,6 @@ important!
 
 ## Features To Be Added
 - Copying of images
-- More settings that could utilize more shortcuts
 - Restoring the custom title bar (was not working on Windows)
 
 ## Development

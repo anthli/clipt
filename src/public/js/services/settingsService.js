@@ -8,7 +8,7 @@ const settingsFactory = () => {
     },
 
     // Send the new image type to the main process
-    switchImageFormat: (format) => {
+    switchImageFormat: format => {
       ipcRenderer.send(constants.Ipc.SwitchImageFormat, format);
     }
   };

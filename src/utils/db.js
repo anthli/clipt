@@ -18,7 +18,7 @@ module.exports.configure = () => {
 };
 
 // Retrieve all Clips from the database
-module.exports.getClips = (cb) => {
+module.exports.getClips = cb => {
   db.all(queries.getAllClips, (err, rows) => {
     if (err) {
       return cb(err, null);
@@ -39,7 +39,7 @@ module.exports.upsertClip = (clip, cb) => {
     if (row) {
       let clipData = [clip.timestamp, row.id];
 
-      db.run(queries.updateClip, clipData, (err) => {
+      db.run(queries.updateClip, clipData, err => {
         if (err) {
           return cb(err);
         }
@@ -48,7 +48,7 @@ module.exports.upsertClip = (clip, cb) => {
         if (row.type === constants.ClipType.Image) {
           let imageData = [clip.image, row.id];
 
-          db.run(queries.updateImage, imageData, (err) => {
+          db.run(queries.updateImage, imageData, err => {
             if (err) {
               return cb(err);
             }
@@ -64,7 +64,7 @@ module.exports.upsertClip = (clip, cb) => {
     else {
       let clipData = [clip.text, clip.type, clip.timestamp];
 
-      db.run(queries.insertClip, clipData, (err) => {
+      db.run(queries.insertClip, clipData, err => {
         if (err) {
           return cb(err);
         }
@@ -78,7 +78,7 @@ module.exports.upsertClip = (clip, cb) => {
           if (clip.image) {
             let imageData = [row.id, clip.image];
 
-            db.run(queries.insertImage, imageData, (err) => {
+            db.run(queries.insertImage, imageData, err => {
               if (err) {
                 return cb(err);
               }
@@ -96,7 +96,7 @@ module.exports.upsertClip = (clip, cb) => {
 
 // Star a Clip in the database given its id and return the last row inserted
 module.exports.starClip = (id, cb) => {
-  db.run(queries.starClip, id, (err) => {
+  db.run(queries.starClip, id, err => {
     if (err) {
       return cb(err, null);
     }
@@ -113,7 +113,7 @@ module.exports.starClip = (id, cb) => {
 
 // Delete a Clip in the database given its id
 module.exports.deleteClip = (id, cb) => {
-  db.run(queries.deleteClip, id, (err) => {
+  db.run(queries.deleteClip, id, err => {
     if (err) {
       return cb(err);
     }
@@ -124,7 +124,7 @@ module.exports.deleteClip = (id, cb) => {
 
 // Unstar a Clip in the database given its clip_id
 module.exports.unstarClip = (id, cb) => {
-  db.run(queries.unstarClip, id, (err) => {
+  db.run(queries.unstarClip, id, err => {
     if (err) {
       return cb(err);
     }

@@ -7,6 +7,6 @@ module.exports.getMainWindow = () => {
   return windows.main;
 };
 
-module.exports.setMainWindow = (win) => {
+module.exports.setMainWindow = win => {
   windows.main = win;
 };

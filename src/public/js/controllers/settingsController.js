@@ -52,7 +52,7 @@ const settingsCtrl = function($scope, Settings) {
 
   // Source: https://goo.gl/GrkqVb
   // Record keydown events
-  $scope.keyDown = (e) => {
+  $scope.keyDown = e => {
     const key = e.which;
 
     if (Accelerators[key]) {
@@ -71,17 +71,17 @@ const settingsCtrl = function($scope, Settings) {
 
   // Source: https://goo.gl/KAMmyp
   // Delete any record of keydown events
-  $scope.keyUp = (e) => {
+  $scope.keyUp = e => {
     const key = e.which;
 
     if (Accelerators[key]) {
-      _.remove(accelerators, (value) => value === Accelerators[key]);
+      _.remove(accelerators, value => value === Accelerators[key]);
     }
     else if (Modifiers[key]) {
-      _.remove(modifiers, (value) => value === Modifiers[key]);
+      _.remove(modifiers, value => value === Modifiers[key]);
     }
     else if (Actions[key]) {
-      _.remove(actions, (value) => value === Actions[key]);
+      _.remove(actions, value => value === Actions[key]);
     }
     else if (key === 27) {
       resetShortcut();
@@ -94,10 +94,10 @@ const settingsCtrl = function($scope, Settings) {
   $scope.switchImageFormat = () => {
     let format = $scope.settings.imageFormat;
     Settings.switchImageFormat(format);
-  }
+  };
 
   // Detect keydown events
-  $(document).keydown((e) => {
+  $(document).keydown(e => {
     // Only register the keydown event if focused on an input
     if($(document.activeElement).attr('class').indexOf('task') > -1) {
       $scope.keyDown(e);
@@ -106,7 +106,7 @@ const settingsCtrl = function($scope, Settings) {
   });
 
   // Detect keyup events
-  $(document).keyup((e) => {
+  $(document).keyup(e => {
     // Only register the keyup event if focused on an input
     if($(document.activeElement).attr('class').indexOf('task') > -1) {
       $scope.keyUp(e);

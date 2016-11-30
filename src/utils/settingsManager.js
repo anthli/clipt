@@ -7,6 +7,6 @@ module.exports.getSettings = () => {
   return globalSettings;
 };
 
-module.exports.setSettings = (settings) => {
+module.exports.setSettings = settings => {
   globalSettings = settings;
 };

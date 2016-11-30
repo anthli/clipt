@@ -42,8 +42,8 @@ const registerGlobalShortcut = (task, shortcut) => {
 };
 
 // Write the given settings to settings.json
-const writeSettingsJson = (settings) => {
-  jsonfile.writeFile(constants.SettingsPath, settings, {spaces: 2}, (err) => {
+const writeSettingsJson = settings => {
+  jsonfile.writeFile(constants.SettingsPath, settings, {spaces: 2}, err => {
     if (err) {
       console.error(err);
 
@@ -73,23 +73,23 @@ module.exports.configure = () => {
 // Set up the settings to be used by the application
 module.exports.start = () => {
   // Register each task's shortcut
-  _.each(globalSettings.shortcuts, (obj) => {
+  _.each(globalSettings.shortcuts, obj => {
     if (obj.shortcut) {
       registerGlobalShortcut(obj.task, obj.shortcut);
     }
   });
 
   // Send the settings to the renderer
-  ipcMain.on(constants.Ipc.FetchSettings, (event) => {
+  ipcMain.on(constants.Ipc.FetchSettings, event => {
     win = windowManager.getMainWindow();
     win.webContents.send(constants.Ipc.Settings, globalSettings);
   });
 
   // Register the shortcut received from the renderer
   ipcMain.on(constants.Ipc.RegisterShortcut, (event, task, shortcut) => {
-    if (_.find(globalSettings.shortcuts, (obj) => obj.task === task)) {
+    if (_.find(globalSettings.shortcuts, obj => obj.task === task)) {
       // Reassign the shortcut
-      _.each(globalSettings.shortcuts, (obj) => {
+      _.each(globalSettings.shortcuts, obj => {
         if (obj.task === task) {
           // Unregister the current task's shortcut
           if (obj.shortcut !== '') {

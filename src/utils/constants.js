@@ -18,7 +18,6 @@ module.exports.ClipType = {
 module.exports.Html = {
   About: `file://${__dirname}/../views/modals/About.html`,
   Index: `file://${__dirname}/../index.html`
-
 };
 
 module.exports.App = {
