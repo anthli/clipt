@@ -2,7 +2,7 @@
   "name": "clipt",
   "productName": "Clipt",
   "description": "Cross platform clipboard history manager",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "main": "src/app.js",
   "author": {
     "name": "Anthony Li",
@@ -31,10 +31,11 @@
     "electron": "latest",
     "electron-builder": "latest",
     "electron-packager": "latest",
-    "electron-rebuild": "latest"
+    "electron-rebuild": "latest",
+    "nodemon": "latest"
   },
   "scripts": {
-    "start": "electron .",
+    "start": "nodemon --exec 'electron .'",
     "rebuild": "./node_modules/.bin/electron-rebuild",
     "pack": "build --dir",
     "dist": "build"

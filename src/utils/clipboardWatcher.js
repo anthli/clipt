@@ -1,4 +1,4 @@
-// Watches the system clipboard for changes in copied data
+// Watches the system clipboard for changes
 // Source: https://goo.gl/Caaio7
 
 'use strict';
@@ -11,7 +11,11 @@ const {
 
 const constants = require('./constants');
 
-let copiedFromClip = false;
+let watchDelay;
+let currText;
+let currImg;
+let clipboardWatcher;
+let intervalId;
 
 // Checks if the oldText is different from the newText
 const textHasDiff = (oldText, newText) => {
@@ -25,6 +29,10 @@ const imageHasDiff = (oldImg, newImg) => {
 
 // Take the data from the Clip and write it to the Clipboard
 ipcMain.on(constants.Ipc.ClipCopied, (event, clip) => {
+  // Pause the clipboard watcher to prevent copying from Clips being registered
+  // as a user-triggered copy
+  clearInterval(intervalId);
+
   switch (clip.type) {
     case constants.ClipType.Text:
       clipboard.writeText(clip.text);
@@ -39,61 +47,50 @@ ipcMain.on(constants.Ipc.ClipCopied, (event, clip) => {
       break;
   }
 
-  copiedFromClip = true;
+  // Set the current text/image to the current clipboard so they match with the
+  // text/image in the new clipboard watcher instance
+  currText = clipboard.readText();
+  currImg = clipboard.readImage();
+
+  // Start up the clipboard watcher again
+  intervalId = setInterval(clipboardWatcher, watchDelay);
 });
 
 module.exports = opts => {
   opts = opts || {};
   // Default delay is 1000 ms
-  const watchDelay = opts.watchDelay || 1000;
+  watchDelay = opts.watchDelay || 1000;
 
   // The text/image from the current clipboard
-  let currText = clipboard.readText();
-  let currImg = clipboard.readImage();
+  currText = clipboard.readText();
+  currImg = clipboard.readImage();
 
-  const intervalId = setInterval(() => {
+  clipboardWatcher = () => {
     // Text or image from the latest change in the clipboard
     const newText = clipboard.readText();
     const newImg = clipboard.readImage();
 
-    // Prevent copying from a Clip registering as a change in the clipboard
-    switch (copiedFromClip) {
-      case true:
-        if (newImg.isEmpty()) {
-          currText = newText;
-        }
-        else {
-          currText = newText;
-          currImg = newImg;
-        }
+    // Detect whether only text was copied, or if an image was copied.
+    // When copying an image, the name of the file also counts as a change
+    // in the clipboard
+    if (textHasDiff(currText, newText) || imageHasDiff(currImg, newImg)) {
+      // Only text was copied
+      if (newImg.isEmpty()) {
+        currText = newText;
 
-        copiedFromClip = false;
+        return opts.onTextChange(newText);
+      }
+      // An image was copied
+      else {
+        currText = newText;
+        currImg = newImg;
 
-        break;
-
-      case false:
-        // Detect whether only text was copied, or if an image was copied.
-        // When copying an image, the name of the file also counts as a change
-        // in the clipboard
-        if (textHasDiff(currText, newText) || imageHasDiff(currImg, newImg)) {
-          // Only text was copied
-          if (newImg.isEmpty()) {
-            currText = newText;
-
-            return opts.onTextChange(newText);
-          }
-          // An image was copied
-          else {
-            currText = newText;
-            currImg = newImg;
-
-            return opts.onImageChange(currText, newImg);
-          }
-        }
-
-        break;
+        return opts.onImageChange(currText, newImg);
+      }
     }
-  }, watchDelay);
+  };
+
+  intervalId = setInterval(clipboardWatcher, watchDelay);
 
   return {
     // Stop the current clipboardWatcher

@@ -31,9 +31,14 @@ important!
 To start developing, clone the repo and run the following:
 
 ```bash
-$ npm/yarn install
-$ npm run rebuild
-$ npm start
+# If you're using npm
+$ npm install
+
+# If you're using Yarn
+$ yarn
+
+# And now for the finishing touch
+$ npm run dev
 ```
 
 To build executables, run the following:

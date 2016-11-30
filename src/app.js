@@ -226,7 +226,7 @@ ipcMain.on(constants.Ipc.ClipsReady, event => {
 // Delete the Clip selected in the application window based on its id and send
 // the id back to the renderer
 ipcMain.on(constants.Ipc.DeleteClip, (event, id) => {
-  db.deleteClip(id, (err) => {
+  db.deleteClip(id, err => {
     if (err) {
       console.error(err);
 
