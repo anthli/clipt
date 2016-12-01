@@ -6,7 +6,6 @@ let globalClips = [];
 const homeCtrl = function($scope, $location, $timeout, Clip) {
   $scope.clips = globalClips;
   $scope.clipDisplayCount = 10;
-  $scope.busy = false;
   $scope.query = '';
 
   // Search for Clips using the query submitted by the user
@@ -35,7 +34,7 @@ const homeCtrl = function($scope, $location, $timeout, Clip) {
 
   // Retrieve the starred_clip_id of the Clip at the given index
   $scope.isStarred = index => {
-    return globalClips[index].starred_clip_id;
+    return $scope.clips[index].starred_clip_id;
   };
 
   // Retrieve all Clips when the route changes
@@ -45,17 +44,17 @@ const homeCtrl = function($scope, $location, $timeout, Clip) {
 
   // Copy the Clip at the given index
   $scope.copyClip = ($event, index) => {
-    Clip.copyClip($event, globalClips[index]);
+    Clip.copyClip($event, $scope.clips[index]);
   };
 
   // Delete the Clip at the given index
   $scope.deleteClip = index => {
-    Clip.deleteClip(globalClips[index], index);
+    Clip.deleteClip($scope.clips[index], index);
   };
 
   // Check to see if the Clip should be starred or unstarred
   $scope.checkStar = index => {
-    let clip = globalClips[index];
+    let clip = $scope.clips[index];
 
     // Star the Clip
     if (!clip.starred_clip_id) {

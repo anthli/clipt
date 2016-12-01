@@ -2,7 +2,7 @@
   "name": "clipt",
   "productName": "Clipt",
   "description": "Cross platform clipboard history manager",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "main": "src/app.js",
   "author": {
     "name": "Anthony Li",

@@ -1,6 +1,6 @@
 <md-content class="clip-list-container" id="home">
   <!-- List of Clips -->
-  <md-list id="clip-list" infinite-scroll="loadMoreClips()" infinite-scroll-container="'#home'" infinite-scroll-disabled="busy" infinite-scroll-distance="0">
+  <md-list id="clip-list" infinite-scroll="loadMoreClips()" infinite-scroll-container="'#home'" infinite-scroll-distance="0">
     <li ng-repeat="clip in clips | limitTo: clipDisplayCount track by clip.id" ng-dblclick="copyClip($event, $index)">
       <div class="clip-container">
         <!-- Star and Delete buttons -->
