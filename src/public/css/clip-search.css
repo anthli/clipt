@@ -10,18 +10,18 @@
   z-index: 2;
 }
 
-/* Search bar icon */
-#clip-search-container i {
-  left: 60px;
-  position: absolute;
-}
+  /* Search bar icon */
+  #clip-search-container i {
+    left: 60px;
+    position: absolute;
+  }
 
-/* Search bar text input area */
-#clip-search-container input {
-  border: 0;
-  font-size: 14px;
-  height: 20px;
-  outline: none;
-  padding: 10px 10px 10px 32px;
-  width: 100%;
-}
+  /* Search bar text input area */
+  #clip-search-container input {
+    border: 0;
+    font-size: 14px;
+    height: 20px;
+    outline: none;
+    padding: 10px 10px 10px 32px;
+    width: 100%;
+  }

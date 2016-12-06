@@ -18,84 +18,84 @@
   -webkit-app-region: no-drag;
 }
 
-#title-bar-button-container button {
-  background-color: transparent;
-  border: none;
-  height: 30px;
-  outline: 0;
-  position: fixed;
-  width: 30px;
-}
+  #title-bar-button-container button {
+    background-color: transparent;
+    border: none;
+    height: 30px;
+    outline: 0;
+    position: fixed;
+    width: 30px;
+  }
 
-#title-bar-button-container button:hover {
-  background-color: #b3b3b3;
-}
+  #title-bar-button-container button:hover {
+    background-color: #b3b3b3;
+  }
 
-#title-bar-button-container button span {
-  background-color: #ffffff;
-  height: 2px;
-  position: absolute;
-}
+  #title-bar-button-container button span {
+    background-color: #ffffff;
+    height: 2px;
+    position: absolute;
+  }
 
 /* Minimize button */
 #minimize-button {
   right: 90px;
 }
 
-#minimize-button span {
-  left: 7px;
-  top: 14px;
-  width: 16px;
-}
+  #minimize-button span {
+    left: 7px;
+    top: 14px;
+    width: 16px;
+  }
 
 /* Maximize button */
 #maximize-button {
   right: 50px;
 }
 
-#maximize-button span {
-  width: 6px;
-}
+  #maximize-button span {
+    width: 6px;
+  }
 
-#maximize-button span:nth-child(1) {
-  left: 4px;
-  top: 8px;
-}
+  #maximize-button span:nth-child(1) {
+    left: 4px;
+    top: 8px;
+  }
 
-#maximize-button span:nth-child(2) {
-  left: 6px;
-  top: 6px;
-}
+  #maximize-button span:nth-child(2) {
+    left: 6px;
+    top: 6px;
+  }
 
-#maximize-button span:nth-child(3) {
-  left: 6px;
-  top: 9px;
-  width: 8px;
-}
+  #maximize-button span:nth-child(3) {
+    left: 6px;
+    top: 9px;
+    width: 8px;
+  }
 
-#maximize-button span:nth-child(4) {
-  left: 20px;
-  top: 20px;
-}
+  #maximize-button span:nth-child(4) {
+    left: 20px;
+    top: 20px;
+  }
 
-#maximize-button span:nth-child(5) {
-  left: 17px;
-  top: 22px;
-}
+  #maximize-button span:nth-child(5) {
+    left: 17px;
+    top: 22px;
+  }
 
-#maximize-button span:nth-child(6) {
-  left: 16px;
-  top: 19px;
-  width: 8px;
-}
+  #maximize-button span:nth-child(6) {
+    left: 16px;
+    top: 19px;
+    width: 8px;
+  }
 
 /* Close button */
 #close-button {
   right: 10px;
 }
 
-#close-button span {
-  left: 3px;
-  top: 14px;
-  width: 24px;
-}
+  #close-button span {
+    left: 3px;
+    top: 14px;
+    width: 24px;
+  }
