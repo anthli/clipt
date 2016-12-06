@@ -2,7 +2,7 @@
   "name": "clipt",
   "productName": "Clipt",
   "description": "Cross platform clipboard history manager",
-  "version": "0.1.6",
+  "version": "0.2.0",
   "main": "src/app.js",
   "author": {
     "name": "Anthony Li",
@@ -15,29 +15,32 @@
   },
   "license": "MIT",
   "dependencies": {
-    "angular": "latest",
-    "angular-animate": "latest",
-    "angular-aria": "latest",
-    "angular-material": "latest",
-    "angular-route": "latest",
-    "jquery": "latest",
     "jsonfile": "latest",
     "lodash": "latest",
     "mkdirp": "latest",
-    "ng-infinite-scroll": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "react-infinite": "latest",
     "sqlite3": "latest"
   },
   "devDependencies": {
+    "babel": "latest",
+    "babel-cli": "latest",
+    "babel-core": "latest",
+    "babel-loader": "latest",
+    "babel-preset-es2015": "latest",
+    "babel-preset-react": "latest",
     "electron": "latest",
     "electron-builder": "latest",
     "electron-packager": "latest",
     "electron-rebuild": "latest",
-    "nodemon": "latest"
+    "webpack": "latest"
   },
   "scripts": {
-    "start": "nodemon --exec 'electron .'",
     "rebuild": "./node_modules/.bin/electron-rebuild",
-    "pack": "build --dir",
+    "pack": "webpack",
+    "start": "npm run pack && electron .",
+    "portable": "build --dir",
     "dist": "build"
   },
   "build": {

@@ -44,7 +44,7 @@ $ npm run dev
 To build executables, run the following:
 
 ```bash
-$ npm run pack
+$ npm run portable
 ```
 
 To build the installer, run the following:
