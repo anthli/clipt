@@ -63,9 +63,8 @@ module.exports.Actions = _.transform(
 module.exports.Controller = {
   About: 'AboutCtrl',
   Home: 'HomeCtrl',
+  Navbar: 'NavbarCtrl',
   Settings: 'SettingsCtrl',
-  SideMenu: 'SideMenuCtrl',
-  Starred: 'StarredCtrl',
   TitleBar: 'TitleBarCtrl'
 };
 
@@ -73,7 +72,7 @@ module.exports.Html = {
   About: 'views/modals/about.html',
   Home: 'views/home.html',
   Settings: 'views/modals/settings.html',
-  Starred: 'views/starred.html'
+  Favorites: 'views/favorites.html'
 };
 
 module.exports.Ipc = {
@@ -82,18 +81,18 @@ module.exports.Ipc = {
   ClipDeleted: 'clip-deleted',
   Clips: 'clips',
   ClipsReady: 'clips-ready',
-  ClipStarred: 'clip-starred',
-  ClipUnstarred: 'clip-unstarred',
+  ClipFavorited: 'clip-favorited',
+  ClipUnfavorited: 'clip-unfavorited',
   DeleteClip: 'delete-clip',
   FetchClips: 'fetch-clips',
   FetchSettings: 'fetch-settings',
   OpenLink: 'open-link',
   RegisterShortcut: 'register-shortcut',
   Settings: 'settings',
-  StarClip: 'star-clip',
+  FavoriteClip: 'favorite-clip',
   SwitchImageFormat: 'switch-image-format',
   TitleBarButtonClicked: 'title-bar-button-clicked',
-  UnstarClip: 'unstar-clip'
+  UnfavoriteClip: 'unfavorite-clip'
 };
 
 module.exports.Modal = {
@@ -102,7 +101,7 @@ module.exports.Modal = {
 
 module.exports.Path = {
   Home: '/',
-  Starred: '/starred/',
+  Favorites: '/favorites/',
   Settings: '/settings/'
 };
 

@@ -1,11 +1,11 @@
-<md-content class="clip-list-container" id="starred">
-  <!-- List of starred Clips -->
-  <md-list id="clip-list" infinite-scroll="loadMoreClips()" infinite-scroll-container="'#starred'" infinite-scroll-distance="0">
+<md-content class="clip-list-container" id="favorites">
+  <!-- List of favorited Clips -->
+  <md-list id="clip-list" infinite-scroll="loadMoreClips()" infinite-scroll-container="'#favorites'" infinite-scroll-distance="0">
     <li ng-repeat="clip in clips | limitTo: clipDisplayCount track by clip.id" ng-dblclick="copyClip($event, $index)">
       <div class="clip-container">
-        <!-- Unstar and Delete buttons -->
+        <!-- Unfavorite and Delete buttons -->
         <div class="clip-button-container">
-          <i class="star-clip starred fa fa-star" ng-click="checkStar($index)"></i>
+          <i class="favorite-clip favorited fa fa-star" ng-click="checkIfFavorited($index)"></i>
           <i class="delete-clip fa fa-trash-o" ng-click="deleteClip($index)"></i>
         </div>
 

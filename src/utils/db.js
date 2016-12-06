@@ -94,14 +94,14 @@ module.exports.upsertClip = (clip, cb) => {
   });
 };
 
-// Star a Clip in the database given its id and return the last row inserted
-module.exports.starClip = (id, cb) => {
-  db.run(queries.starClip, id, err => {
+// Favorite a Clip in the database given its id and return the last row inserted
+module.exports.favoriteClip = (id, cb) => {
+  db.run(queries.favoriteClip, id, err => {
     if (err) {
       return cb(err, null);
     }
 
-    db.get(queries.getLastStarredClip, (err, row) => {
+    db.get(queries.getLastFavoritedClip, (err, row) => {
       if (err) {
         return cb(err, null);
       }
@@ -122,9 +122,9 @@ module.exports.deleteClip = (id, cb) => {
   });
 };
 
-// Unstar a Clip in the database given its clip_id
-module.exports.unstarClip = (id, cb) => {
-  db.run(queries.unstarClip, id, err => {
+// Unfavorite a Clip in the database given its clip_id
+module.exports.unfavoriteClip = (id, cb) => {
+  db.run(queries.unfavoriteClip, id, err => {
     if (err) {
       return cb(err);
     }

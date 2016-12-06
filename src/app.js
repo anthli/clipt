@@ -237,31 +237,31 @@ ipcMain.on(constants.Ipc.DeleteClip, (event, id) => {
   });
 });
 
-// Star the Clip selected in the application window based on its id and send
-// the starred Clip's id and starred id back to the renderer
-ipcMain.on(constants.Ipc.StarClip, (event, id, index) => {
-  db.starClip(id, (err, starredClip) => {
+// Favorite the Clip selected in the application window based on its id and send
+// the favorited Clip's id and favorited id back to the renderer
+ipcMain.on(constants.Ipc.FavoriteClip, (event, id, index) => {
+  db.favoriteClip(id, (err, favoritedClip) => {
     if (err) {
       console.error(err);
 
       return;
     }
 
-    win.webContents.send(constants.Ipc.ClipStarred, id, starredClip.id);
+    win.webContents.send(constants.Ipc.ClipFavorited, id, favoritedClip.id);
   });
 });
 
-// Unstar the Clip selected in the application window based on its id and send
-// its id back to the renderer
-ipcMain.on(constants.Ipc.UnstarClip, (event, id) => {
-  db.unstarClip(id, err => {
+// Unfavorite the Clip selected in the application window based on its id and
+// send its id back to the renderer
+ipcMain.on(constants.Ipc.UnfavoriteClip, (event, id) => {
+  db.unfavoriteClip(id, err => {
     if (err) {
       console.error(err);
 
       return;
     }
 
-    win.webContents.send(constants.Ipc.ClipUnstarred, id);
+    win.webContents.send(constants.Ipc.ClipUnfavorited, id);
   });
 });
 

@@ -46,18 +46,18 @@ module.exports.Ipc = {
   ClipDeleted: 'clip-deleted',
   Clips: 'clips',
   ClipsReady: 'clips-ready',
-  ClipStarred: 'clip-starred',
-  ClipUnstarred: 'clip-unstarred',
+  ClipFavorited: 'clip-favorited',
+  ClipUnfavorited: 'clip-unfavorited',
   DeleteClip: 'delete-clip',
   FetchClips: 'fetch-clips',
   FetchSettings: 'fetch-settings',
   OpenLink: 'open-link',
   RegisterShortcut: 'register-shortcut',
   Settings: 'settings',
-  StarClip: 'star-clip',
+  FavoriteClip: 'favorite-clip',
   SwitchImageFormat: 'switch-image-format',
   TitleBarButtonClicked: 'title-bar-button-clicked',
-  UnstarClip: 'unstar-clip'
+  UnfavoriteClip: 'unfavorite-clip'
 };
 
 module.exports.Platform = {

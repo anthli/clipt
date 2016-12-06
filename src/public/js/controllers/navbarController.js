@@ -1,9 +1,9 @@
 'use strict';
 
-const sideMenuCtrl = function($scope, $location) {
+const navbarCtrl = function($scope, $location) {
   $scope.menuItems = [
     'home',
-    'starred',
+    'favorites',
     'settings'
   ];
 
@@ -28,6 +28,6 @@ const sideMenuCtrl = function($scope, $location) {
   };
 };
 
-sideMenuCtrl.$inject = ['$scope', '$location'];
+navbarCtrl.$inject = ['$scope', '$location'];
 
-app.controller(constants.Controller.SideMenu, sideMenuCtrl);
+app.controller(constants.Controller.Navbar, navbarCtrl);

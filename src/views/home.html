@@ -3,10 +3,10 @@
   <md-list id="clip-list" infinite-scroll="loadMoreClips()" infinite-scroll-container="'#home'" infinite-scroll-distance="0">
     <li ng-repeat="clip in clips | limitTo: clipDisplayCount track by clip.id" ng-dblclick="copyClip($event, $index)">
       <div class="clip-container">
-        <!-- Star and Delete buttons -->
+        <!-- Favorite and Delete buttons -->
         <div class="clip-button-container">
-          <!-- Change the star icon depending on whether the clip is starred or not -->
-          <i class="star-clip" ng-class="isStarred($index) ? 'starred fa fa-star' : 'fa fa-star-o'" ng-click="checkStar($index)"></i>
+          <!-- Change the favorite icon depending on whether the clip is favorited or not -->
+          <i class="favorite-clip" ng-class="isFavorited($index) ? 'favorited fa fa-star' : 'fa fa-star-o'" ng-click="checkIfFavorited($index)"></i>
           <i class="delete-clip fa fa-trash-o" ng-click="deleteClip($index)"></i>
         </div>
 

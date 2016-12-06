@@ -8,72 +8,71 @@
   padding: 0 !important;
 }
 
-.clip-container:hover {
-  background-color: #e6e6e6;
-  border-color: #e6e6e6;
-}
+  .clip-container:hover {
+    background-color: #e6e6e6;
+    border-color: #e6e6e6;
+  }
 
-.clip-container:active {
-  background-color: #b3b3b3;
-  border-color: #b3b3b3;
-}
+  .clip-container:active {
+    background-color: #b3b3b3;
+    border-color: #b3b3b3;
+  }
 
-.clip-button-container i {
-  opacity: 0;
-}
-
-.clip-button-container .starred,
-.clip-container:hover .clip-button-container i {
-  opacity: 1;
-}
+  .clip-container:hover .clip-button-container i {
+    opacity: 1;
+  }
 
 .clip-button-container {
-  margin-left: 7px;
-  min-height: 80px;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 80px;
+  justify-content: space-around;
   position: absolute;
-  width: 0;
+  width: 30px;
   z-index: 1;
 }
 
-.star-clip, .delete-clip {
+  .clip-button-container i {
+    opacity: 0;
+  }
+
+  .clip-button-container .favorited {
+    opacity: 1;
+  }
+
+.favorite-clip, .delete-clip {
   color: #a6a6a6;
   font-size: 20px;
   outline: none;
   z-index: 1;
 }
 
-.star-clip:hover,
-.starred {
-  color: #ffdc00;
-}
+  .favorite-clip:hover,
+  .favorited {
+    color: #ffdc00;
+  }
 
-.star-clip {
-  margin: 16px 0 0 -1px;
-}
-
-.delete-clip {
-  margin-top: 10px;
-}
-
-.delete-clip:hover {
-  color: #f44336;
-}
+  .delete-clip:hover {
+    color: #f44336;
+  }
 
 .clip {
-  min-height: 80px;
+  display: flex;
+  flex-direction: column;
+  height: 80px;
+  justify-content: space-around;
   overflow: hidden;
-  padding: 0 10px 0 30px;
+  margin: 0 10px 0 30px;
   width: 100%;
 }
 
 .clip-type {
   font-size: 14px;
-  margin-top: 16px;
 }
 
 .clip-text {
   font-size: 12px;
-  margin-top: 16px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

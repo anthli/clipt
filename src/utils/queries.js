@@ -8,14 +8,14 @@ module.exports.createTables = `
     timestamp INTEGER NOT NULL
   );
 
-  CREATE TABLE IF NOT EXISTS image_clip (
+  CREATE TABLE IF NOT EXISTS image (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     clip_id INTEGER NOT NULL UNIQUE,
     image BLOB NOT NULL,
     FOREIGN KEY(clip_id) REFERENCES clip(id) ON DELETE CASCADE
   );
 
-  CREATE TABLE IF NOT EXISTS starred_clip (
+  CREATE TABLE IF NOT EXISTS favorite (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     clip_id INTEGER NOT NULL UNIQUE,
     FOREIGN KEY(clip_id) REFERENCES clip(id) ON DELETE CASCADE
@@ -25,11 +25,11 @@ module.exports.createTables = `
 `;
 
 module.exports.getAllClips = `
-  SELECT C.id, S.id AS starred_clip_id, C.type, C.timestamp, C.text, I.image
+  SELECT C.id, F.id AS favorite_clip_id, C.type, C.timestamp, C.text, I.image
   FROM clip C
-  LEFT JOIN starred_clip S
-    ON C.id = S.clip_id
-  LEFT JOIN image_clip I
+  LEFT JOIN favorite F
+    ON C.id = F.clip_id
+  LEFT JOIN image I
     ON C.id = I.clip_id
   ORDER BY C.timestamp DESC;
 `;
@@ -41,8 +41,8 @@ module.exports.getLastInsertedClip = `
   );
 `;
 
-module.exports.getLastStarredClip = `
-  SELECT * FROM starred_clip
+module.exports.getLastFavoritedClip = `
+  SELECT * FROM favorite
   WHERE id = (
     SELECT last_insert_rowid()
   );
@@ -57,7 +57,7 @@ module.exports.insertClip = `
 `;
 
 module.exports.insertImage = `
-  INSERT INTO image_clip (clip_id, image) VALUES($1, $2);
+  INSERT INTO image (clip_id, image) VALUES($1, $2);
 `;
 
 module.exports.updateClip = `
@@ -65,17 +65,17 @@ module.exports.updateClip = `
 `;
 
 module.exports.updateImage = `
-  UPDATE image_clip SET image = $1 WHERE clip_id = $2;
+  UPDATE image SET image = $1 WHERE clip_id = $2;
 `;
 
-module.exports.starClip = `
-  INSERT INTO starred_clip (clip_id) VALUES($1);
+module.exports.favoriteClip = `
+  INSERT INTO favorite (clip_id) VALUES($1);
 `;
 
 module.exports.deleteClip = `
   DELETE FROM clip WHERE id = $1;
 `;
 
-module.exports.unstarClip = `
-  DELETE FROM starred_clip WHERE id = $1;
+module.exports.unfavoriteClip = `
+  DELETE FROM favorite WHERE id = $1;
 `;

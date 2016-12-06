@@ -1,7 +1,7 @@
 #title-bar-button-container button, #title-bar-button-container button:hover,
 .clip-container,
 .clip-button-container,
-.star-clip, .star-clip:hover,
+.favorite-clip, .favorite-clip:hover,
 .delete-clip, .delete-clip:hover {
   transition: all ease-out 300ms;
 }

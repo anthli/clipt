@@ -32,9 +32,9 @@ const homeCtrl = function($scope, $location, $timeout, Clip) {
     $scope.clipDisplayCount += 10;
   };
 
-  // Retrieve the starred_clip_id of the Clip at the given index
-  $scope.isStarred = index => {
-    return $scope.clips[index].starred_clip_id;
+  // Retrieve the favorite_clip_id of the Clip at the given index
+  $scope.isFavorited = index => {
+    return $scope.clips[index].favorite_clip_id;
   };
 
   // Retrieve all Clips when the route changes
@@ -52,17 +52,17 @@ const homeCtrl = function($scope, $location, $timeout, Clip) {
     Clip.deleteClip($scope.clips[index], index);
   };
 
-  // Check to see if the Clip should be starred or unstarred
-  $scope.checkStar = index => {
+  // Check to see if the Clip should be favorited or unfavorited
+  $scope.checkIfFavorited = index => {
     let clip = $scope.clips[index];
 
-    // Star the Clip
-    if (!clip.starred_clip_id) {
-      Clip.starClip(clip, index);
+    // Favorite the Clip
+    if (!clip.favorite_clip_id) {
+      Clip.favoriteClip(clip, index);
     }
-    // Unstar the Clip
+    // Unfavorite the Clip
     else {
-      Clip.unstarClip(clip);
+      Clip.unfavoriteClip(clip);
     }
   };
 
@@ -78,9 +78,9 @@ const homeCtrl = function($scope, $location, $timeout, Clip) {
 
         break;
 
-      // Filter out all clips that are not starred
-      case constants.Path.Starred:
-        globalClips = _.filter(clips, clip => clip.starred_clip_id);
+      // Filter out all clips that are not favorited
+      case constants.Path.Favorites:
+        globalClips = _.filter(clips, clip => clip.favorite_clip_id);
 
         break;
     }
@@ -94,14 +94,13 @@ const homeCtrl = function($scope, $location, $timeout, Clip) {
   // Delete the Clip from the list of Clips based on its id
   ipcRenderer.on(constants.Ipc.ClipDeleted, (event, id) => {
     _.remove(globalClips, clip => clip.id === id);
-    $scope.$digest();
   });
 
-  // Star the Clip at the given index by assigning its starredId
-  ipcRenderer.on(constants.Ipc.ClipStarred, (event, id, starredId) => {
+  // Favorite the Clip at the given index by assigning its favoriteId
+  ipcRenderer.on(constants.Ipc.ClipFavorited, (event, id, favoritedId) => {
     _.each(globalClips, clip => {
       if (clip.id === id) {
-        clip.starred_clip_id = starredId;
+        clip.favorite_clip_id = favoritedId;
       }
     });
 
@@ -109,17 +108,19 @@ const homeCtrl = function($scope, $location, $timeout, Clip) {
     $scope.$digest();
   });
 
-  // Unstar the Clip at the given its id by setting its starred_clip_id to null
-  ipcRenderer.on(constants.Ipc.ClipUnstarred, (event, starredId) => {
+  // Unfavorite the Clip at the given its id by setting its favorite_clip_id to
+  // null
+  ipcRenderer.on(constants.Ipc.ClipUnfavorited, (event, favoriteId) => {
     _.each(globalClips, clip => {
-      if (clip.starred_clip_id === starredId) {
-        clip.starred_clip_id = null;
+      if (clip.favorite_clip_id === favoriteId) {
+        clip.favorite_clip_id = null;
       }
     });
 
-    // Delete it from the list of starred Clips
-    if ($location.path() === constants.Path.Starred) {
-      _.remove(globalClips, clip => !clip.starred_clip_id);
+    // Delete it from the list of favorite Clips
+    if ($location.path() === constants.Path.Favorite) {
+      console.log('test');
+      _.remove(globalClips, clip => !clip.favorite_clip_id);
     }
 
     $scope.clips = globalClips;

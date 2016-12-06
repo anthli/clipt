@@ -8,15 +8,15 @@
     <!-- Load CSS files -->
     <link rel="stylesheet" href="../node_modules/angular-material/angular-material.css" media="screen">
     <link rel="stylesheet" href="public/css/font-awesome.css" media="screen">
+    <link rel="stylesheet" href="public/css/index.css" media="screen">
     <link rel="stylesheet" href="public/css/about.css" media="screen">
     <link rel="stylesheet" href="public/css/animations.css" media="screen">
     <link rel="stylesheet" href="public/css/clip-list.css" media="screen">
     <link rel="stylesheet" href="public/css/clip-search.css" media="screen">
     <link rel="stylesheet" href="public/css/clip.css" media="screen">
     <link rel="stylesheet" href="public/css/copy-popup.css" media="screen">
-    <link rel="stylesheet" href="public/css/home.css" media="screen">
+    <link rel="stylesheet" href="public/css/navbar.css" media="screen">
     <link rel="stylesheet" href="public/css/settings.css" media="screen">
-    <link rel="stylesheet" href="public/css/side-menu.css" media="screen">
     <link rel="stylesheet" href="public/css/title-bar.css" media="screen">
 
     <!-- Load JavaScript files -->
@@ -30,8 +30,8 @@
     <script src="public/js/app.js"></script>
     <script src="public/js/controllers/aboutController.js"></script>
     <script src="public/js/controllers/homeController.js"></script>
+    <script src="public/js/controllers/navbarController.js"></script>
     <script src="public/js/controllers/settingsController.js"></script>
-    <script src="public/js/controllers/sideMenuController.js"></script>
     <script src="public/js/controllers/titleBarController.js"></script>
     <script src="public/js/services/clipService.js"></script>
     <script src="public/js/services/settingsService.js"></script>
@@ -40,7 +40,7 @@
 
   <body ng-app="clipt">
     <!-- Title bar -->
-    <!--<div id="title-bar" ng-controller="TitleBarCtrl">
+    <!--<div id="title-bar" ng-controller="Title-BarCtrl">
       <div id="title-bar-button-container">
         <button id="minimize-button" ng-click="click('minimize')">
           <span></span>
@@ -62,11 +62,11 @@
       </div>
     </div>-->
 
-    <!-- Side bar menu -->
-    <md-toolbar id="side-menu" ng-controller="SideMenuCtrl">
-      <i class="side-menu-icon fa fa-home" ng-class="{active: activeMenu === 'home'}" ng-click="setActiveMenu('home')"></i>
-      <i class="side-menu-icon fa fa-star" ng-class="{active: activeMenu === 'starred'}" ng-click="setActiveMenu('starred')"></i>
-      <i class="side-menu-icon fa fa-cog" ng-class="{active: activeMenu === 'settings'}" ng-click="setActiveMenu('settings')"></i>
+    <!-- Navigation bar -->
+    <md-toolbar id="navbar" ng-controller="NavbarCtrl">
+      <i class="navbar-icon fa fa-home" ng-class="{active: activeMenu === 'home'}" ng-click="setActiveMenu('home')"></i>
+      <i class="navbar-icon fa fa-star" ng-class="{active: activeMenu === 'favorites'}" ng-click="setActiveMenu('favorites')"></i>
+      <i class="navbar-icon fa fa-cog" ng-class="{active: activeMenu === 'settings'}" ng-click="setActiveMenu('settings')"></i>
     </md-toolbar>
 
     <!-- Popup when copying a Clip -->
