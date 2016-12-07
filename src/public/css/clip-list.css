@@ -1,15 +1,12 @@
-.clip-list-container {
+.clip-list {
   /*height: calc(100% - 70px);*/
   height: calc(100% - 40px);
   margin-left: 50px;
+  padding: 0;
   width: calc(100% - 50px);
 }
 
-#clip-list {
-  padding: 0;
-}
-
-  #clip-list li {
+  .clip-list li {
     list-style: none;
     outline: none;
   }

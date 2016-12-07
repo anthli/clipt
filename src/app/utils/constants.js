@@ -70,29 +70,30 @@ module.exports.Controller = {
 
 module.exports.Html = {
   About: 'views/modals/about.html',
+  Bookmarks: 'views/bookmarks.html',
   Home: 'views/home.html',
-  Settings: 'views/modals/settings.html',
-  Favorites: 'views/favorites.html'
+  Settings: 'views/modals/settings.html'
 };
 
 module.exports.Ipc = {
   AboutModal: 'about-modal',
+  Bookmark: 'bookmark',
+  Bookmarked: 'bookmarked',
+  BookmarkDeleted: 'bookmark-deleted',
   ClipCopied: 'clip-copied',
   ClipDeleted: 'clip-deleted',
   Clips: 'clips',
   ClipsReady: 'clips-ready',
-  ClipFavorited: 'clip-favorited',
-  ClipUnfavorited: 'clip-unfavorited',
+  DeleteBookmark: 'delete-bookmark',
   DeleteClip: 'delete-clip',
-  FetchClips: 'fetch-clips',
-  FetchSettings: 'fetch-settings',
+  GetBookmarks: 'fetch-bookmarks',
+  GetClips: 'fetch-clips',
+  GetSettings: 'fetch-settings',
   OpenLink: 'open-link',
   RegisterShortcut: 'register-shortcut',
   Settings: 'settings',
-  FavoriteClip: 'favorite-clip',
   SwitchImageFormat: 'switch-image-format',
-  TitleBarButtonClicked: 'title-bar-button-clicked',
-  UnfavoriteClip: 'unfavorite-clip'
+  TitleBarButtonClicked: 'title-bar-button-clicked'
 };
 
 module.exports.Modal = {
@@ -101,7 +102,7 @@ module.exports.Modal = {
 
 module.exports.Path = {
   Home: '/',
-  Favorites: '/favorites/',
+  Bookmarks: '/bookmarks/',
   Settings: '/settings/'
 };
 

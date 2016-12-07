@@ -1,8 +1,8 @@
 #title-bar-button-container button, #title-bar-button-container button:hover,
 .clip-container,
 .clip-button-container,
-.favorite-clip, .favorite-clip:hover,
-.delete-clip, .delete-clip:hover {
+.bookmark-icon, .bookmark-icon:hover,
+.delete-icon, .delete-icon:hover {
   transition: all ease-out 300ms;
 }
 

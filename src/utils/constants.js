@@ -42,22 +42,23 @@ module.exports.ImageFormat = {
 
 module.exports.Ipc = {
   AboutModal: 'about-modal',
+  Bookmark: 'bookmark',
+  Bookmarked: 'bookmarked',
+  BookmarkDeleted: 'bookmark-deleted',
   ClipCopied: 'clip-copied',
   ClipDeleted: 'clip-deleted',
   Clips: 'clips',
   ClipsReady: 'clips-ready',
-  ClipFavorited: 'clip-favorited',
-  ClipUnfavorited: 'clip-unfavorited',
+  DeleteBookmark: 'delete-bookmark',
   DeleteClip: 'delete-clip',
-  FetchClips: 'fetch-clips',
-  FetchSettings: 'fetch-settings',
+  GetBookmarks: 'fetch-bookmarks',
+  GetClips: 'fetch-clips',
+  GetSettings: 'fetch-settings',
   OpenLink: 'open-link',
   RegisterShortcut: 'register-shortcut',
   Settings: 'settings',
-  FavoriteClip: 'favorite-clip',
   SwitchImageFormat: 'switch-image-format',
-  TitleBarButtonClicked: 'title-bar-button-clicked',
-  UnfavoriteClip: 'unfavorite-clip'
+  TitleBarButtonClicked: 'title-bar-button-clicked'
 };
 
 module.exports.Platform = {

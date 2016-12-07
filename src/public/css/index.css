@@ -10,8 +10,7 @@
   user-select: none;
 }
 
-html, body, div[ng-view] {
+html, body {
   height: 100%;
-  overflow: hidden;
   width: 100%;
 }
