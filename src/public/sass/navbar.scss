@@ -13,8 +13,12 @@
   font-size: 30px;
   margin: 12px 0;
   outline: none;
+
+  &:hover, .active {
+    color: #ffffff;
+  }
 }
 
-  .navbar-icon:hover, .navbar-icon.active {
+  .navbar-icon.active {
     color: #ffffff;
   }

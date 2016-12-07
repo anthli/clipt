@@ -9,7 +9,7 @@ export default class Clip extends Component {
 
     this.state = {
       bookmarkId: this.props.bookmarkId
-    }
+    };
   }
 
   componentWillReceiveProps(nextProps) {
@@ -33,7 +33,11 @@ export default class Clip extends Component {
           >
           </i>
 
-          <i className="delete-icon fa fa-trash-o"></i>
+          <i
+            className="delete-icon fa fa-trash-o"
+            onClick={() => this.props.deleteClip(this.props.clipId)}
+          >
+          </i>
         </div>
 
         <div className="clip">

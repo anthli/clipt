@@ -16,6 +16,7 @@ export default class Home extends Component {
     };
 
     this.checkBookmark = this.checkBookmark.bind(this);
+    this.deleteClip = this.deleteClip.bind(this);
   }
 
   componentWillMount() {
@@ -32,9 +33,9 @@ export default class Home extends Component {
     ipcRenderer.send(constants.Ipc.ClipsReady);
   }
 
+  // Toggle the Bookmark given its Clip id
   checkBookmark(id) {
-    let index = _.findIndex(this.state.clips, clip => clip.id === id);
-    let clip = this.state.clips[index];
+    let clip = _.find(this.state.clips, clip => clip.id === id);
 
     // Bookmark the Clip
     if (!clip.bookmark_id) {
@@ -72,6 +73,17 @@ export default class Home extends Component {
     }
   }
 
+  // Delete the Clip with the given id
+  deleteClip(id) {
+    ipcRenderer.send(constants.Ipc.DeleteClip, id);
+
+    ipcRenderer.on(constants.Ipc.ClipDeleted, (event, clipId) => {
+      this.setState(() => ({
+        clips: _.filter(this.state.clips, clip => clip.id !== id)
+      }));
+    });
+  }
+
   render() {
     let clips = _.map(this.state.clips, clip => {
       return (
@@ -82,6 +94,7 @@ export default class Home extends Component {
           text={clip.text}
           bookmarkId={clip.bookmark_id}
           checkBookmark={this.checkBookmark}
+          deleteClip={this.deleteClip}
         />
       );
     });

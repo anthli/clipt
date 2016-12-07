@@ -6,21 +6,21 @@
   height: 80px;
   margin: 0;
   padding: 0 !important;
-}
 
-  .clip-container:hover {
+  &:hover {
     background-color: #e6e6e6;
     border-color: #e6e6e6;
   }
 
-  .clip-container:active {
+  &:hover .clip-button-container i {
+    opacity: 1;
+  }
+
+  &:active {
     background-color: #b3b3b3;
     border-color: #b3b3b3;
   }
-
-  .clip-container:hover .clip-button-container i {
-    opacity: 1;
-  }
+}
 
 .clip-button-container {
   align-items: center;
@@ -31,31 +31,41 @@
   position: absolute;
   width: 30px;
   z-index: 1;
-}
 
-  .clip-button-container i {
+  i {
     opacity: 0;
   }
 
-  .clip-button-container .bookmarked {
+  .bookmarked {
     opacity: 1;
   }
+}
 
-.bookmark-icon, .delete-icon {
+.bookmark-icon {
   color: #a6a6a6;
   font-size: 20px;
   outline: none;
   z-index: 1;
-}
 
-  .bookmark-icon:hover,
-  .bookmarked {
+  &:hover {
     color: #ffdc00;
   }
+}
 
-  .delete-icon:hover {
+.bookmarked {
+  color: #ffdc00;
+}
+
+.delete-icon {
+  color: #a6a6a6;
+  font-size: 20px;
+  outline: none;
+  z-index: 1;
+
+  &:hover {
     color: #f44336;
   }
+}
 
 .clip {
   display: flex;

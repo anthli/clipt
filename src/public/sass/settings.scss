@@ -1,0 +1,20 @@
+#clipt-settings {
+  height: 100%;
+  margin-left: 50px;
+}
+
+#settings-tabs {
+  height: 100%;
+}
+
+#settings-container {
+  padding: 30px;
+
+  .col-1 {
+    width: 100%
+  }
+
+  .col-2 {
+    width: calc(50% - 2.5px);
+  }
+}

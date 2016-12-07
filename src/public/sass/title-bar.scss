@@ -1,0 +1,101 @@
+#title-bar {
+  background-color: #262626;
+  height: 30px;
+  margin: 0;
+  padding: 0;
+
+  -webkit-app-region: drag;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Title bar button */
+#title-bar-button-container {
+  position: fixed;
+  right: 0;
+  top: 0;
+
+  -webkit-app-region: no-drag;
+
+  button {
+    background-color: transparent;
+    border: none;
+    height: 30px;
+    outline: 0;
+    position: fixed;
+    width: 30px;
+
+    span {
+      background-color: #ffffff;
+      height: 2px;
+      position: absolute;
+    }
+
+    &:hover {
+      background-color: #b3b3b3;
+    }
+  }
+}
+
+/* Minimize button */
+#minimize-button {
+  right: 90px;
+
+  span {
+    left: 7px;
+    top: 14px;
+    width: 16px;
+  }
+}
+
+/* Maximize button */
+#maximize-button {
+  right: 50px;
+
+  span {
+    width: 6px;
+
+    &:nth-child(1) {
+      left: 4px;
+      top: 8px;
+    }
+
+    &:nth-child(2) {
+      left: 6px;
+      top: 6px;
+    }
+
+    &:nth-child(3) {
+      left: 6px;
+      top: 9px;
+      width: 8px;
+    }
+
+    &:nth-child(4) {
+      left: 20px;
+      top: 20px;
+    }
+
+    &:nth-child(5) {
+      left: 17px;
+      top: 22px;
+    }
+
+    &:nth-child(6) {
+      left: 16px;
+      top: 19px;
+      width: 8px;
+    }
+  }
+}
+
+/* Close button */
+#close-button {
+  right: 10px;
+
+  span {
+    left: 3px;
+    top: 14px;
+    width: 24px;
+  }
+}

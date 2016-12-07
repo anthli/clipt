@@ -1,25 +1,21 @@
-const webpack = require('webpack');
+'use strict';
+
+const path = require('path');
 
 module.exports = {
-  entry: './src/app/main.jsx',
+  content: __dirname,
+  entry: './src/app/main.js',
   target: 'electron',
-
   output: {
-    path: './src/dist/',
-    filename: 'bundle.js',
+    path: path.join(__dirname, './src/dist'),
+    filename: 'main.js',
   },
-
-  resolve: {
-    extensions: ['', '.js', '.jsx']
-  },
-
   module: {
     loaders: [
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         loader: 'babel',
-
         query: {
           presets: ['es2015', 'react']
         }
