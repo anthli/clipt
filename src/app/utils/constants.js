@@ -78,18 +78,19 @@ module.exports.Html = {
 module.exports.Ipc = {
   AboutModal: 'about-modal',
   Bookmark: 'bookmark',
+  Bookmarks: 'bookmarks',
   Bookmarked: 'bookmarked',
   BookmarkDeleted: 'bookmark-deleted',
   ClipCopied: 'clip-copied',
   ClipDeleted: 'clip-deleted',
   Clips: 'clips',
-  ClipsReady: 'clips-ready',
   DeleteBookmark: 'delete-bookmark',
   DeleteClip: 'delete-clip',
   GetBookmarks: 'fetch-bookmarks',
   GetClips: 'fetch-clips',
   GetSettings: 'fetch-settings',
   OpenLink: 'open-link',
+  ReadyToDisplay: 'ready-to-display',
   RegisterShortcut: 'register-shortcut',
   Settings: 'settings',
   SwitchImageFormat: 'switch-image-format',
@@ -105,6 +106,11 @@ module.exports.Path = {
   Bookmarks: '/bookmarks/',
   Settings: '/settings/'
 };
+
+module.exports.Platform = {
+  Mac: 'darwin',
+  Win: 'win32'
+}
 
 module.exports.Service = {
   Clip: 'Clip',

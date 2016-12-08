@@ -17,19 +17,19 @@ gulp.task('clean', () => {
   return del([`${DistDir}/**/*`]);
 });
 
+gulp.task('webpack', () => {
+  return gulp.src(`${SrcDir}/app/main.jsx`)
+    .pipe(webpack(require('./webpack.config.js')))
+    .pipe(gulp.dest(`${DistDir}/js`));
+});
+
 gulp.task('sass', () => {
-  return gulp.src(`${SrcDir}/public/sass/**/*.scss`)
+  return gulp.src(`${SrcDir}/public/**/*.scss`)
     .pipe(sass({
       outputStyle: 'compressed'
     }).on('error', sass.logError))
     .pipe(concatCSS('app.min.css'))
     .pipe(gulp.dest(`${DistDir}/css`));
-});
-
-gulp.task('webpack', () => {
-  return gulp.src(`${SrcDir}/app/main.js`)
-    .pipe(webpack(require('./webpack.config.js')))
-    .pipe(gulp.dest(`${DistDir}/js`));
 });
 
 gulp.task('watch', ['build'], () => {
@@ -39,19 +39,25 @@ gulp.task('watch', ['build'], () => {
 
   gulp.watch(
     [`${SrcDir}/app/**/*.js`],
-    ['webpack'])
-    .on('change', fileChanged);
+    ['webpack']
+  ).on('change', fileChanged);
+
   gulp.watch(
-    [`${SrcDir}/public/sass/**/*.scss`],
-    ['sass'])
-    .on('change', fileChanged);
+    [`${SrcDir}/app/**/*.jsx`],
+    ['webpack']
+  ).on('change', fileChanged);
+
+  gulp.watch(
+    [`${SrcDir}/public/**/*.scss`],
+    ['sass']
+  ).on('change', fileChanged);
 });
 
-gulp.task('build', callback => {
+gulp.task('build', cb => {
   runSequence(
     'clean',
     ['webpack', 'sass'],
-    callback
+    cb
   );
 });
 

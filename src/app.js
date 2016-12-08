@@ -133,6 +133,9 @@ app.on(constants.App.Ready, () => {
   configureWindow.start();
   configureSettings.start();
   configureTray.start();
+
+  win = windowManager.getMainWindow();
+  win.webContents.openDevTools();
 });
 
 // On macOS it is common to re-create a window in the app when the
@@ -202,9 +205,24 @@ ipcMain.on(constants.Ipc.GetClips, event => {
   });
 });
 
+// Retrieve all Bookmarks from the database and send them to the renderer
+ipcMain.on(constants.Ipc.GetBookmarks, event => {
+  win = windowManager.getMainWindow();
+
+  db.getBookmarks((err, bookmarks) => {
+    if (err) {
+      console.error(err);
+
+      return;
+    }
+
+    win.webContents.send(constants.Ipc.Bookmarks, bookmarks);
+  });
+});
+
 // If the browser window is closed, prevent it from opening before all of the
-// clips are ready to be displayed
-ipcMain.on(constants.Ipc.ClipsReady, event => {
+// Clips or Bookmarks are ready to be displayed
+ipcMain.on(constants.Ipc.ReadyToDisplay, event => {
   win = windowManager.getMainWindow();
 
   if (win) {

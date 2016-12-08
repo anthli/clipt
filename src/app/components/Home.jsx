@@ -2,8 +2,8 @@ import _ from 'lodash';
 import {ipcRenderer} from 'electron';
 import React, {Component} from 'react';
 
-import Clip from './Clip';
-import Clips from './Clips';
+import Clip from './Clip.jsx';
+import Clips from './Clips.jsx';
 
 import constants from '../utils/constants';
 
@@ -30,10 +30,10 @@ export default class Home extends Component {
   }
 
   componentDidMount() {
-    ipcRenderer.send(constants.Ipc.ClipsReady);
+    ipcRenderer.send(constants.Ipc.ReadyToDisplay);
   }
 
-  // Toggle the Bookmark given its Clip id
+  // Toggle the Bookmark given the Clip's id
   checkBookmark(id) {
     let clip = _.find(this.state.clips, clip => clip.id === id);
 

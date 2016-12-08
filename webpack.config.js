@@ -4,7 +4,7 @@ const path = require('path');
 
 module.exports = {
   content: __dirname,
-  entry: './src/app/main.js',
+  entry: './src/app/main.jsx',
   target: 'electron',
   output: {
     path: path.join(__dirname, './src/dist'),

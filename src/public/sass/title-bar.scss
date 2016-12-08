@@ -1,29 +1,45 @@
-#title-bar {
-  background-color: #262626;
-  height: 30px;
-  margin: 0;
-  padding: 0;
+#title-bar-container {
+  height: 38px;
 
   -webkit-app-region: drag;
-  -webkit-user-select: none;
-  user-select: none;
 }
 
-/* Title bar button */
+[id$="-title-bar"] {
+  background-color: #262626;
+  height: 38px;
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+#short-title-bar {
+  width: calc(100% - 126px);
+}
+
+/* Title bar button container */
 #title-bar-button-container {
+  background-color: #262626;
+  height: 38px;
   position: fixed;
   right: 0;
   top: 0;
+  width: 126px;
 
   -webkit-app-region: no-drag;
 
   button {
+    align-items: center;
     background-color: transparent;
     border: none;
-    height: 30px;
+    display: flex;
+    height: 38px;
+    justify-content: center;
     outline: 0;
     position: fixed;
-    width: 30px;
+    width: 42px;
 
     span {
       background-color: #ffffff;
@@ -37,53 +53,53 @@
   }
 }
 
+
+
 /* Minimize button */
 #minimize-button {
-  right: 90px;
+  right: 84px;
 
   span {
-    left: 7px;
-    top: 14px;
     width: 16px;
   }
 }
 
 /* Maximize button */
 #maximize-button {
-  right: 50px;
+  right: 42px;
 
   span {
     width: 6px;
 
     &:nth-child(1) {
-      left: 4px;
-      top: 8px;
+      left: 10px;
+      top: 12px;
     }
 
     &:nth-child(2) {
-      left: 6px;
-      top: 6px;
+      left: 12px;
+      top: 10px;
     }
 
     &:nth-child(3) {
-      left: 6px;
-      top: 9px;
+      left: 12px;
+      top: 13px;
       width: 8px;
     }
 
     &:nth-child(4) {
-      left: 20px;
-      top: 20px;
+      left: 26px;
+      top: 24px;
     }
 
     &:nth-child(5) {
-      left: 17px;
-      top: 22px;
+      left: 24px;
+      top: 26px;
     }
 
     &:nth-child(6) {
-      left: 16px;
-      top: 19px;
+      left: 22px;
+      top: 23px;
       width: 8px;
     }
   }
@@ -91,11 +107,9 @@
 
 /* Close button */
 #close-button {
-  right: 10px;
+  right: 0px;
 
   span {
-    left: 3px;
-    top: 14px;
     width: 24px;
   }
 }

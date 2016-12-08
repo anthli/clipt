@@ -2,7 +2,7 @@
   "name": "clipt",
   "productName": "Clipt",
   "description": "Cross platform clipboard history manager",
-  "version": "0.2.0",
+  "version": "1.2.0",
   "main": "src/app.js",
   "author": {
     "name": "Anthony Li",
@@ -21,6 +21,7 @@
     "react": "latest",
     "react-dom": "latest",
     "react-infinite": "latest",
+    "react-router": "latest",
     "sqlite3": "latest"
   },
   "devDependencies": {

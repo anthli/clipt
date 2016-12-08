@@ -1,18 +1,18 @@
-#clip-search-container {
+#search-bar {
   align-items: center;
   background-color: #ffffff;
-  border: 1px solid #dddddd;
+  border-top: 1px solid #dddddd;
   bottom: 0;
-  color: rgba(38, 50, 56, 0.5);
+  color: rgba(55, 55, 55, 0.5);
   display: flex;
-  margin-left: 49px;
+  margin-left: 50px;
+  position: fixed;
   width: calc(100% - 50px);
-  z-index: 2;
 
   /* Search bar icon */
   i {
-    left: 60px;
-    position: absolute;
+    margin-left: 10px;
+    position: fixed;
   }
 
   /* Search bar text input area */
