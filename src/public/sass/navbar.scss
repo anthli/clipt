@@ -3,15 +3,18 @@
   background-color: #333333;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: calc(100% - 38px);
   position: fixed;
   width: 50px;
+}
+
+.navbar-icon-container {
+  margin: 12px 0;
 }
 
 .navbar-icon {
   color: #a6a6a6;
   font-size: 30px;
-  margin: 12px 0;
   outline: none;
 
   &:hover, .active {

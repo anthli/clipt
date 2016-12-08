@@ -21,16 +21,24 @@ export default class Home extends Component {
 
   componentWillMount() {
     ipcRenderer.send(constants.Ipc.GetClips);
-
-    ipcRenderer.on(constants.Ipc.Clips, (event, clips) => {
-      this.setState(() => ({
-        clips: clips
-      }));
-    });
   }
 
   componentDidMount() {
-    ipcRenderer.send(constants.Ipc.ReadyToDisplay);
+    this._isMounted = true;
+
+    if (this._isMounted) {
+      ipcRenderer.on(constants.Ipc.Clips, (event, clips) => {
+        this.setState(() => ({
+          clips: clips
+        }));
+
+        ipcRenderer.send(constants.Ipc.ReadyToDisplay);
+      });
+    }
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   // Toggle the Bookmark given the Clip's id

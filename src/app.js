@@ -133,9 +133,6 @@ app.on(constants.App.Ready, () => {
   configureWindow.start();
   configureSettings.start();
   configureTray.start();
-
-  win = windowManager.getMainWindow();
-  win.webContents.openDevTools();
 });
 
 // On macOS it is common to re-create a window in the app when the
@@ -238,6 +235,7 @@ ipcMain.on(constants.Ipc.ReadyToDisplay, event => {
     }
 
     win.show();
+    win.webContents.openDevTools();
   }
 });
 

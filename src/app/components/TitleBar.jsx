@@ -15,9 +15,7 @@ export default class TitleBar extends Component {
     switch (process.platform) {
       case constants.Platform.Mac:
         titleBar = (
-          <div id="title-bar-container">
-            <div id="full-title-bar"></div>
-          </div>
+          <div id="full-title-bar"></div>
         );
 
         break;
@@ -55,6 +53,9 @@ export default class TitleBar extends Component {
         );
     }
 
-    return (titleBar);
+    return (
+      <div id="title-bar-container">
+        {titleBar}
+      </div>);
   }
 }

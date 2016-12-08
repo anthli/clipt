@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router';
 
 export default class Navbar extends Component {
   constructor() {
@@ -18,32 +19,44 @@ export default class Navbar extends Component {
   render() {
     return (
       <div id="navbar">
-        <i
-          className={
-            "navbar-icon fa fa-home" +
-            (this.state.activeMenu === 'home' ? ' active' : '')
-          }
-          onClick={() => this.switchActiveMenu('home')}
-        >
-        </i>
+        <div className="navbar-icon-container">
+          <Link to="/">
+            <i
+              className={
+                "navbar-icon fa fa-home" +
+                (this.state.activeMenu === 'home' ? ' active' : '')
+              }
+              onClick={() => this.switchActiveMenu('home')}
+            >
+            </i>
+          </Link>
+        </div>
 
-        <i
-          className={
-            "navbar-icon fa fa-star" +
-            (this.state.activeMenu === 'favorites' ? ' active' : '')
-          }
-          onClick={() => this.switchActiveMenu('favorites')}
-        >
-        </i>
+        <div className="navbar-icon-container">
+          <Link to="/bookmarks">
+            <i
+              className={
+                "navbar-icon fa fa-star" +
+                (this.state.activeMenu === 'bookmarks' ? ' active' : '')
+              }
+              onClick={() => this.switchActiveMenu('bookmarks')}
+            >
+            </i>
+          </Link>
+        </div>
 
-        <i
-          className={
-            "navbar-icon fa fa-cog" +
-            (this.state.activeMenu === 'settings' ? ' active' : '')
-          }
-          onClick={() => this.switchActiveMenu('settings')}
-        >
-        </i>
+        <div className="navbar-icon-container">
+          <Link to="/settings">
+            <i
+              className={
+                "navbar-icon fa fa-cog" +
+                (this.state.activeMenu === 'settings' ? ' active' : '')
+              }
+              onClick={() => this.switchActiveMenu('settings')}
+            >
+            </i>
+          </Link>
+        </div>
       </div>
     );
   }
