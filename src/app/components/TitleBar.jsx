@@ -21,36 +21,36 @@ export default class TitleBar extends Component {
         break;
 
       case constants.Platform.Win:
-        // titleBar = (
-        //   <div id="short-title-bar">
-        //     <div id="title-bar-button-container">
-        //       <button
-        //         id="minimize-button"
-        //         onClick={() => this.click('minimize')}
-        //       >
-        //         <span></span>
-        //       </button>
-        //       <button
-        //         id="maximize-button"
-        //         onClick={() => this.click('maximize')}
-        //       >
-        //         <span></span>
-        //         <span></span>
-        //         <span></span>
-        //         <span></span>
-        //         <span></span>
-        //         <span></span>
-        //       </button>
-        //       <button
-        //         id="close-button"
-        //         onClick={() => this.click('close')}
-        //       >
-        //         <span></span>
-        //         <span></span>
-        //       </button>
-        //     </div>
-        //   </div>
-        // );
+        titleBar = (
+          <div id="short-title-bar">
+            <div id="title-bar-button-container">
+              <button
+                id="minimize-button"
+                onClick={() => this.click('minimize')}
+              >
+                <span></span>
+              </button>
+              <button
+                id="maximize-button"
+                onClick={() => this.click('maximize')}
+              >
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+              </button>
+              <button
+                id="close-button"
+                onClick={() => this.click('close')}
+              >
+                <span></span>
+                <span></span>
+              </button>
+            </div>
+          </div>
+        );
 
         break;
     }

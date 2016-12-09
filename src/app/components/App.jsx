@@ -14,7 +14,7 @@ export default class App extends Component {
 
     return (
       <div>
-        {isWin32 && <TitleBar />}
+        {!isWin32 && <TitleBar />}
         <Navbar />
         <SearchBar />
 
