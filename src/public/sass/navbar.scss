@@ -1,4 +1,4 @@
-#navbar {
+[id^="navbar"] {
   align-items: center;
   background-color: #333333;
   display: flex;
@@ -6,6 +6,10 @@
   height: calc(100% - 38px);
   position: fixed;
   width: 50px;
+}
+
+#navbar-win32 {
+  height: 100%;
 }
 
 .navbar-icon-container {

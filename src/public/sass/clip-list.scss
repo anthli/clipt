@@ -1,4 +1,4 @@
-.clip-list {
+[class^="clip-list"] {
   margin: 0 0 22px 50px;
   padding: 0;
 
@@ -6,4 +6,8 @@
     list-style: none;
     outline: none;
   }
+}
+
+.clip-list-win32 {
+  margin: 0 0 0 50px;
 }
