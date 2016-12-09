@@ -60,21 +60,6 @@ module.exports.Actions = _.transform(
   )
 );
 
-module.exports.Controller = {
-  About: 'AboutCtrl',
-  Home: 'HomeCtrl',
-  Navbar: 'NavbarCtrl',
-  Settings: 'SettingsCtrl',
-  TitleBar: 'TitleBarCtrl'
-};
-
-module.exports.Html = {
-  About: 'views/modals/about.html',
-  Bookmarks: 'views/bookmarks.html',
-  Home: 'views/home.html',
-  Settings: 'views/modals/settings.html'
-};
-
 module.exports.Ipc = {
   AboutModal: 'about-modal',
   Bookmark: 'bookmark',
@@ -101,19 +86,7 @@ module.exports.Modal = {
   ReadyToShow: 'ready-to-show',
 };
 
-module.exports.Path = {
-  Home: '/',
-  Bookmarks: '/bookmarks/',
-  Settings: '/settings/'
-};
-
 module.exports.Platform = {
   Mac: 'darwin',
   Win: 'win32'
-}
-
-module.exports.Service = {
-  Clip: 'Clip',
-  Settings: 'Settings',
-  TitleBar: 'TitleBar'
 };

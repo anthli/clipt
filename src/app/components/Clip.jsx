@@ -22,7 +22,10 @@ export default class Clip extends Component {
 
   render() {
     return (
-      <div className="clip-container">
+      <div
+        className="clip-container"
+        onClick={this.props.copyClip.bind(null, this.props.clipId)}
+      >
         <div className="clip-button-container">
           <i
             className={

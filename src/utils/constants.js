@@ -83,8 +83,8 @@ module.exports.TitleBar = {
 
 module.exports.Tray = {
   DoubleClick: 'double-click',
-  MacIcon: `${__dirname}/../assets/images/icon@2x.png`,
-  WinIcon: `${__dirname}/../assets/images/icon.ico`,
+  MacIcon: `${__dirname}/../public/img/iconTemplate@2x.png`,
+  WinIcon: `${__dirname}/../public/img/icon.ico`,
   Menu: {
     AboutLabel: 'About Clipt',
     PreferencesLabel: 'Preferences...',

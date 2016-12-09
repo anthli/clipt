@@ -235,7 +235,6 @@ ipcMain.on(constants.Ipc.ReadyToDisplay, event => {
     }
 
     win.show();
-    win.webContents.openDevTools();
   }
 });
 

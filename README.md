@@ -10,17 +10,18 @@ important!
 ![alt text](./src/assets/images/demo.png)
 
 ## Features
-- Clips are ordered by timestamp and displayed top to bottom in descending order
-  (latest to earliest)
-- Ability to favorite and delete Clips on demand
+- Clips are copied at the click of a (left mouse) button
+- Ordered by timestamp and displayed top to bottom in descending order (latest
+  to earliest)
+- Application window closes when a Clip is copied so you can get right back to
+  work
+- Ability to bookmark and delete Clips on demand
 - Customizable shortcut to open and close the application window
 - Minimizing to the menu/task bar without the application quitting
-- Prevention of duplicate Clips by updating timestamp of the existing Clip with
-  the same copied data
+- Prevention of duplicate Clips by utilizing and updating the timestamps
 
 ## Features To Be Added
 - Copying of images
-- Restoring the custom title bar (was not working on Windows)
 
 ## Development
 
@@ -37,8 +38,8 @@ $ npm install
 # If you're using Yarn
 $ yarn
 
-# And now for the finishing touch
-$ npm run dev
+$ npm run build/watch
+$ npm run start
 ```
 
 To build executables, run the following:

@@ -1,5 +1,5 @@
-import _ from 'lodash';
 import {ipcRenderer} from 'electron';
+import _ from 'lodash';
 import React, {Component} from 'react';
 
 import Clip from './Clip.jsx';
@@ -15,6 +15,7 @@ export default class Bookmarks extends Component {
       clips: []
     };
 
+    this.copyClip = this.copyClip.bind(this);
     this.checkBookmark = this.checkBookmark.bind(this);
     this.deleteClip = this.deleteClip.bind(this);
   }
@@ -41,16 +42,32 @@ export default class Bookmarks extends Component {
     this._isMounted = false;
   }
 
+  // Find the copied Bookmark with its id and send it to the main process to be
+  // written to the clipboard
+  copyClip(id, event) {
+    // Don't copy the Bookmark if either the Bookmark or Delete icons are
+    // clicked on
+    let iconClickedOn = _.find(event.target.classList, className => {
+      return className === 'bookmark-icon' || className === 'delete-icon';
+    });
+
+    if (!iconClickedOn) {
+      let clip = _.find(this.state.clips, clip => clip.id === id);
+      ipcRenderer.send(constants.Ipc.ClipCopied, clip);
+    }
+  }
+
   // Delete the Bookmark given its id
   checkBookmark(id) {
+    let clip = _.find(this.state.clips, clip => clip.id === id);
+
     ipcRenderer.send(constants.Ipc.DeleteBookmark, clip.bookmark_id);
 
     // Set the deleted Bookmark's id to null
     ipcRenderer.on(constants.Ipc.BookmarkDeleted, (event, bookmarkId) => {
-      let newClips = _.each(this.state.clips, clip => {
-        if (clip.bookmark_id === bookmarkId) {
-          clip.bookmark_id = null;
-        }
+      // Filter out the deleted Bookmark
+      let newClips = _.reject(this.state.clips, clip => {
+        return clip.bookmark_id === bookmarkId;
       });
 
       this.setState(() => ({
@@ -79,6 +96,7 @@ export default class Bookmarks extends Component {
           type={clip.type}
           text={clip.text}
           bookmarkId={clip.bookmark_id}
+          copyClip={this.copyClip}
           checkBookmark={this.checkBookmark}
           deleteClip={this.deleteClip}
         />

@@ -1,5 +1,5 @@
-import _ from 'lodash';
 import {ipcRenderer} from 'electron';
+import _ from 'lodash';
 import React, {Component} from 'react';
 
 import Clip from './Clip.jsx';
@@ -15,6 +15,7 @@ export default class Home extends Component {
       clips: []
     };
 
+    this.copyClip = this.copyClip.bind(this);
     this.checkBookmark = this.checkBookmark.bind(this);
     this.deleteClip = this.deleteClip.bind(this);
   }
@@ -39,6 +40,20 @@ export default class Home extends Component {
 
   componentWillUnmount() {
     this._isMounted = false;
+  }
+
+  // Find the copied Clip with its id and send it to the main process to be
+  // written to the clipboard
+  copyClip(id, event) {
+    // Don't copy the Clip if either the Bookmark or Delete icons are clicked on
+    let iconClickedOn = _.find(event.target.classList, className => {
+      return className === 'bookmark-icon' || className === 'delete-icon';
+    });
+
+    if (!iconClickedOn) {
+      let clip = _.find(this.state.clips, clip => clip.id === id);
+      ipcRenderer.send(constants.Ipc.ClipCopied, clip);
+    }
   }
 
   // Toggle the Bookmark given the Clip's id
@@ -101,6 +116,7 @@ export default class Home extends Component {
           type={clip.type}
           text={clip.text}
           bookmarkId={clip.bookmark_id}
+          copyClip={this.copyClip}
           checkBookmark={this.checkBookmark}
           deleteClip={this.deleteClip}
         />
