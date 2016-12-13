@@ -1,5 +1,7 @@
 'use strict';
 
+import _ from 'lodash';
+
 // Source: https://goo.gl/VT4OGk
 module.exports.Accelerators = {
   17: 'Ctrl',

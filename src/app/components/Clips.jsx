@@ -1,17 +1,13 @@
-<<<<<<< HEAD
 import {ipcRenderer} from 'electron';
+import _ from 'lodash';
 import React from 'react';
 import {AutoSizer, List} from 'react-virtualized';
 
 import Clip from './Clip.jsx';
-=======
-import React, {Component} from 'react';
-import Infinite from 'react-infinite';
->>>>>>> parent of 5aa0dd6... Added About modal back
 
 import constants from '../utils/constants';
 
-export default class Clips extends Component {
+export default class Clips extends React.Component {
   constructor(props) {
     super(props);
 

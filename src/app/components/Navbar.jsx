@@ -1,13 +1,9 @@
-<<<<<<< HEAD
 import React from 'react';
-=======
-import React, {Component} from 'react';
->>>>>>> parent of 5aa0dd6... Added About modal back
 import {Link} from 'react-router';
 
 import constants from '../utils/constants';
 
-export default class Navbar extends Component {
+export default class Navbar extends React.Component {
   constructor() {
     super();
 
@@ -17,13 +13,7 @@ export default class Navbar extends Component {
   }
 
   switchActiveMenu(menu) {
-<<<<<<< HEAD
     this.setState({activeMenu: menu});
-=======
-    this.setState(() => ({
-      activeMenu: menu
-    }));
->>>>>>> parent of 5aa0dd6... Added About modal back
   }
 
   render() {

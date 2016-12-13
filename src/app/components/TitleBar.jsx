@@ -1,9 +1,9 @@
 import {ipcRenderer} from 'electron';
-import React, {Component} from 'react';
+import React from 'react';
 
 import constants from '../utils/constants';
 
-export default class TitleBar extends Component {
+export default class TitleBar extends React.Component {
   click(button) {
     ipcRenderer.send(constants.Ipc.TitleBarButtonClicked, button);
   }

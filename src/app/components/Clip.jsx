@@ -1,9 +1,9 @@
 import {ipcRenderer} from 'electron';
-import React, {Component} from 'react';
+import React from 'react';
 
 import constants from '../utils/constants';
 
-export default class Clip extends Component {
+export default class Clip extends React.Component {
   constructor(props) {
     super(props);
 
@@ -14,13 +14,7 @@ export default class Clip extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (this.props.bookmarkId !== nextProps.bookmarkId) {
-<<<<<<< HEAD
       this.setState({bookmarkId: nextProps.bookmarkId});
-=======
-      this.setState(() => ({
-        bookmarkId: nextProps.bookmarkId
-      }));
->>>>>>> parent of 5aa0dd6... Added About modal back
     }
   }
 
