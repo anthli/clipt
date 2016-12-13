@@ -3,7 +3,7 @@
 let timeoutPromise;
 let globalClips = [];
 
-const homeCtrl = function($scope, $location, $timeout, Clip) {
+const homeCtrl = function($scope, $location, $timeout, Home) {
   $scope.clips = globalClips;
   $scope.clipDisplayCount = 10;
   $scope.query = '';
@@ -12,6 +12,11 @@ const homeCtrl = function($scope, $location, $timeout, Clip) {
     $scope.clips = globalClips;
     $scope.$digest();
   };
+
+  // Retrieve all Clips when the route changes
+  $scope.$on('$routeChangeSuccess', () => {
+    Home.fetchAllClips();
+  });
 
   // Search for Clips using the query submitted by the user
   $scope.$watch('query', () => {
@@ -25,7 +30,7 @@ const homeCtrl = function($scope, $location, $timeout, Clip) {
     // filtering so that it isn't triggered on every keystroke
     else {
       timeoutPromise = $timeout(() => {
-        $scope.clips = Clip.filterClips(globalClips, $scope.query);
+        $scope.clips = Home.filterClips(globalClips, $scope.query);
         $scope.$digest();
       }, 500);
     }
@@ -34,6 +39,7 @@ const homeCtrl = function($scope, $location, $timeout, Clip) {
   // Load more clips when scrolled to the bottom of the list. This prevents
   // Clips from loading in all at once and slowing down the UI
   $scope.loadMore = () => {
+    console.log('loading more');
     $scope.clipDisplayCount += 10;
   };
 
@@ -42,28 +48,23 @@ const homeCtrl = function($scope, $location, $timeout, Clip) {
     return $scope.clips[index].bookmark_id;
   };
 
-  // Retrieve all Clips when the route changes
-  $scope.$on('$routeChangeSuccess', () => {
-    Clip.fetchAllClips();
-  });
-
   // Copy the Clip at the given index
   $scope.copyClip = ($event, index) => {
-    Clip.copyClip($event, $scope.clips[index]);
+    Home.copyClip($event, $scope.clips[index]);
   };
 
   // Delete the Clip at the given index
   $scope.deleteClip = index => {
-    Clip.deleteClip($scope.clips[index].id);
+    Home.deleteClip($scope.clips[index].id);
   };
 
   // Check to see if the Bookmark should be added or deleted
   $scope.checkBookmark = index => {
-    if (!clip.bookmark_id) {
-      Clip.bookmarkClip($scope.clips[index].id);
+    if (!Home.bookmark_id) {
+      Home.bookmarkClip($scope.clips[index].id);
     }
     else {
-      Clip.deleteBookmark($scope.clips[index].bookmark_id);
+      Home.deleteBookmark($scope.clips[index].bookmark_id);
     }
   };
 
@@ -81,12 +82,10 @@ const homeCtrl = function($scope, $location, $timeout, Clip) {
 
       // Filter out all Clips that aren't Bookmarks
       case constants.Path.Bookmarks:
-        globalClips = _.filter(clips, clip => clip.bookmark_id);
+        globalClips = _.filter(clips, clip => Home.bookmark_id);
 
         break;
     }
-
-    console.log(clips);
 
     // Signal the main process that the Clips are ready to be displayed
     ipcRenderer.send(constants.Ipc.ReadyToDisplay);
@@ -94,15 +93,17 @@ const homeCtrl = function($scope, $location, $timeout, Clip) {
   });
 
   // Delete the Clip from the list of Clips based on its id
-  ipcRenderer.on(constants.Ipc.ClipDeleted, (event, id) => {
-    _.remove(globalClips, clip => clip.id === id);
+  ipcRenderer.on(constants.Ipc.ClipDeleted, (event, clipId) => {
+    _.remove(globalClips, clip => clip.id === clipId);
+
+    update();
   });
 
   // Bookmark the Clip at the given index
-  ipcRenderer.on(constants.Ipc.Bookmarked, (event, id, bookmarkId) => {
+  ipcRenderer.on(constants.Ipc.Bookmarked, (event, clipId, bookmarkId) => {
     _.each(globalClips, clip => {
-      if (clip.id === id) {
-        clip.fbookmark_id = bookmarkId;
+      if (clip.id === clipId) {
+        clip.bookmark_id = bookmarkId;
       }
     });
 
@@ -126,6 +127,6 @@ const homeCtrl = function($scope, $location, $timeout, Clip) {
   });
 };
 
-homeCtrl.$inject = ['$scope', '$location', '$timeout', 'Clip'];
+homeCtrl.$inject = ['$scope', '$location', '$timeout', 'Home'];
 
 app.controller(constants.Controller.Home, homeCtrl);

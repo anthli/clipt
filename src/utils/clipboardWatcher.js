@@ -10,6 +10,7 @@ const {
 } = require('electron');
 
 const constants = require('./constants');
+const windowManager = require('./windowManager');
 
 let watchDelay;
 let currText;
@@ -54,6 +55,10 @@ ipcMain.on(constants.Ipc.ClipCopied, (event, clip) => {
 
   // Start up the clipboard watcher again
   intervalId = setInterval(clipboardWatcher, watchDelay);
+
+  // Destory the window when a Clip is copied
+  let win = windowManager.getMainWindow();
+  win.destroy();
 });
 
 module.exports = opts => {

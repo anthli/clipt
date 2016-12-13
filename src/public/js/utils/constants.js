@@ -119,7 +119,7 @@ module.exports.Platform = {
 };
 
 module.exports.Service = {
-  Clip: 'Clip',
+  Home: 'Home',
   Settings: 'Settings',
   TitleBar: 'TitleBar'
 };

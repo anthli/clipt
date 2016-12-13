@@ -1,16 +1,21 @@
 'use strict';
 
-const clipFactory = () => {
+const homeFactory = () => {
   return {
     // Signal the main process to retrieve all Clips
     fetchAllClips: () => {
-      ipcRenderer.send(constants.Ipc.FetchClips);
+      ipcRenderer.send(constants.Ipc.GetClips);
     },
 
     // When a Clip is clicked on, send the clip to the main process to be
     // written to the system clipboard
     copyClip: (event, clip) => {
-      ipcRenderer.send(constants.Ipc.ClipCopied, clip);
+      // Prevent copying when clicking on the Bookmark or Delete icons
+      let elem = angular.element(event.target);
+
+      if (!elem.hasClass('bookmark-icon') && !elem.hasClass('delete-icon')) {
+        ipcRenderer.send(constants.Ipc.ClipCopied, clip);
+      }
     },
 
     // When the delete icon is clicked, signal the main process that the Clip it
@@ -38,4 +43,4 @@ const clipFactory = () => {
   };
 };
 
-app.factory(constants.Service.Clip, clipFactory);
+app.factory(constants.Service.Home, homeFactory);
