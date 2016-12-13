@@ -42,7 +42,7 @@ module.exports.getBookmarks = cb => {
 // Upsert the given Clip into the database and return the last row inserted
 module.exports.upsertClip = (clip, cb) => {
   db.get(queries.findClip, clip.text, (err, row) => {
-    if(err) {
+    if (err) {
       return cb(err);
     }
 

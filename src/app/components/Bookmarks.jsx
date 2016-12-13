@@ -1,6 +1,10 @@
 import {ipcRenderer} from 'electron';
 import _ from 'lodash';
+<<<<<<< HEAD
+import React from 'react';
+=======
 import React, {Component} from 'react';
+>>>>>>> parent of 5aa0dd6... Added About modal back
 
 import Clip from './Clip.jsx';
 import Clips from './Clips.jsx';
@@ -14,10 +18,6 @@ export default class Bookmarks extends Component {
     this.state = {
       clips: []
     };
-
-    this.copyClip = this.copyClip.bind(this);
-    this.checkBookmark = this.checkBookmark.bind(this);
-    this.deleteClip = this.deleteClip.bind(this);
   }
 
   componentWillMount() {
@@ -25,6 +25,11 @@ export default class Bookmarks extends Component {
   }
 
   componentDidMount() {
+<<<<<<< HEAD
+    // Render the Bookmarks received from the main process
+    ipcRenderer.on(constants.Ipc.Bookmarks, (event, bookmarks) => {
+      this.setState({clips: bookmarks});
+=======
     this._isMounted = true;
 
     if (this._isMounted) {
@@ -37,11 +42,14 @@ export default class Bookmarks extends Component {
       });
     }
   }
+>>>>>>> parent of 5aa0dd6... Added About modal back
 
   componentWillUnmount() {
     this._isMounted = false;
   }
 
+<<<<<<< HEAD
+=======
   // Find the copied Bookmark with its id and send it to the main process to be
   // written to the clipboard
   copyClip(id, event) {
@@ -87,24 +95,10 @@ export default class Bookmarks extends Component {
     });
   }
 
+>>>>>>> parent of 5aa0dd6... Added About modal back
   render() {
-    let clips = _.map(this.state.clips, clip => {
-      return (
-        <Clip
-          key={clip.id}
-          clipId={clip.id}
-          type={clip.type}
-          text={clip.text}
-          bookmarkId={clip.bookmark_id}
-          copyClip={this.copyClip}
-          checkBookmark={this.checkBookmark}
-          deleteClip={this.deleteClip}
-        />
-      );
-    });
-
     return (
-      <Clips clips={clips} />
+      <Clips clips={this.state.clips} />
     );
   }
 }

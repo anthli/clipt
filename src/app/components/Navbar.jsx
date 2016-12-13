@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+import React from 'react';
+=======
 import React, {Component} from 'react';
+>>>>>>> parent of 5aa0dd6... Added About modal back
 import {Link} from 'react-router';
 
 import constants from '../utils/constants';
@@ -13,9 +17,13 @@ export default class Navbar extends Component {
   }
 
   switchActiveMenu(menu) {
+<<<<<<< HEAD
+    this.setState({activeMenu: menu});
+=======
     this.setState(() => ({
       activeMenu: menu
     }));
+>>>>>>> parent of 5aa0dd6... Added About modal back
   }
 
   render() {
@@ -28,7 +36,7 @@ export default class Navbar extends Component {
             <i
               className={
                 "navbar-icon fa fa-home" +
-                (this.state.activeMenu === 'home' && ' active')
+                (this.state.activeMenu === 'home' ? ' active' : '')
               }
               onClick={() => this.switchActiveMenu('home')}
             >
@@ -41,7 +49,7 @@ export default class Navbar extends Component {
             <i
               className={
                 "navbar-icon fa fa-star" +
-                (this.state.activeMenu === 'bookmarks' && ' active')
+                (this.state.activeMenu === 'bookmarks' ? ' active' : '')
               }
               onClick={() => this.switchActiveMenu('bookmarks')}
             >
@@ -54,7 +62,7 @@ export default class Navbar extends Component {
             <i
               className={
                 "navbar-icon fa fa-cog" +
-                (this.state.activeMenu === 'settings' && ' active')
+                (this.state.activeMenu === 'settings' ? ' active' : '')
               }
               onClick={() => this.switchActiveMenu('settings')}
             >

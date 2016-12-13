@@ -19,9 +19,14 @@
     "lodash": "latest",
     "mkdirp": "latest",
     "react": "latest",
+    "react-addons-shallow-compare": "latest",
     "react-dom": "latest",
-    "react-infinite": "latest",
     "react-router": "latest",
+<<<<<<< HEAD
+    "react-tap-event-plugin": "latest",
+    "react-virtualized": "latest",
+=======
+>>>>>>> parent of 5aa0dd6... Added About modal back
     "sqlite3": "latest"
   },
   "devDependencies": {

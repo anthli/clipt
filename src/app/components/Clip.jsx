@@ -14,15 +14,20 @@ export default class Clip extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (this.props.bookmarkId !== nextProps.bookmarkId) {
+<<<<<<< HEAD
+      this.setState({bookmarkId: nextProps.bookmarkId});
+=======
       this.setState(() => ({
         bookmarkId: nextProps.bookmarkId
       }));
+>>>>>>> parent of 5aa0dd6... Added About modal back
     }
   }
 
   render() {
     return (
       <div
+        style={this.props.style}
         className="clip-container"
         onClick={this.props.copyClip.bind(null, this.props.clipId)}
       >
