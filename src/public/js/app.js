@@ -28,9 +28,9 @@ const config = $routeProvider => {
     controller: constants.Controller.Home
   })
 
-  // Favorite Clips page
-  .when(constants.Path.Favorites, {
-    templateUrl: constants.Html.Favorites,
+  // Bookmarks page
+  .when(constants.Path.Bookmarks, {
+    templateUrl: constants.Html.Bookmarks,
     controller: constants.Controller.Home
   })
 

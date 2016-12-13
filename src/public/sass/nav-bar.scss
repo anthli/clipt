@@ -1,0 +1,31 @@
+[id^="nav-bar"] {
+  align-items: center;
+  background-color: #333333;
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 38px);
+  position: fixed;
+  width: 50px;
+}
+
+#nav-bar-win32 {
+  height: 100%;
+}
+
+.nav-bar-icon-container {
+  margin: 12px 0;
+}
+
+.nav-bar-icon {
+  color: #a6a6a6;
+  font-size: 30px;
+  outline: none;
+
+  &:hover {
+    color: #ffffff;
+  }
+}
+
+  .nav-bar-icon.active {
+    color: #ffffff;
+  }

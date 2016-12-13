@@ -1,9 +1,9 @@
-<div id="home" class="clip-list-container">
-  <div id="clip-list" infinite-scroll="loadMore()" infinite-scroll-container="'#home'" infinite-scroll-distance="0">
+<div id="bookmarks" class="clip-list-container">
+  <div id="clip-list" infinite-scroll="loadMore()" infinite-scroll-container="'#bookmarks'" infinite-scroll-distance="0">
     <li ng-repeat="clip in clips | limitTo: clipDisplayCount track by clip.id" ng-dblclick="copyClip($event, $index)">
       <div class="clip-container">
         <div class="clip-button-container">
-          <i class="bookmark-icon" ng-class="isBookmarked($index) ? 'bookmarked fa fa-star' : 'fa fa-star-o'" ng-click="checkIfBookmarked($index)"></i>
+          <i class="bookmark-icon favorited fa fa-star" ng-click="checkIfBookmarked($index)"></i>
           <i class="delete-icon fa fa-trash-o" ng-click="deleteClip($index)"></i>
         </div>
 

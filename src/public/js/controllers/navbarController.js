@@ -3,7 +3,7 @@
 const navbarCtrl = function($scope, $location) {
   $scope.menuItems = [
     'home',
-    'favorites',
+    'bookmarks',
     'settings'
   ];
 
@@ -30,4 +30,4 @@ const navbarCtrl = function($scope, $location) {
 
 navbarCtrl.$inject = ['$scope', '$location'];
 
-app.controller(constants.Controller.Navbar, navbarCtrl);
+app.controller(constants.Controller.NavBar, navbarCtrl);

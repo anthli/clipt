@@ -1,0 +1,58 @@
+#title-bar-button-container button {
+  transition: all ease-out 300ms;
+
+  &:hover {
+    transition: all ease-out 300ms;
+  }
+}
+
+.clip-container,
+.clip-button-container {
+  transition: all ease-out 300ms;
+}
+
+.bookmark-icon {
+  transition: all ease-out 300ms;
+
+  &:hover {
+    transition: all ease-out 300ms;
+  }
+}
+
+.delete-icon {
+  transition: all ease-out 300ms;
+
+  &:hover {
+    transition: all ease-out 300ms;
+  }
+}
+
+/* Maximize button */
+#maximize-button {
+  span {
+    &:nth-child(1), &:nth-child(4) {
+      -webkit-transform: rotate(90deg);
+      transform: rotate(90deg);
+    }
+
+    &:nth-child(3), &:nth-child(6) {
+      -webkit-transform: rotate(45deg);
+      transform: rotate(45deg);
+    }
+  }
+}
+
+/* Close button */
+#close-button {
+  span {
+    &:nth-child(1) {
+      -webkit-transform: rotate(45deg);
+      transform: rotate(45deg);
+    }
+
+    &:nth-child(2) {
+      -webkit-transform: rotate(-45deg);
+      transform: rotate(-45deg);
+    }
+  }
+}

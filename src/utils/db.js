@@ -28,10 +28,21 @@ module.exports.getClips = cb => {
   });
 };
 
+// Retrieve all Bookmarks from the database
+module.exports.getBookmarks = cb => {
+  db.all(queries.getAllBookmarks, (err, rows) => {
+    if (err) {
+      return cb(err, null);
+    }
+
+    cb(null, rows);
+  });
+};
+
 // Upsert the given Clip into the database and return the last row inserted
 module.exports.upsertClip = (clip, cb) => {
   db.get(queries.findClip, clip.text, (err, row) => {
-    if(err) {
+    if (err) {
       return cb(err);
     }
 
@@ -94,14 +105,15 @@ module.exports.upsertClip = (clip, cb) => {
   });
 };
 
-// Favorite a Clip in the database given its id and return the last row inserted
-module.exports.favoriteClip = (id, cb) => {
-  db.run(queries.favoriteClip, id, err => {
+// Insert a bookmark in the database given its id and return the last row
+// inserted
+module.exports.insertBookmark = (id, cb) => {
+  db.run(queries.insertBookmark, id, err => {
     if (err) {
       return cb(err, null);
     }
 
-    db.get(queries.getLastFavoritedClip, (err, row) => {
+    db.get(queries.getLastInsertedBookmark, (err, row) => {
       if (err) {
         return cb(err, null);
       }
@@ -111,7 +123,7 @@ module.exports.favoriteClip = (id, cb) => {
   });
 };
 
-// Delete a Clip in the database given its id
+// Delete a Clip from the database given its id
 module.exports.deleteClip = (id, cb) => {
   db.run(queries.deleteClip, id, err => {
     if (err) {
@@ -122,9 +134,9 @@ module.exports.deleteClip = (id, cb) => {
   });
 };
 
-// Unfavorite a Clip in the database given its clip_id
-module.exports.unfavoriteClip = (id, cb) => {
-  db.run(queries.unfavoriteClip, id, err => {
+// Delete a Bookmark from the database given its clip_id
+module.exports.deleteBookmark = (id, cb) => {
+  db.run(queries.deleteBookmark, id, err => {
     if (err) {
       return cb(err);
     }

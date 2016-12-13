@@ -12,6 +12,9 @@
 
 html, body, div[ng-view] {
   height: 100%;
-  overflow: hidden;
   width: 100%;
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
 }

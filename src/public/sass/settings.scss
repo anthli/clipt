@@ -1,4 +1,4 @@
-#clipt-settings {
+#settings {
   height: 100%;
   margin-left: 50px;
 }
@@ -9,27 +9,15 @@
 
 #settings-container {
   padding: 30px;
-}
 
-  #settings-container .col-1 {
+  .col-1 {
     width: 100%
   }
 
-  #settings-container .col-2 {
+  .col-2 {
     width: calc(50% - 2.5px);
   }
-
-  #settings-container md-input-container {
-    padding: 0;
-  }
-
-  #settings-container md-input-container input {
-    border-color: rgba(38, 38, 38, 0.2);
-  }
-
-  #settings-container md-select {
-    color: #262626;
-  }
+}
 
 /* Selection menu underline color when focused */
 md-select:not([disabled]):focus .md-select-value {

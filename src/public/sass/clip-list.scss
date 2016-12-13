@@ -1,0 +1,21 @@
+.clip-list-container {
+  height: calc(100% - 38px);
+  margin-left: 50px;
+  width: calc(100% - 50px);
+}
+
+#clip-list,
+#clip-list-win32 {
+  height: 100%;
+  margin-bottom: 22px;
+  padding: 0;
+
+  li {
+    list-style: none;
+    outline: none;
+  }
+}
+
+#clip-list-win32 {
+  margin-bottom: 19px;
+}

@@ -1,27 +1,28 @@
-#clip-search-container {
+#search-bar {
   align-items: center;
   background-color: #ffffff;
-  border: 1px solid #dddddd;
+  border-top: 1px solid #dddddd;
   bottom: 0;
-  color: rgba(38, 50, 56, 0.5);
+  color: rgba(55, 55, 55, 0.5);
   display: flex;
-  margin-left: 49px;
+  margin-left: 50px;
+  position: fixed;
   width: calc(100% - 50px);
-  z-index: 2;
-}
+  z-index: 1;
 
   /* Search bar icon */
-  #clip-search-container i {
-    left: 60px;
-    position: absolute;
+  i {
+    margin-left: 8px;
+    position: fixed;
   }
 
   /* Search bar text input area */
-  #clip-search-container input {
+  input {
     border: 0;
     font-size: 14px;
     height: 20px;
     outline: none;
-    padding: 10px 10px 10px 32px;
+    padding: 10px 10px 10px 30px;
     width: 100%;
   }
+}

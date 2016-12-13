@@ -60,10 +60,16 @@ module.exports.Actions = _.transform(
   )
 );
 
+module.exports.Component = {
+  CopyPopup: 'copyPopup',
+  NavBar: 'navBar',
+  TitleBar: 'titleBar'
+};
+
 module.exports.Controller = {
   About: 'AboutCtrl',
   Home: 'HomeCtrl',
-  Navbar: 'NavbarCtrl',
+  NavBar: 'NavBarCtrl',
   Settings: 'SettingsCtrl',
   TitleBar: 'TitleBarCtrl'
 };
@@ -71,28 +77,30 @@ module.exports.Controller = {
 module.exports.Html = {
   About: 'views/modals/about.html',
   Home: 'views/home.html',
-  Settings: 'views/modals/settings.html',
-  Favorites: 'views/favorites.html'
+  Settings: 'views/settings.html',
+  Bookmarks: 'views/bookmarks.html'
 };
 
 module.exports.Ipc = {
   AboutModal: 'about-modal',
+  Bookmark: 'bookmark',
+  Bookmarks: 'bookmarks',
+  Bookmarked: 'bookmarked',
+  BookmarkDeleted: 'bookmark-deleted',
   ClipCopied: 'clip-copied',
   ClipDeleted: 'clip-deleted',
   Clips: 'clips',
-  ClipsReady: 'clips-ready',
-  ClipFavorited: 'clip-favorited',
-  ClipUnfavorited: 'clip-unfavorited',
+  DeleteBookmark: 'delete-bookmark',
   DeleteClip: 'delete-clip',
-  FetchClips: 'fetch-clips',
-  FetchSettings: 'fetch-settings',
+  GetBookmarks: 'fetch-bookmarks',
+  GetClips: 'fetch-clips',
+  GetSettings: 'fetch-settings',
   OpenLink: 'open-link',
+  ReadyToDisplay: 'ready-to-display',
   RegisterShortcut: 'register-shortcut',
   Settings: 'settings',
-  FavoriteClip: 'favorite-clip',
   SwitchImageFormat: 'switch-image-format',
-  TitleBarButtonClicked: 'title-bar-button-clicked',
-  UnfavoriteClip: 'unfavorite-clip'
+  TitleBarButtonClicked: 'title-bar-button-clicked'
 };
 
 module.exports.Modal = {
@@ -101,8 +109,13 @@ module.exports.Modal = {
 
 module.exports.Path = {
   Home: '/',
-  Favorites: '/favorites/',
+  Bookmarks: '/bookmarks/',
   Settings: '/settings/'
+};
+
+module.exports.Platform = {
+  Mac: 'darwin',
+  Win: 'win32'
 };
 
 module.exports.Service = {

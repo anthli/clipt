@@ -188,7 +188,7 @@ ipcMain.on(constants.Ipc.TitleBarButtonClicked, (event, button) => {
 });
 
 // Retrieve all Clips from the database and send them to the renderer
-ipcMain.on(constants.Ipc.FetchClips, event => {
+ipcMain.on(constants.Ipc.GetClips, event => {
   win = windowManager.getMainWindow();
 
   db.getClips((err, clips) => {
@@ -202,9 +202,24 @@ ipcMain.on(constants.Ipc.FetchClips, event => {
   });
 });
 
+// Retrieve all Bookmarks from the database and send them to the renderer
+ipcMain.on(constants.Ipc.GetBookmarks, event => {
+  win = windowManager.getMainWindow();
+
+  db.getBookmarks((err, bookmarks) => {
+    if (err) {
+      console.error(err);
+
+      return;
+    }
+
+    win.webContents.send(constants.Ipc.Bookmarks, bookmarks);
+  });
+});
+
 // If the browser window is closed, prevent it from opening before all of the
-// clips are ready to be displayed
-ipcMain.on(constants.Ipc.ClipsReady, event => {
+// Clips or Bookmarks are ready to be displayed
+ipcMain.on(constants.Ipc.ReadyToDisplay, event => {
   win = windowManager.getMainWindow();
 
   if (win) {
@@ -237,31 +252,30 @@ ipcMain.on(constants.Ipc.DeleteClip, (event, id) => {
   });
 });
 
-// Favorite the Clip selected in the application window based on its id and send
-// the favorited Clip's id and favorited id back to the renderer
-ipcMain.on(constants.Ipc.FavoriteClip, (event, id, index) => {
-  db.favoriteClip(id, (err, favoritedClip) => {
+// Bookmark the Clip selected in the application window based on the Clip's id
+// and send the Bookmark's id back to the renderer
+ipcMain.on(constants.Ipc.Bookmark, (event, id) => {
+  db.insertBookmark(id, (err, bookmark) => {
     if (err) {
       console.error(err);
 
       return;
     }
 
-    win.webContents.send(constants.Ipc.ClipFavorited, id, favoritedClip.id);
+    win.webContents.send(constants.Ipc.Bookmarked, id, bookmark.id);
   });
 });
 
-// Unfavorite the Clip selected in the application window based on its id and
-// send its id back to the renderer
-ipcMain.on(constants.Ipc.UnfavoriteClip, (event, id) => {
-  db.unfavoriteClip(id, err => {
+// Remove the Bookmark selected in the application window based on its id
+ipcMain.on(constants.Ipc.DeleteBookmark, (event, bookmarkId) => {
+  db.deleteBookmark(bookmarkId, err => {
     if (err) {
       console.error(err);
 
       return;
     }
 
-    win.webContents.send(constants.Ipc.ClipUnfavorited, id);
+    win.webContents.send(constants.Ipc.BookmarkDeleted, bookmarkId);
   });
 });
 

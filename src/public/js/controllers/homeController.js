@@ -8,6 +8,11 @@ const homeCtrl = function($scope, $location, $timeout, Clip) {
   $scope.clipDisplayCount = 10;
   $scope.query = '';
 
+  const update = () => {
+    $scope.clips = globalClips;
+    $scope.$digest();
+  };
+
   // Search for Clips using the query submitted by the user
   $scope.$watch('query', () => {
     $timeout.cancel(timeoutPromise);
@@ -28,13 +33,13 @@ const homeCtrl = function($scope, $location, $timeout, Clip) {
 
   // Load more clips when scrolled to the bottom of the list. This prevents
   // Clips from loading in all at once and slowing down the UI
-  $scope.loadMoreClips = () => {
+  $scope.loadMore = () => {
     $scope.clipDisplayCount += 10;
   };
 
-  // Retrieve the favorite_clip_id of the Clip at the given index
-  $scope.isFavorited = index => {
-    return $scope.clips[index].favorite_clip_id;
+  // Retrieve the Bookmark id of the Clip at the given index
+  $scope.isBookmarked = index => {
+    return $scope.clips[index].bookmark_id;
   };
 
   // Retrieve all Clips when the route changes
@@ -49,20 +54,16 @@ const homeCtrl = function($scope, $location, $timeout, Clip) {
 
   // Delete the Clip at the given index
   $scope.deleteClip = index => {
-    Clip.deleteClip($scope.clips[index], index);
+    Clip.deleteClip($scope.clips[index].id);
   };
 
-  // Check to see if the Clip should be favorited or unfavorited
-  $scope.checkIfFavorited = index => {
-    let clip = $scope.clips[index];
-
-    // Favorite the Clip
-    if (!clip.favorite_clip_id) {
-      Clip.favoriteClip(clip, index);
+  // Check to see if the Bookmark should be added or deleted
+  $scope.checkBookmark = index => {
+    if (!clip.bookmark_id) {
+      Clip.bookmarkClip($scope.clips[index].id);
     }
-    // Unfavorite the Clip
     else {
-      Clip.unfavoriteClip(clip);
+      Clip.deleteBookmark($scope.clips[index].bookmark_id);
     }
   };
 
@@ -78,17 +79,18 @@ const homeCtrl = function($scope, $location, $timeout, Clip) {
 
         break;
 
-      // Filter out all clips that are not favorited
-      case constants.Path.Favorites:
-        globalClips = _.filter(clips, clip => clip.favorite_clip_id);
+      // Filter out all Clips that aren't Bookmarks
+      case constants.Path.Bookmarks:
+        globalClips = _.filter(clips, clip => clip.bookmark_id);
 
         break;
     }
 
+    console.log(clips);
+
     // Signal the main process that the Clips are ready to be displayed
-    ipcRenderer.send(constants.Ipc.ClipsReady);
-    $scope.clips = globalClips;
-    $scope.$digest();
+    ipcRenderer.send(constants.Ipc.ReadyToDisplay);
+    update();
   });
 
   // Delete the Clip from the list of Clips based on its id
@@ -96,35 +98,31 @@ const homeCtrl = function($scope, $location, $timeout, Clip) {
     _.remove(globalClips, clip => clip.id === id);
   });
 
-  // Favorite the Clip at the given index by assigning its favoriteId
-  ipcRenderer.on(constants.Ipc.ClipFavorited, (event, id, favoritedId) => {
+  // Bookmark the Clip at the given index
+  ipcRenderer.on(constants.Ipc.Bookmarked, (event, id, bookmarkId) => {
     _.each(globalClips, clip => {
       if (clip.id === id) {
-        clip.favorite_clip_id = favoritedId;
+        clip.fbookmark_id = bookmarkId;
       }
     });
 
-    $scope.clips = globalClips;
-    $scope.$digest();
+    update();
   });
 
-  // Unfavorite the Clip at the given its id by setting its favorite_clip_id to
-  // null
-  ipcRenderer.on(constants.Ipc.ClipUnfavorited, (event, favoriteId) => {
+  // Delete the Bookmark by assigning its id to null
+  ipcRenderer.on(constants.Ipc.BookmarkDeleted, (event, bookmarkId) => {
     _.each(globalClips, clip => {
-      if (clip.favorite_clip_id === favoriteId) {
-        clip.favorite_clip_id = null;
+      if (clip.bookmark_id === bookmarkId) {
+        clip.bookmark_id = null;
       }
     });
 
-    // Delete it from the list of favorite Clips
-    if ($location.path() === constants.Path.Favorite) {
-      console.log('test');
-      _.remove(globalClips, clip => !clip.favorite_clip_id);
+    // Delete it if the current view is the Bookmarks page
+    if ($location.path() === constants.Path.Bookmark) {
+      _.remove(globalClips, clip => !clip.bookmark_id);
     }
 
-    $scope.clips = globalClips;
-    $scope.$digest();
+    update();
   });
 };
 

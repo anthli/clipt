@@ -42,22 +42,24 @@ module.exports.ImageFormat = {
 
 module.exports.Ipc = {
   AboutModal: 'about-modal',
+  Bookmark: 'bookmark',
+  Bookmarks: 'bookmarks',
+  Bookmarked: 'bookmarked',
+  BookmarkDeleted: 'bookmark-deleted',
   ClipCopied: 'clip-copied',
   ClipDeleted: 'clip-deleted',
   Clips: 'clips',
-  ClipsReady: 'clips-ready',
-  ClipFavorited: 'clip-favorited',
-  ClipUnfavorited: 'clip-unfavorited',
+  DeleteBookmark: 'delete-bookmark',
   DeleteClip: 'delete-clip',
-  FetchClips: 'fetch-clips',
-  FetchSettings: 'fetch-settings',
+  GetBookmarks: 'fetch-bookmarks',
+  GetClips: 'fetch-clips',
+  GetSettings: 'fetch-settings',
   OpenLink: 'open-link',
+  ReadyToDisplay: 'ready-to-display',
   RegisterShortcut: 'register-shortcut',
   Settings: 'settings',
-  FavoriteClip: 'favorite-clip',
   SwitchImageFormat: 'switch-image-format',
-  TitleBarButtonClicked: 'title-bar-button-clicked',
-  UnfavoriteClip: 'unfavorite-clip'
+  TitleBarButtonClicked: 'title-bar-button-clicked'
 };
 
 module.exports.Platform = {
@@ -73,13 +75,16 @@ module.exports.Shortcut = {
 module.exports.TitleBar = {
   Close: 'close',
   Maximize: 'maximize',
-  Minimize: 'minimize'
+  Minimize: 'minimize',
+  Style: {
+    HiddenInset: 'hidden-inset'
+  }
 };
 
 module.exports.Tray = {
   DoubleClick: 'double-click',
-  MacIcon: `${__dirname}/../assets/images/icon@2x.png`,
-  WinIcon: `${__dirname}/../assets/images/icon.ico`,
+  MacIcon: `${__dirname}/../public/img/iconTemplate@2x.png`,
+  WinIcon: `${__dirname}/../public/img/icon.ico`,
   Menu: {
     AboutLabel: 'About Clipt',
     PreferencesLabel: 'Preferences...',

@@ -1,4 +1,4 @@
-#clipt-about {
+#about {
   margin: 10px;
 }
 
@@ -27,15 +27,15 @@
   font-weight: 900;
 }
 
-#about-app-name {
-  font-size: 14px;
-}
+  #about-app-name,
+  #about-version,
+  #about-creditor {
+    margin-bottom: 15px;
+  }
 
-#about-app-name,
-#about-version,
-#about-creditor {
-  margin-bottom: 15px;
-}
+  #about-app-name {
+    font-size: 14px;
+  }
 
 #about-credits {
   margin-bottom: 0px;
