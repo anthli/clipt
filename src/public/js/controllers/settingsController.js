@@ -115,10 +115,11 @@ const settingsCtrl = function($scope, Settings) {
   });
 
   // ipcRenderer Configuration
-  ipcRenderer.send(constants.Ipc.FetchSettings);
+  ipcRenderer.send(constants.Ipc.GetSettings);
 
   // Render the settings sent from the main process
   ipcRenderer.on(constants.Ipc.Settings, (event, settings) => {
+    console.log(settings);
     globalSettings = $scope.settings = settings;
     $scope.$digest();
   });

@@ -80,7 +80,7 @@ module.exports.start = () => {
   });
 
   // Send the settings to the renderer
-  ipcMain.on(constants.Ipc.FetchSettings, event => {
+  ipcMain.on(constants.Ipc.GetSettings, event => {
     win = windowManager.getMainWindow();
     win.webContents.send(constants.Ipc.Settings, globalSettings);
   });
