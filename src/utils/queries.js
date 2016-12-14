@@ -45,17 +45,6 @@ module.exports.getLastInsertedClip = `
   );
 `;
 
-module.exports.getAllBookmarks = `
-  SELECT C.id, B.id AS bookmark_id, C.type, C.timestamp, C.text, I.image
-  FROM clip C
-  LEFT JOIN bookmark B
-    ON C.id = B.clip_id
-  LEFT JOIN image I
-    ON C.id = I.clip_id
-  WHERE bookmark_id IS NOT NULL
-  ORDER BY C.timestamp DESC;
-`;
-
 module.exports.getLastInsertedBookmark = `
   SELECT * FROM bookmark
   WHERE id = (

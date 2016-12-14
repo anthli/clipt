@@ -15,7 +15,7 @@ const homeCtrl = function($scope, $location, $timeout, Home) {
 
   // Retrieve all Clips when the route changes
   $scope.$on('$routeChangeSuccess', () => {
-    Home.fetchAllClips();
+    Home.getAllClips();
   });
 
   // Search for Clips using the query submitted by the user
@@ -60,11 +60,13 @@ const homeCtrl = function($scope, $location, $timeout, Home) {
 
   // Check to see if the Bookmark should be added or deleted
   $scope.checkBookmark = index => {
-    if (!Home.bookmark_id) {
-      Home.bookmarkClip($scope.clips[index].id);
+    let clip = $scope.clips[index];
+
+    if (!clip.bookmark_id) {
+      Home.bookmarkClip(clip.id);
     }
     else {
-      Home.deleteBookmark($scope.clips[index].bookmark_id);
+      Home.deleteBookmark(clip.bookmark_id);
     }
   };
 
@@ -82,7 +84,7 @@ const homeCtrl = function($scope, $location, $timeout, Home) {
 
       // Filter out all Clips that aren't Bookmarks
       case constants.Path.Bookmarks:
-        globalClips = _.filter(clips, clip => Home.bookmark_id);
+        globalClips = _.filter(clips, clip => clip.bookmark_id);
 
         break;
     }
@@ -119,7 +121,7 @@ const homeCtrl = function($scope, $location, $timeout, Home) {
     });
 
     // Delete it if the current view is the Bookmarks page
-    if ($location.path() === constants.Path.Bookmark) {
+    if ($location.path() === constants.Path.Bookmarks) {
       _.remove(globalClips, clip => !clip.bookmark_id);
     }
 

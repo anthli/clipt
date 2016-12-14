@@ -3,7 +3,7 @@
 const homeFactory = () => {
   return {
     // Signal the main process to retrieve all Clips
-    fetchAllClips: () => {
+    getAllClips: () => {
       ipcRenderer.send(constants.Ipc.GetClips);
     },
 

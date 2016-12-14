@@ -16,8 +16,8 @@ const navBarComponent = {
       <div class="nav-bar-icon-container">
         <i
           class="nav-bar-icon fa fa-star"
-          ng-class="{active: activeMenu === 'favorites'}"
-          ng-click="setActiveMenu('favorites')"
+          ng-class="{active: activeMenu === 'bookmarks'}"
+          ng-click="setActiveMenu('bookmarks')"
         >
         </i>
       </div>

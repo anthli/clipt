@@ -28,17 +28,6 @@ module.exports.getClips = cb => {
   });
 };
 
-// Retrieve all Bookmarks from the database
-module.exports.getBookmarks = cb => {
-  db.all(queries.getAllBookmarks, (err, rows) => {
-    if (err) {
-      return cb(err, null);
-    }
-
-    cb(null, rows);
-  });
-};
-
 // Upsert the given Clip into the database and return the last row inserted
 module.exports.upsertClip = (clip, cb) => {
   db.get(queries.findClip, clip.text, (err, row) => {

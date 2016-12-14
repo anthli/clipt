@@ -1,6 +1,6 @@
 'use strict';
 
-const navbarCtrl = function($scope, $location) {
+const navBarCtrl = function($scope, $location) {
   $scope.menuItems = [
     'home',
     'bookmarks',
@@ -28,6 +28,6 @@ const navbarCtrl = function($scope, $location) {
   };
 };
 
-navbarCtrl.$inject = ['$scope', '$location'];
+navBarCtrl.$inject = ['$scope', '$location'];
 
-app.controller(constants.Controller.NavBar, navbarCtrl);
+app.controller(constants.Controller.NavBar, navBarCtrl);

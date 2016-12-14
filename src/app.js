@@ -202,21 +202,6 @@ ipcMain.on(constants.Ipc.GetClips, event => {
   });
 });
 
-// Retrieve all Bookmarks from the database and send them to the renderer
-ipcMain.on(constants.Ipc.GetBookmarks, event => {
-  win = windowManager.getMainWindow();
-
-  db.getBookmarks((err, bookmarks) => {
-    if (err) {
-      console.error(err);
-
-      return;
-    }
-
-    win.webContents.send(constants.Ipc.Bookmarks, bookmarks);
-  });
-});
-
 // If the browser window is closed, prevent it from opening before all of the
 // Clips or Bookmarks are ready to be displayed
 ipcMain.on(constants.Ipc.ReadyToDisplay, event => {
