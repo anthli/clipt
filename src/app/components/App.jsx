@@ -1,7 +1,7 @@
 import React from 'react';
 
 import AboutModal from './modals/AboutModal.jsx';
-import Navbar from './Navbar.jsx';
+import NavBar from './NavBar.jsx';
 import SearchBar from './SearchBar.jsx';
 import TitleBar from './TitleBar.jsx'
 
@@ -14,7 +14,7 @@ export default class App extends React.Component {
     return (
       <div>
         {!isWin32 && <TitleBar />}
-        <Navbar />
+        <NavBar />
         <SearchBar />
 
         {this.props.children};

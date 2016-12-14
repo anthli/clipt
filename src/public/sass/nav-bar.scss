@@ -1,4 +1,4 @@
-[id^="navbar"] {
+[id^="nav-bar"] {
   align-items: center;
   background-color: #333333;
   display: flex;
@@ -8,15 +8,15 @@
   width: 50px;
 }
 
-#navbar-win32 {
+#nav-bar-win32 {
   height: 100%;
 }
 
-.navbar-icon-container {
+.nav-bar-icon-container {
   margin: 12px 0;
 }
 
-.navbar-icon {
+.nav-bar-icon {
   color: #a6a6a6;
   font-size: 30px;
   outline: none;
@@ -26,6 +26,6 @@
   }
 }
 
-  .navbar-icon.active {
+  .nav-bar-icon.active {
     color: #ffffff;
   }

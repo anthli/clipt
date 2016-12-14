@@ -29,7 +29,7 @@ module.exports.start = () => {
     case constants.Platform.Win:
       win = new BrowserWindow({
         autoHideMenuBar: true,
-        // frame: false,
+        frame: false,
         width: 800,
         height: 600,
         show: false,

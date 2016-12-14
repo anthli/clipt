@@ -7,7 +7,7 @@ With Clipt, whatever you copy will be stored and can be used at a later
 time. Never again will you have to worry about copying over something
 important!
 
-![alt text](./src/assets/images/demo.png)
+![alt text](./src/public/img/demo.png)
 
 ## Features
 - Clips are copied at the click of a (left mouse) button

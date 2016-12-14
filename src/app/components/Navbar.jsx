@@ -20,12 +20,12 @@ export default class Navbar extends React.Component {
     let isWin32 = process.platform === constants.Platform.Win;
 
     return (
-      <div id={isWin32 ? 'navbar-win32' : 'navbar'}>
-        <div className="navbar-icon-container">
+      <div id={isWin32 ? 'nav-bar-win32' : 'nav-bar'}>
+        <div className="nav-bar-icon-container">
           <Link to="/">
             <i
               className={
-                "navbar-icon fa fa-home" +
+                "nav-bar-icon fa fa-home" +
                 (this.state.activeMenu === 'home' ? ' active' : '')
               }
               onClick={() => this.switchActiveMenu('home')}
@@ -34,11 +34,11 @@ export default class Navbar extends React.Component {
           </Link>
         </div>
 
-        <div className="navbar-icon-container">
+        <div className="nav-bar-icon-container">
           <Link to="/bookmarks">
             <i
               className={
-                "navbar-icon fa fa-star" +
+                "nav-bar-icon fa fa-star" +
                 (this.state.activeMenu === 'bookmarks' ? ' active' : '')
               }
               onClick={() => this.switchActiveMenu('bookmarks')}
@@ -47,11 +47,11 @@ export default class Navbar extends React.Component {
           </Link>
         </div>
 
-        <div className="navbar-icon-container">
+        <div className="nav-bar-icon-container">
           <Link to="/settings">
             <i
               className={
-                "navbar-icon fa fa-cog" +
+                "nav-bar-icon fa fa-cog" +
                 (this.state.activeMenu === 'settings' ? ' active' : '')
               }
               onClick={() => this.switchActiveMenu('settings')}
