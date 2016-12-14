@@ -6,47 +6,41 @@ const selectTitleBar = () => {
 
   switch (process.platform) {
     case constants.Platform.Mac:
-      template = `
-        <div id="title-bar-container">
-          <div id="full-title-bar"></div>
-        </div>
-      `;
+      template = '<div id="full-title-bar"></div>';
 
       break;
 
     case constants.Platform.Win:
       template = `
-        <div id="title-bar-container">
-          <div id="short-title-bar">
-            <div id="title-bar">
-              <div id="title-bar-button-container">
-                <button
-                  id="minimize-button"
-                  ng-click="click('minimize')"
-                >
-                  <span></span>
-                </button>
+        <div id="short-title-bar">
+          <div id="title-bar">
+            <div id="title-bar-button-container">
+              <button
+                id="minimize-button"
+                ng-click="click('minimize')"
+              >
+                <span></span>
+              </button>
 
-                <button
-                  id="maximize-button"
-                  ng-click="click('maximize')"
-                >
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </button>
+              <button
+                id="maximize-button"
+                ng-click="click('maximize')"
+              >
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+              </button>
 
-                <button
-                  id="close-button"
-                  ng-click="click('close')"
-                >
-                  <span></span>
-                  <span></span>
-                </button>
-              </div>
+              <button
+                id="close-button"
+                ng-click="click('close')"
+              >
+                <span></span>
+                <span></span>
+              </button>
             </div>
           </div>
         </div>
@@ -58,9 +52,10 @@ const selectTitleBar = () => {
   return template;
 };
 
-const titleBarComponent = {
-  controller: constants.Controller.TitleBar,
-  template: selectTitleBar
-};
-
-app.component(constants.Component.TitleBar, titleBarComponent);
+app.component(constants.Component.TitleBar, {
+  template: `
+    <div id="title-bar-container" ng-controller="TitleBarCtrl">
+      ${selectTitleBar()}
+    </div>
+  `
+});

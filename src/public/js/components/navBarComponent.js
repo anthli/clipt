@@ -1,9 +1,8 @@
-'use strict';
+'use strict';;
 
-const navBarComponent = {
-  controller: constants.Controller.NavBar,
+app.component(constants.Component.NavBar, {
   template: `
-    <div id="nav-bar">
+    <div id="nav-bar" ng-controller="NavBarCtrl">
       <div class="nav-bar-icon-container">
         <i
           class="nav-bar-icon fa fa-home"
@@ -32,6 +31,4 @@ const navBarComponent = {
       </div>
     </div>
   `
-};
-
-app.component(constants.Component.NavBar, navBarComponent);
+});
