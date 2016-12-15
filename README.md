@@ -42,10 +42,10 @@ $ npm run build/watch
 $ npm run start
 ```
 
-To build executables, run the following:
+To build an executable, run the following:
 
 ```bash
-$ npm run portable
+$ npm run pack
 ```
 
 To build the installer, run the following:
